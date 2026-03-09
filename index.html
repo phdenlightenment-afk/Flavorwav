@@ -1,0 +1,1780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FlavorWav — Infused Straws</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+
+<style>
+/* ===========================
+   CSS VARIABLES & RESET
+=========================== */
+:root {
+  --cyan: #00d4ff;
+  --cyan-dim: rgba(0,212,255,0.15);
+  --purple: #7b2fff;
+  --pink: #ff2d9e;
+  --gold: #ffd700;
+  --dark: #050a14;
+  --dark2: #070e1c;
+  --glass: rgba(255,255,255,0.04);
+  --glass-border: rgba(0,212,255,0.18);
+  --text: #e8f4ff;
+  --text-dim: rgba(232,244,255,0.6);
+  --nav-height: 72px;
+  --radius: 16px;
+  --transition: 0.35s cubic-bezier(0.25,0.8,0.25,1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Rajdhani', sans-serif;
+  background: var(--dark);
+  color: var(--text);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+
+/* ===========================
+   UTILITY
+=========================== */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.section-label {
+  font-family: 'Orbitron', monospace;
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--cyan);
+  margin-bottom: 12px;
+  opacity: 0.8;
+}
+
+.section-title {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(28px, 5vw, 52px);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #fff 30%, var(--cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  border-radius: 50px;
+  font-family: 'Orbitron', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.1);
+  transform: translateX(-100%);
+  transition: transform 0.4s ease;
+}
+.btn:hover::before { transform: translateX(0); }
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--cyan), var(--purple));
+  color: #fff;
+  box-shadow: 0 0 30px rgba(0,212,255,0.4);
+}
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 50px rgba(0,212,255,0.6), 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--cyan);
+  border: 1.5px solid var(--cyan);
+  box-shadow: 0 0 20px rgba(0,212,255,0.1);
+}
+.btn-outline:hover {
+  background: var(--cyan-dim);
+  transform: translateY(-3px);
+  box-shadow: 0 0 30px rgba(0,212,255,0.3);
+}
+
+.btn-tiktok {
+  background: linear-gradient(135deg, #010101, #1a1a1a);
+  color: #fff;
+  border: 1.5px solid rgba(255,255,255,0.15);
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+.btn-tiktok:hover {
+  background: linear-gradient(135deg, #222, #111);
+  transform: translateY(-3px);
+  box-shadow: 0 0 40px rgba(105,201,208,0.3);
+}
+
+/* Scroll-reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* ===========================
+   NAVIGATION
+=========================== */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  padding: 0 32px;
+  transition: background 0.4s ease, backdrop-filter 0.4s ease, box-shadow 0.4s ease;
+  background: transparent;
+}
+
+nav.scrolled {
+  background: rgba(5,10,20,0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 1px 0 var(--glass-border), 0 4px 30px rgba(0,0,0,0.5);
+}
+
+.nav-inner {
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ============================
+   REPLACE NAV LOGO IMAGE HERE
+   Change the src to: FLAVORWAVLOGOOFFICIAL.png
+============================ */
+.nav-logo img {
+  height: 44px;
+  width: auto;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: 'Orbitron', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  transition: color var(--transition), text-shadow var(--transition);
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 1.5px;
+  background: var(--cyan);
+  transition: width 0.3s ease;
+  box-shadow: 0 0 6px var(--cyan);
+}
+
+.nav-links a:hover {
+  color: var(--cyan);
+  text-shadow: 0 0 12px rgba(0,212,255,0.5);
+}
+.nav-links a:hover::after { width: 100%; }
+
+.nav-cta {
+  padding: 10px 22px !important;
+  font-size: 11px !important;
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 8px;
+  border: none;
+  background: transparent;
+  z-index: 1100;
+}
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--cyan);
+  transition: var(--transition);
+  transform-origin: center;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile Menu */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  background: rgba(5,10,20,0.97);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  z-index: 1050;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  transform: translateX(100%);
+  transition: transform 0.45s cubic-bezier(0.25,0.8,0.25,1);
+}
+.mobile-menu.open { transform: translateX(0); }
+
+.mobile-menu a {
+  font-family: 'Orbitron', monospace;
+  font-size: 20px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  transition: color var(--transition), text-shadow var(--transition);
+}
+.mobile-menu a:hover {
+  color: var(--cyan);
+  text-shadow: 0 0 20px rgba(0,212,255,0.7);
+}
+
+/* ===========================
+   HERO SECTION
+=========================== */
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding-top: var(--nav-height);
+}
+
+/* ============================
+   HERO BACKGROUND IMAGE
+   Replace the background-image URL with: FLAVPACK_14.png
+   Example: background-image: url('FLAVPACK_14.png');
+============================ */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('FLAVPACK_14.png');
+  background-size: cover;
+  background-position: center 20%;
+  background-repeat: no-repeat;
+  transform: scale(1.05);
+  transition: transform 0.1s linear;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(5,10,20,0.85) 0%,
+    rgba(5,10,20,0.5) 50%,
+    rgba(5,10,20,0.75) 100%
+  );
+}
+
+.hero-particles {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.hero-particles span {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: var(--cyan);
+  border-radius: 50%;
+  animation: float-particle linear infinite;
+  opacity: 0;
+}
+@keyframes float-particle {
+  0% { opacity: 0; transform: translateY(100vh) scale(0); }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-10vh) scale(1.5); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 800px;
+  padding: 0 24px;
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: 6px 18px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 50px;
+  font-family: 'Orbitron', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--cyan);
+  margin-bottom: 24px;
+  animation: hero-fade-up 0.8s ease forwards;
+  backdrop-filter: blur(10px);
+}
+
+.hero-title {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(42px, 9vw, 96px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -1px;
+  margin-bottom: 20px;
+  animation: hero-fade-up 0.8s 0.15s ease forwards;
+  opacity: 0;
+}
+.hero-title span {
+  background: linear-gradient(135deg, var(--cyan) 0%, var(--purple) 60%, var(--pink) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 0 40px rgba(0,212,255,0.4));
+}
+
+.hero-sub {
+  font-size: clamp(16px, 3vw, 22px);
+  font-weight: 300;
+  color: var(--text-dim);
+  max-width: 560px;
+  margin: 0 auto 36px;
+  animation: hero-fade-up 0.8s 0.3s ease forwards;
+  opacity: 0;
+  letter-spacing: 0.5px;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  animation: hero-fade-up 0.8s 0.45s ease forwards;
+  opacity: 0;
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  animation: hero-fade-up 0.8s 0.7s ease forwards;
+  opacity: 0;
+}
+.hero-scroll span {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+  font-family: 'Orbitron', monospace;
+}
+.scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--cyan), transparent);
+  animation: scroll-pulse 2s ease-in-out infinite;
+}
+@keyframes scroll-pulse {
+  0%,100% { opacity: 0.4; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.2); }
+}
+
+@keyframes hero-fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===========================
+   ABOUT SECTION
+=========================== */
+#about {
+  position: relative;
+  padding: 100px 0;
+  overflow: hidden;
+}
+
+/* ============================
+   ABOUT BACKGROUND IMAGE
+   Replace with: about_us_no_glow_city.png
+============================ */
+.about-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('about_us_no_glow_city.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.25;
+}
+.about-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, var(--dark) 0%, transparent 30%, transparent 70%, var(--dark) 100%);
+}
+
+.about-inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.about-image-wrap {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.about-image-wrap img {
+  width: 100%;
+  border-radius: var(--radius);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 0 60px rgba(0,212,255,0.15), 0 20px 60px rgba(0,0,0,0.6);
+}
+
+.about-text p {
+  color: var(--text-dim);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+.about-features {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.about-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  padding: 14px 18px;
+  backdrop-filter: blur(10px);
+  transition: var(--transition);
+}
+.about-feature:hover {
+  background: rgba(0,212,255,0.07);
+  transform: translateX(6px);
+  border-color: rgba(0,212,255,0.4);
+}
+.feature-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.feature-text strong {
+  font-family: 'Orbitron', monospace;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--cyan);
+  display: block;
+  margin-bottom: 4px;
+}
+.feature-text span {
+  font-size: 15px;
+  color: var(--text-dim);
+}
+
+/* ===========================
+   BENEFITS SECTION
+=========================== */
+#benefits {
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ============================
+   BENEFITS IMAGE
+   Replace with: FlavorWav_Benefits_Page.png
+============================ */
+#benefits img.benefits-full {
+  width: 100%;
+  display: block;
+}
+
+/* ===========================
+   FLAVORS SECTION
+=========================== */
+#flavors {
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--dark) 0%, var(--dark2) 50%, var(--dark) 100%);
+}
+
+/* ============================
+   FLAVORS BACKGROUND IMAGE
+   Replace with: FlavorWav_Flavor_Menu.png
+============================ */
+.flavors-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('FlavorWav_Flavor_Menu.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.12;
+}
+
+.flavors-header {
+  text-align: center;
+  margin-bottom: 60px;
+  position: relative;
+  z-index: 2;
+}
+
+.flavors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  position: relative;
+  z-index: 2;
+}
+
+/* ============================
+   EDIT FLAVOR CARDS BELOW
+   Add/remove cards to update flavors
+============================ */
+.flavor-card {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  padding: 28px;
+  backdrop-filter: blur(16px);
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+  cursor: pointer;
+}
+.flavor-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--card-accent, linear-gradient(90deg, var(--cyan), var(--purple)));
+  transition: opacity 0.3s ease;
+}
+.flavor-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, var(--card-glow, rgba(0,212,255,0.08)), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.flavor-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(0,212,255,0.4);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4), 0 0 40px var(--card-shadow, rgba(0,212,255,0.15));
+}
+.flavor-card:hover::after { opacity: 1; }
+
+.flavor-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-family: 'Orbitron', monospace;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  background: var(--card-accent);
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+.flavor-name {
+  font-family: 'Orbitron', monospace;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.flavor-desc {
+  font-size: 14px;
+  color: var(--text-dim);
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+.flavor-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.flavor-stat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text-dim);
+}
+.flavor-stat::before {
+  content: '✓';
+  color: var(--cyan);
+  font-weight: 700;
+  font-size: 12px;
+}
+
+/* ===========================
+   HOW IT WORKS SECTION
+=========================== */
+#how-it-works {
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ============================
+   HOW IT WORKS IMAGE
+   Replace with: how_it_works_no_city_glow.png
+============================ */
+#how-it-works img.hiw-full {
+  width: 100%;
+  display: block;
+}
+
+/* ===========================
+   RELEASE PROFILES SECTION
+=========================== */
+#release-profiles {
+  padding: 0;
+  position: relative;
+}
+
+/* ============================
+   RELEASE PROFILES IMAGE
+   Replace with: Release_Profiles_Page.png
+============================ */
+#release-profiles img.rp-full {
+  width: 100%;
+  display: block;
+}
+
+/* ===========================
+   SHOP SECTION
+=========================== */
+#shop {
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.shop-bg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 50%, rgba(0,212,255,0.08) 0%, transparent 70%),
+              radial-gradient(ellipse at 80% 20%, rgba(123,47,255,0.1) 0%, transparent 60%);
+}
+
+.shop-glow-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,212,255,0.06);
+  pointer-events: none;
+}
+.shop-glow-ring:nth-child(2) {
+  width: 800px;
+  height: 800px;
+  border-color: rgba(0,212,255,0.04);
+}
+.shop-glow-ring:nth-child(3) {
+  width: 1000px;
+  height: 1000px;
+  border-color: rgba(0,212,255,0.02);
+}
+
+.shop-content {
+  position: relative;
+  z-index: 2;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.shop-product-img {
+  width: 240px;
+  height: auto;
+  margin: 0 auto 40px;
+  filter: drop-shadow(0 0 40px rgba(0,212,255,0.4)) drop-shadow(0 0 80px rgba(123,47,255,0.3));
+  animation: float-bob 4s ease-in-out infinite;
+}
+
+@keyframes float-bob {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-18px); }
+}
+
+/* ============================
+   SHOP PRODUCT IMAGE
+   Replace with: FLAVPACK_14.png
+============================ */
+
+.shop-title {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(32px,6vw,58px);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 16px;
+  background: linear-gradient(135deg, #fff 0%, var(--cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.shop-desc {
+  font-size: 18px;
+  color: var(--text-dim);
+  margin-bottom: 36px;
+  font-weight: 300;
+}
+
+.shop-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* ===========================
+   TIKTOK SECTION
+=========================== */
+#tiktok {
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ============================
+   TIKTOK IMAGE
+   Replace with: Flavorwav_TIKTOK_Action_Page.png
+============================ */
+.tiktok-image-wrap {
+  position: relative;
+}
+.tiktok-image-wrap img {
+  width: 100%;
+  display: block;
+}
+
+.tiktok-overlay-cta {
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  text-align: center;
+}
+
+/* ============================
+   UPDATE YOUR TIKTOK LINK HERE
+   Change the href below to your actual TikTok profile URL
+============================ */
+.tiktok-btn {
+  background: linear-gradient(135deg, #69c9d0, #010101 70%);
+  color: #fff;
+  border: 1.5px solid rgba(105,201,208,0.4);
+  font-size: 14px;
+  padding: 14px 36px;
+  box-shadow: 0 0 30px rgba(105,201,208,0.3), 0 10px 40px rgba(0,0,0,0.5);
+}
+.tiktok-btn:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 0 60px rgba(105,201,208,0.5), 0 15px 50px rgba(0,0,0,0.6);
+}
+
+/* ===========================
+   CONTACT SECTION
+=========================== */
+#contact {
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+  background: var(--dark2);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.contact-info-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.contact-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+  backdrop-filter: blur(10px);
+}
+
+.contact-info-item strong {
+  font-family: 'Orbitron', monospace;
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--cyan);
+  display: block;
+  margin-bottom: 4px;
+}
+.contact-info-item span {
+  font-size: 15px;
+  color: var(--text-dim);
+}
+
+.social-links {
+  display: flex;
+  gap: 12px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 50px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  font-family: 'Orbitron', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: var(--text-dim);
+  transition: var(--transition);
+  backdrop-filter: blur(10px);
+}
+.social-link:hover {
+  color: var(--cyan);
+  border-color: rgba(0,212,255,0.4);
+  background: var(--cyan-dim);
+  transform: translateY(-3px);
+}
+
+/* Contact Form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-family: 'Orbitron', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--cyan);
+  text-transform: uppercase;
+}
+
+.form-group input,
+.form-group textarea {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 16px;
+  color: var(--text);
+  outline: none;
+  transition: var(--transition);
+  backdrop-filter: blur(10px);
+  resize: none;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--cyan);
+  box-shadow: 0 0 20px rgba(0,212,255,0.15);
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(232,244,255,0.3);
+}
+
+/* ===========================
+   FAQ SECTION
+=========================== */
+#faq {
+  padding: 100px 0;
+  position: relative;
+  background: var(--dark);
+}
+
+.faq-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.faq-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: 50px;
+  background: var(--glass);
+  border: 1.5px solid var(--cyan);
+  font-family: 'Orbitron', monospace;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: var(--cyan);
+  transition: var(--transition);
+  cursor: pointer;
+  text-decoration: none;
+  margin-top: 20px;
+}
+.faq-download-btn:hover {
+  background: var(--cyan-dim);
+  box-shadow: 0 0 30px rgba(0,212,255,0.25);
+  transform: translateY(-3px);
+}
+
+/* FAQ Categories */
+.faq-categories {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+
+.faq-cat-btn {
+  padding: 9px 20px;
+  border-radius: 50px;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  font-family: 'Orbitron', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: var(--transition);
+  backdrop-filter: blur(10px);
+}
+.faq-cat-btn:hover,
+.faq-cat-btn.active {
+  background: var(--cyan-dim);
+  border-color: var(--cyan);
+  color: var(--cyan);
+  box-shadow: 0 0 15px rgba(0,212,255,0.2);
+}
+
+.faq-section-group { display: none; }
+.faq-section-group.active { display: block; }
+
+/* ============================
+   EDIT FAQ QUESTIONS/ANSWERS IN THE HTML BELOW
+   Each .faq-item contains a question (.faq-q) and answer (.faq-a)
+============================ */
+.faq-item {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  transition: border-color 0.3s ease;
+}
+.faq-item.open {
+  border-color: rgba(0,212,255,0.35);
+}
+
+.faq-q {
+  width: 100%;
+  background: transparent;
+  border: none;
+  text-align: left;
+  padding: 20px 24px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  transition: color 0.3s ease;
+}
+.faq-q:hover { color: var(--cyan); }
+.faq-item.open .faq-q { color: var(--cyan); }
+
+.faq-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1.5px solid var(--glass-border);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  font-style: normal;
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--text-dim);
+}
+.faq-item.open .faq-icon {
+  border-color: var(--cyan);
+  color: var(--cyan);
+  transform: rotate(45deg);
+  box-shadow: 0 0 10px rgba(0,212,255,0.3);
+}
+
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.45s cubic-bezier(0.25,0.8,0.25,1), padding 0.3s ease;
+}
+.faq-a-inner {
+  padding: 0 24px 20px;
+  font-size: 15px;
+  color: var(--text-dim);
+  line-height: 1.8;
+  border-top: 1px solid var(--glass-border);
+  padding-top: 16px;
+}
+
+/* ===========================
+   FOOTER
+=========================== */
+footer {
+  background: var(--dark2);
+  border-top: 1px solid var(--glass-border);
+  padding: 60px 0 32px;
+  text-align: center;
+}
+
+.footer-logo img {
+  height: 50px;
+  margin: 0 auto 24px;
+  opacity: 0.8;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
+.footer-links a {
+  font-family: 'Orbitron', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+  transition: color 0.3s ease;
+}
+.footer-links a:hover { color: var(--cyan); }
+
+.footer-copy {
+  font-size: 13px;
+  color: rgba(232,244,255,0.3);
+  letter-spacing: 0.5px;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+
+  .about-inner { grid-template-columns: 1fr; }
+  .about-image-wrap { order: -1; }
+
+  .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+}
+
+@media (max-width: 600px) {
+  .hero-title { font-size: clamp(36px, 11vw, 60px); }
+  .flavors-grid { grid-template-columns: 1fr; }
+  .hero-actions { flex-direction: column; align-items: stretch; text-align: center; }
+  .shop-product-img { width: 180px; }
+  .tiktok-overlay-cta { bottom: 4%; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===========================
+     NAVIGATION
+=========================== -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <!-- REPLACE src with your logo file path e.g. FLAVORWAVLOGOOFFICIAL.png -->
+    <a href="#hero" class="nav-logo">
+      <img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav Logo" />
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="#shop">Shop</a></li>
+      <li><a href="#about">About Us</a></li>
+      <li><a href="#flavors">Flavors</a></li>
+      <li><a href="#how-it-works">How It Works</a></li>
+      <li><a href="#tiktok">TikTok</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#shop" class="btn btn-primary nav-cta">Shop Now</a></li>
+    </ul>
+
+    <button class="hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#shop" class="mobile-link">Shop</a>
+  <a href="#about" class="mobile-link">About Us</a>
+  <a href="#flavors" class="mobile-link">Flavors</a>
+  <a href="#how-it-works" class="mobile-link">How It Works</a>
+  <a href="#tiktok" class="mobile-link">TikTok</a>
+  <a href="#contact" class="mobile-link">Contact</a>
+  <a href="#faq" class="mobile-link">FAQ</a>
+  <a href="#shop" class="btn btn-primary" style="margin-top:8px;">Shop Now</a>
+</div>
+
+<!-- ===========================
+     HERO SECTION
+=========================== -->
+<!-- HERO BACKGROUND: Replace URL in CSS .hero-bg with FLAVPACK_14.png -->
+<section id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-particles" id="heroParticles"></div>
+
+  <div class="hero-content">
+    <!-- EDIT: Brand tagline badge -->
+    <div class="hero-badge">⚡ Flavor · Vitamins · Caffeine · Fiber</div>
+
+    <!-- EDIT: Main headline -->
+    <h1 class="hero-title">RIDE THE<br/><span>FLAVOR WAV</span></h1>
+
+    <!-- EDIT: Sub-headline -->
+    <p class="hero-sub">Infused straws that transform your tumbler into a premium functional drink experience. No mixing. No mess. Just sip.</p>
+
+    <div class="hero-actions">
+      <!-- EDIT: Update href to your shop URL -->
+      <a href="#shop" class="btn btn-primary">Shop Now</a>
+      <a href="#how-it-works" class="btn btn-outline">How It Works</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ===========================
+     ABOUT SECTION
+=========================== -->
+<!-- ABOUT BACKGROUND: Replace URL in CSS .about-bg with about_us_no_glow_city.png -->
+<section id="about">
+  <div class="about-bg"></div>
+  <div class="about-bg-overlay"></div>
+  <div class="container">
+    <div class="about-inner">
+      <div class="about-image-wrap reveal">
+        <!-- REPLACE src with about_us_no_glow_city.png -->
+        <img src="about_us_no_glow_city.png" alt="About FlavorWav" />
+      </div>
+
+      <div class="about-text">
+        <p class="section-label reveal">Our Story</p>
+        <h2 class="section-title reveal reveal-delay-1">Built for Real Tumbler Users</h2>
+
+        <!-- EDIT: About Us text -->
+        <p class="reveal reveal-delay-2">
+          <strong>FlavorWav</strong> is a California-based company built for people who actually use their large-format tumblers every day. We design and manufacture large-format replacement straws for Yeti, Stanley, and similar tumblers.
+        </p>
+        <p class="reveal reveal-delay-2">
+          Each straw is lined with great-tasting flavors and optional functional ingredients like prebiotic fiber, vitamins, probiotics, and other nutraceuticals.
+        </p>
+        <p class="reveal reveal-delay-3">
+          Drop a FlavorWav straw into your tumbler, add your drink, and sip. The lining dissolves as you use it — no scooping, mixing, or mess.
+        </p>
+
+        <!-- EDIT: Feature bullets -->
+        <div class="about-features reveal reveal-delay-3">
+          <div class="about-feature">
+            <span class="feature-icon">🧪</span>
+            <div class="feature-text">
+              <strong>Glueless Construction</strong>
+              <span>No adhesive seam commonly used in many paper straws.</span>
+            </div>
+          </div>
+          <div class="about-feature">
+            <span class="feature-icon">🔬</span>
+            <div class="feature-text">
+              <strong>Rigorous Testing</strong>
+              <span>Tested for PFAS and other key chemical screens relevant to food-contact products.</span>
+            </div>
+          </div>
+          <div class="about-feature">
+            <span class="feature-icon">🌿</span>
+            <div class="feature-text">
+              <strong>Biodegradable</strong>
+              <span>Premium paper straws with a verified biodegradability report.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+     BENEFITS SECTION (Full Image)
+=========================== -->
+<!-- BENEFITS IMAGE: Replace src with FlavorWav_Benefits_Page.png -->
+<section id="benefits">
+  <img src="FlavorWav_Benefits_Page.png" alt="FlavorWav Infused Straw Benefits" class="benefits-full reveal" />
+</section>
+
+<!-- ===========================
+     FLAVORS SECTION
+=========================== -->
+<!-- FLAVORS BACKGROUND: Replace URL in CSS .flavors-bg with FlavorWav_Flavor_Menu.png -->
+<section id="flavors">
+  <div class="flavors-bg"></div>
+  <div class="container">
+    <div class="flavors-header">
+      <p class="section-label reveal">Our Collection</p>
+      <h2 class="section-title reveal reveal-delay-1">Amazing Flavors & Benefits</h2>
+      <p class="reveal reveal-delay-2" style="color:var(--text-dim);font-size:17px;max-width:560px;margin:0 auto;">12" Infused Straws Fit 30oz &amp; 40oz Tumblers</p>
+    </div>
+
+    <!-- EDIT: Add or remove flavor cards below. Update name, description, and stats per flavor -->
+    <div class="flavors-grid">
+
+      <div class="flavor-card reveal" style="--card-accent: linear-gradient(90deg,#7b2fff,#b06aff); --card-glow: rgba(123,47,255,0.12); --card-shadow: rgba(123,47,255,0.2);">
+        <span class="flavor-badge" style="background: linear-gradient(90deg,#7b2fff,#b06aff);">Zenergy Grape</span>
+        <h3 class="flavor-name">Zenergy Grape</h3>
+        <p class="flavor-desc">Bold grape energy straw with fast-acting caffeine and focus support. Perfect for pre-workout or peak-demand moments.</p>
+        <div class="flavor-stats">
+          <span class="flavor-stat">125mg Caffeine</span>
+          <span class="flavor-stat">125mg Alpinamine + B6 + B12</span>
+          <span class="flavor-stat">Grape Energy</span>
+        </div>
+      </div>
+
+      <div class="flavor-card reveal reveal-delay-1" style="--card-accent: linear-gradient(90deg,#f5a623,#ffdd57); --card-glow: rgba(245,166,35,0.12); --card-shadow: rgba(245,166,35,0.2);">
+        <span class="flavor-badge" style="background: linear-gradient(90deg,#f5a623,#ffdd57); color:#000;">Alpha Lemon</span>
+        <h3 class="flavor-name">Alpha Lemon</h3>
+        <p class="flavor-desc">Crisp lemon flavor loaded with Alpha GPC for sharp cognitive support and B-vitamin complex for sustained mental clarity.</p>
+        <div class="flavor-stats">
+          <span class="flavor-stat">125mg Alpha GPC</span>
+          <span class="flavor-stat">With B6, B12 + Lemon Flavor</span>
+          <span class="flavor-stat">Alpha GPC Cognition</span>
+        </div>
+      </div>
+
+      <div class="flavor-card reveal reveal-delay-2" style="--card-accent: linear-gradient(90deg,#ff2d9e,#c2185b); --card-glow: rgba(255,45,158,0.12); --card-shadow: rgba(255,45,158,0.2);">
+        <span class="flavor-badge" style="background: linear-gradient(90deg,#ff2d9e,#c2185b);">Mixed Berry Probiotic</span>
+        <h3 class="flavor-name">Mixed Berry Probiotics</h3>
+        <p class="flavor-desc">Vibrant berry blend with 50 billion CFU probiotics and 3g of fiber to support a happy gut every sip.</p>
+        <div class="flavor-stats">
+          <span class="flavor-stat">3g of Fiber</span>
+          <span class="flavor-stat">50 Billion CFU Probiotics</span>
+          <span class="flavor-stat">Probiotic Straw</span>
+        </div>
+      </div>
+
+      <div class="flavor-card reveal reveal-delay-3" style="--card-accent: linear-gradient(90deg,#00d4ff,#0091ea); --card-glow: rgba(0,212,255,0.12); --card-shadow: rgba(0,212,255,0.2);">
+        <span class="flavor-badge" style="background: linear-gradient(90deg,#00d4ff,#0091ea);">C4 Blue Raspberry</span>
+        <h3 class="flavor-name">C4 Blue Raspberry</h3>
+        <p class="flavor-desc">Icy blue raspberry loaded with Creatine and B vitamins. The ultimate workout companion straw.</p>
+        <div class="flavor-stats">
+          <span class="flavor-stat">Creatine</span>
+          <span class="flavor-stat">With B6, B12</span>
+          <span class="flavor-stat">C4 Workout Straw</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+     HOW IT WORKS SECTION (Full Image)
+=========================== -->
+<!-- HOW IT WORKS IMAGE: Replace src with how_it_works_no_city_glow.png -->
+<section id="how-it-works">
+  <img src="how_it_works_no_city_glow.png" alt="How FlavorWav Works" class="hiw-full reveal" />
+</section>
+
+<!-- ===========================
+     RELEASE PROFILES SECTION (Full Image)
+=========================== -->
+<!-- RELEASE PROFILES IMAGE: Replace src with Release_Profiles_Page.png -->
+<section id="release-profiles">
+  <img src="Release_Profiles_Page.png" alt="FlavorWav Release Profiles" class="rp-full reveal" />
+</section>
+
+<!-- ===========================
+     SHOP SECTION
+=========================== -->
+<section id="shop">
+  <div class="shop-bg"></div>
+  <div class="shop-glow-ring"></div>
+  <div class="shop-glow-ring"></div>
+  <div class="shop-glow-ring"></div>
+
+  <div class="container">
+    <div class="shop-content">
+      <!-- SHOP PRODUCT IMAGE: Replace src with FLAVPACK_14.png -->
+      <img src="FLAVPACK_14.png" alt="FlavorWav Pack" class="shop-product-img reveal" />
+
+      <!-- EDIT: Shop section headline and description -->
+      <h2 class="shop-title reveal reveal-delay-1">Ready to Ride<br/>the Wav?</h2>
+      <p class="shop-desc reveal reveal-delay-2">Premium infused straws packed with flavor, vitamins, caffeine, and fiber. Available now — free shipping on qualifying orders.</p>
+
+      <div class="shop-actions reveal reveal-delay-3">
+        <!-- EDIT: Update href to your actual shop URL -->
+        <a href="#" class="btn btn-primary">Shop All Flavors</a>
+        <a href="#flavors" class="btn btn-outline">View Flavors</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+     TIKTOK SECTION
+=========================== -->
+<!-- TIKTOK IMAGE: Replace src with Flavorwav_TIKTOK_Action_Page.png -->
+<section id="tiktok">
+  <div class="tiktok-image-wrap">
+    <img src="Flavorwav_TIKTOK_Action_Page.png" alt="FlavorWav on TikTok" />
+    <div class="tiktok-overlay-cta">
+      <!-- EDIT: Replace href with your actual TikTok URL e.g. https://www.tiktok.com/@flavorwav -->
+      <a href="https://www.tiktok.com/@flavorwav" target="_blank" rel="noopener" class="btn tiktok-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.73a4.85 4.85 0 0 1-1.01-.04z"/></svg>
+        Follow Us on TikTok
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+     CONTACT SECTION
+=========================== -->
+<section id="contact">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:60px;">
+      <p class="section-label reveal">Get In Touch</p>
+      <h2 class="section-title reveal reveal-delay-1">Contact Us</h2>
+    </div>
+
+    <div class="contact-grid">
+      <div>
+        <!-- EDIT: Update contact info below -->
+        <div class="contact-info-item reveal">
+          <div class="contact-icon">📧</div>
+          <div>
+            <strong>Email</strong>
+            <!-- EDIT: Replace with your actual email -->
+            <span>hello@flavorwav.com</span>
+          </div>
+        </div>
+
+        <div class="contact-info-item reveal reveal-delay-1">
+          <div class="contact-icon">📞</div>
+          <div>
+            <strong>Phone</strong>
+            <!-- EDIT: Replace with your actual phone -->
+            <span>+1 (800) FLAV-WAV</span>
+          </div>
+        </div>
+
+        <div class="contact-info-item reveal reveal-delay-2">
+          <div class="contact-icon">📍</div>
+          <div>
+            <strong>Location</strong>
+            <span>California, USA</span>
+          </div>
+        </div>
+
+        <!-- EDIT: Update social links/hrefs -->
+        <div class="social-links reveal reveal-delay-3">
+          <a href="https://www.tiktok.com/@flavorwav" target="_blank" class="social-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.73a4.85 4.85 0 0 1-1.01-.04z"/></svg>
+            TikTok
+          </a>
+          <a href="#" target="_blank" class="social-link">📸 Instagram</a>
+          <a href="#" target="_blank" class="social-link">🌐 Website</a>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="contact-form reveal reveal-delay-1">
+        <div class="form-group">
+          <label for="contact-name">Name</label>
+          <input type="text" id="contact-name" placeholder="Your name" />
+        </div>
+        <div class="form-group">
+          <label for="contact-email">Email</label>
+          <input type="email" id="contact-email" placeholder="your@email.com" />
+        </div>
+        <div class="form-group">
+          <label for="contact-msg">Message</label>
+          <textarea id="contact-msg" rows="5" placeholder="How can we help?"></textarea>
+        </div>
+        <button class="btn btn-primary" onclick="handleContactSubmit()" style="width:100%;justify-content:center;">Send Message</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+     FAQ SECTION
+=========================== -->
+<section id="faq">
+  <div class="container">
+    <div class="faq-header">
+      <p class="section-label reveal">Help Center</p>
+      <h2 class="section-title reveal reveal-delay-1">Frequently Asked Questions</h2>
+      <p class="reveal reveal-delay-2" style="color:var(--text-dim);font-size:17px;max-width:540px;margin:0 auto 20px;">Everything you need to know about FlavorWav.</p>
+
+      <!-- EDIT: Replace href with your actual FAQ PDF file path -->
+      <a href="files/flavorwav-full-faq.pdf" download class="faq-download-btn reveal reveal-delay-3">
+        ⬇ Download Full FAQ (PDF)
+      </a>
+    </div>
+
+    <!-- FAQ Category Buttons -->
+    <div class="faq-categories">
+      <button class="faq-cat-btn active" data-cat="ordering">Ordering</button>
+      <button class="faq-cat-btn" data-cat="shipping">Shipping & Delivery</button>
+      <button class="faq-cat-btn" data-cat="products">Products & Ingredients</button>
+      <button class="faq-cat-btn" data-cat="returns">Returns & Support</button>
+    </div>
+
+    <!-- ============================
+         EDIT FAQ QUESTIONS/ANSWERS BELOW
+         Each .faq-item: change the button text (question) and .faq-a-inner (answer)
+    ============================ -->
+
+    <!-- ORDERING -->
+    <div class="faq-section-group active" id="faq-ordering">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How do I place an order? <i class="faq-icon">+</i></button>
+        <div class="faq-a"><div class="faq-a-inner">Visit our Shop page, choose your favorite flavors, add them to your cart, and check out securely. We accept all major credit cards and PayPal.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Can I order multiple flavors in one pack? <i class="faq-icon">+</i></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes! We offer variety packs that let you mix and match your favorite flavors. Check out our Shop page for all available bundle options.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Is there a minimum order quantity? <i class="faq-icon">+</i></button>
+        <div class="faq-a"><div class="faq-a-inner">No minimum order required. You can order a single pack or stock up with our larger bundles for the best per-unit price.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Do you offer subscription orders? <i class="faq-icon">+</i></button>
+        <div class="faq-a"><div class="faq-a-inner">We're actively working on subscription options. Sign up for our newsletter to be the first to know when subscriptions launch.</div></div>
+      </div>
+    </div>
+
+    <!-- SHIPPING -->
+    <div class="faq-section-group" id="faq-shipping">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How long does shipping take? <i class="faq-icon">+</i></button>
+        <div class="faq-a"><div class="faq-a-inner">Standard shipping takes 5–7 business days. Expedited options are available at checkout for 2–3 business day delivery.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Do you offer free shipping? <i class="faq-icon">+</i></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes! Free standard shipping on all qualifying orders. Check our current promotions on the shop page for the latest threshold.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Do you ship internationally? <i class="faq-icon">+</i></button>
+        <div class="faq-a"><div class="faq-a-inner">We currently ship within the United States. International shipping is coming soon — stay tuned to our social channels for updates.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How can I track my order? <i class="faq-icon">+</i></button>
+        <div class="faq-a"><div class="faq-a-inner">Once your order ships, you'll receive a confirmation email with a tracking number. You can track your order directly from the carrier's website.</div></div>
+      </div>
+    </div>
+
+    <!-- PRODUCTS & INGREDIENTS -->
+    <div class="faq-section-group" id="faq-products">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What tumblers do FlavorWav straws fit? <i class="faq-icon">+</i></button>
+        <div class="faq-a"><div class="faq-a-inner">Our 12" straws are designed to fit 30oz and 40oz tumblers including Yeti, Stanley, RTIC, Hydro Flask, and similar large-format tumblers.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Are the straws safe and tested? <i class="faq-icon">+</i></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes. Our straws are tested for PFAS and other key chemical screens relevant to food-contact products. We use glueless construction — no adhesive seam commonly found in other paper straws.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How does the flavor dissolve? <i class="faq-icon">+</i></button>
+        <div class="faq-a"><div class="faq-a-inner">The inner lining of each straw dissolves naturally as liquid passes through it during normal sipping. You don't need to stir or shake — just insert and drink.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Are FlavorWav straws biodegradable? <i class="faq-icon">+</i></button>
+        <div class="faq-a"><div class="faq-a-inner">Yes. FlavorWav straws are paper-based and biodegradable, backed by a verified biodegradability report. We're committed to sustainability without sacrificing performance.</div></div>
+      </div>
+    </div>
+
+    <!-- RETURNS & SUPPORT -->
+    <div class="faq-section-group" id="faq-returns">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What is your return policy? <i class="faq-icon">+</i></button>
+        <div class="faq-a"><div class="faq-a-inner">We accept returns within 30 days of purchase for unopened, unused products. Please contact us at hello@flavorwav.com with your order number to initiate a return.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">What if my order arrives damaged? <i class="faq-icon">+</i></button>
+        <div class="faq-a"><div class="faq-a-inner">We're sorry to hear that! Please email us at hello@flavorwav.com with a photo of the damaged item and your order number. We'll make it right as quickly as possible.</div></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How do I contact customer support? <i class="faq-icon">+</i></button>
+        <div class="faq-a"><div class="faq-a-inner">You can reach us via the contact form on this page, by email at hello@flavorwav.com, or through our social media channels. We typically respond within 1–2 business days.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===========================
+     FOOTER
+=========================== -->
+<footer>
+  <div class="container">
+    <div class="footer-logo">
+      <!-- REPLACE src with FLAVORWAVLOGOOFFICIAL.png -->
+      <img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav" />
+    </div>
+
+    <!-- EDIT: Footer links -->
+    <nav class="footer-links">
+      <a href="#shop">Shop</a>
+      <a href="#about">About</a>
+      <a href="#flavors">Flavors</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#tiktok">TikTok</a>
+      <a href="#contact">Contact</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <!-- EDIT: Footer copyright text -->
+    <p class="footer-copy">© 2025 FlavorWav. All rights reserved. California, USA.</p>
+  </div>
+</footer>
+
+
+<!-- ===========================
+     JAVASCRIPT
+=========================== -->
+<script>
+// === NAVBAR SCROLL ===
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// === PARALLAX HERO ===
+const heroBg = document.getElementById('heroBg');
+window.addEventListener('scroll', () => {
+  if (heroBg) {
+    heroBg.style.transform = `scale(1.05) translateY(${window.scrollY * 0.3}px)`;
+  }
+});
+
+// === HERO PARTICLES ===
+(function spawnParticles() {
+  const container = document.getElementById('heroParticles');
+  if (!container) return;
+  for (let i = 0; i < 40; i++) {
+    const p = document.createElement('span');
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = (8 + Math.random() * 12) + 's';
+    p.style.animationDelay = (Math.random() * 10) + 's';
+    p.style.width = p.style.height = (1 + Math.random() * 2) + 'px';
+    if (Math.random() > 0.7) {
+      p.style.background = `hsl(${Math.random() > 0.5 ? 270 : 310}, 100%, 70%)`;
+    }
+    container.appendChild(p);
+  }
+})();
+
+// === HAMBURGER / MOBILE MENU ===
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+
+hamburger.addEventListener('click', () => {
+  const open = mobileMenu.classList.toggle('open');
+  hamburger.classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+});
+
+document.querySelectorAll('.mobile-link, .mobile-menu .btn').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    hamburger.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
+
+// === SCROLL REVEAL ===
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// === FAQ ACCORDION ===
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.closest('.faq-item');
+    const answer = item.querySelector('.faq-a');
+    const isOpen = item.classList.contains('open');
+
+    // Close all in same group
+    item.closest('.faq-section-group').querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-a').style.maxHeight = '0';
+      i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+    });
+
+    if (!isOpen) {
+      item.classList.add('open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+      btn.setAttribute('aria-expanded', 'true');
+    }
+  });
+});
+
+// === FAQ CATEGORY TABS ===
+document.querySelectorAll('.faq-cat-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.faq-cat-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.faq-section-group').forEach(g => g.classList.remove('active'));
+    btn.classList.add('active');
+    const target = document.getElementById('faq-' + btn.dataset.cat);
+    if (target) target.classList.add('active');
+  });
+});
+
+// === CONTACT FORM ===
+function handleContactSubmit() {
+  const name = document.getElementById('contact-name').value.trim();
+  const email = document.getElementById('contact-email').value.trim();
+  const msg = document.getElementById('contact-msg').value.trim();
+  if (!name || !email || !msg) {
+    alert('Please fill in all fields before sending.');
+    return;
+  }
+  // EDIT: Replace with your actual form submission logic (e.g., Formspree, EmailJS, etc.)
+  alert('Thank you, ' + name + '! Your message has been sent. We\'ll be in touch soon.');
+  document.getElementById('contact-name').value = '';
+  document.getElementById('contact-email').value = '';
+  document.getElementById('contact-msg').value = '';
+}
+
+// === SMOOTH SCROLL (fallback for older browsers) ===
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', e => {
+    const target = document.querySelector(link.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+</body>
+</html>

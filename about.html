@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>About Us — FlavorWav</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --cyan: #00d4ff; --cyan-dim: rgba(0,212,255,0.15); --purple: #7b2fff;
+  --dark: #050a14; --dark2: #070e1c; --glass: rgba(255,255,255,0.04);
+  --glass-border: rgba(0,212,255,0.18); --text: #e8f4ff; --text-dim: rgba(232,244,255,0.6);
+  --nav-height: 70px; --transition: 0.35s cubic-bezier(0.25,0.8,0.25,1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Rajdhani', sans-serif; background: var(--dark); color: var(--text); overflow-x: hidden; }
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+
+nav#navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  height: var(--nav-height); display: flex; align-items: center; padding: 0 24px;
+  background: rgba(5,10,20,0.95); backdrop-filter: blur(20px);
+  box-shadow: 0 1px 0 var(--glass-border), 0 4px 30px rgba(0,0,0,0.5);
+}
+.nav-inner { width: 100%; display: flex; align-items: center; justify-content: space-between; }
+.nav-logo img { height: 42px; width: auto; }
+.nav-links { display: none; }
+@media (min-width: 1280px) {
+  .nav-links { display: flex; align-items: center; gap: 20px; list-style: none; }
+  .nav-links a { font-family: 'Orbitron', monospace; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-dim); transition: color var(--transition); }
+  .nav-links a:hover, .nav-links a.active { color: var(--cyan); }
+  .hamburger { display: none !important; }
+}
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 22px; border-radius: 50px; font-family: 'Orbitron', monospace; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; border: none; transition: var(--transition); }
+.btn-primary { background: linear-gradient(135deg, var(--cyan), var(--purple)); color: #fff; box-shadow: 0 0 30px rgba(0,212,255,0.4); }
+.btn-primary:hover { transform: translateY(-3px); }
+.hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; border: none; background: transparent; }
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--cyan); transition: var(--transition); transform-origin: center; }
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mobile-menu { position: fixed; inset: 0; background: rgba(5,10,20,0.97); backdrop-filter: blur(24px); z-index: 1050; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 28px; transform: translateX(100%); transition: transform 0.45s cubic-bezier(0.25,0.8,0.25,1); }
+.mobile-menu.open { transform: translateX(0); }
+.mobile-menu a { font-family: 'Orbitron', monospace; font-size: 20px; letter-spacing: 3px; text-transform: uppercase; color: var(--text-dim); transition: color var(--transition); }
+.mobile-menu a:hover { color: var(--cyan); }
+
+.page-top { padding-top: var(--nav-height); position: relative; }
+.back-btn { position: absolute; top: calc(var(--nav-height) + 20px); left: 24px; font-family: 'Orbitron', monospace; font-size: 10px; letter-spacing: 2px; color: var(--cyan); display: flex; align-items: center; gap: 8px; transition: var(--transition); z-index: 10; }
+.back-btn:hover { transform: translateX(-4px); }
+
+section img { width: 100%; display: block; }
+
+.reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+footer { background: var(--dark2); border-top: 1px solid var(--glass-border); padding: 40px 0 24px; text-align: center; }
+.footer-logo img { height: 44px; margin: 0 auto 16px; opacity: 0.8; }
+.footer-links { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-bottom: 20px; }
+.footer-links a { font-family: 'Orbitron', monospace; font-size: 10px; letter-spacing: 2px; color: var(--text-dim); transition: color 0.3s; }
+.footer-links a:hover { color: var(--cyan); }
+.footer-copy { font-size: 12px; color: rgba(232,244,255,0.3); }
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#shop">Shop</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="flavors.html">Flavors</a></li>
+      <li><a href="index.html#how-it-works">How It Works</a></li>
+      <li><a href="tiktok.html">TikTok</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+      <li><a href="index.html#faq">FAQ</a></li>
+      <li><a href="index.html#shop" class="btn btn-primary">Shop Now</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#shop" class="mobile-link">Shop</a>
+  <a href="about.html" class="mobile-link">About Us</a>
+  <a href="flavors.html" class="mobile-link">Flavors</a>
+  <a href="index.html#how-it-works" class="mobile-link">How It Works</a>
+  <a href="tiktok.html" class="mobile-link">TikTok</a>
+  <a href="index.html#contact" class="mobile-link">Contact</a>
+  <a href="index.html#faq" class="mobile-link">FAQ</a>
+  <a href="index.html#shop" class="btn btn-primary" style="margin-top:8px;">Shop Now</a>
+</div>
+
+<div class="page-top">
+  <a href="index.html" class="back-btn">← Back</a>
+  <!-- ABOUT FULL IMAGE -->
+  <img src="about%20us%20no%20glow%20city.png" alt="About FlavorWav" class="reveal" />
+</div>
+
+<!-- BENEFITS IMAGE -->
+<section>
+  <img src="FlavorWav%20Benefits%20Page.png" alt="FlavorWav Benefits" class="reveal" />
+</section>
+
+<footer>
+  <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+    <div class="footer-logo"><img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav" /></div>
+    <nav class="footer-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#shop">Shop</a>
+      <a href="about.html">About</a>
+      <a href="flavors.html">Flavors</a>
+      <a href="tiktok.html">TikTok</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="index.html#faq">FAQ</a>
+    </nav>
+    <p class="footer-copy">© 2025 FlavorWav. All rights reserved. California, USA.</p>
+  </div>
+</footer>
+
+<script>
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  const open = mobileMenu.classList.toggle('open');
+  hamburger.classList.toggle('open', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+});
+document.querySelectorAll('.mobile-link, .mobile-menu .btn').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    hamburger.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
+const ro = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); ro.unobserve(e.target); } });
+}, { threshold: 0.05 });
+document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+</script>
+</body>
+</html>

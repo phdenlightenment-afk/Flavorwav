@@ -8,7 +8,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
-
 :root{--cyan:#00d4ff;--purple:#7b2fff;--pink:#ff2d9e;--dark:#050a14;--dark2:#070e1c;
   --glass:rgba(255,255,255,0.06);--glass-border:rgba(0,212,255,0.18);
   --text:#e8f4ff;--text-dim:rgba(232,244,255,0.6);--nav-height:70px;--radius:16px;
@@ -18,64 +17,31 @@ html{scroll-behavior:smooth;}
 body{font-family:'Rajdhani',sans-serif;background:#000;color:var(--text);overflow-x:hidden;}
 img{display:block;}
 a{text-decoration:none;color:inherit;}
-
-
-
-
-
-  to{filter:drop-shadow(0 0 40px rgba(0,212,255,0.95)) drop-shadow(0 0 80px rgba(123,47,255,0.5));}}
-
-
-
-/* CURSOR - pointer-events:none so it NEVER blocks clicks */
-#cursor-dot{position:fixed;width:8px;height:8px;background:var(--cyan);border-radius:50%;
-  pointer-events:none;z-index:9998;transform:translate(-50%,-50%);
-  box-shadow:0 0 10px var(--cyan),0 0 20px rgba(0,212,255,0.4);}
-#cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid rgba(0,212,255,0.45);
-  border-radius:50%;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);}
+#cursor-dot{position:fixed;width:8px;height:8px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);box-shadow:0 0 10px var(--cyan),0 0 20px rgba(0,212,255,0.4);}
+#cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid rgba(0,212,255,0.45);border-radius:50%;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);}
 body.ch #cursor-dot{background:var(--pink);box-shadow:0 0 16px var(--pink);}
 body.ch #cursor-ring{width:54px;height:54px;border-color:rgba(255,45,158,0.5);}
 @media(hover:none),(pointer:coarse){#cursor-dot,#cursor-ring{display:none;}}
-/* NAV */
-nav#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-height);
-  display:flex;align-items:center;padding:0 24px;background:rgba(5,10,20,0.96);
-  backdrop-filter:blur(20px);box-shadow:0 1px 0 var(--glass-border);}
+nav#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-height);display:flex;align-items:center;padding:0 24px;background:rgba(5,10,20,0.96);backdrop-filter:blur(20px);box-shadow:0 1px 0 var(--glass-border);}
 .nav-inner{width:100%;display:flex;align-items:center;justify-content:space-between;}
 .nav-logo img{height:42px;width:auto;}
 .nav-links{display:none;}
-@media(min-width:1280px){
-  .nav-links{display:flex;align-items:center;gap:16px;list-style:none;}
-  .nav-links a{font-family:'Orbitron',monospace;font-size:8.5px;letter-spacing:1.5px;
-    text-transform:uppercase;color:var(--text-dim);transition:color var(--t);}
-  .nav-links a:hover,.nav-links a.active{color:var(--cyan);}
-  .hamburger{display:none!important;}}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:50px;
-  font-family:'Orbitron',monospace;font-size:10px;font-weight:700;letter-spacing:1.5px;
-  text-transform:uppercase;cursor:pointer;border:none;transition:var(--t);}
-.btn-primary{background:linear-gradient(135deg,var(--cyan),var(--purple));color:#fff;
-  box-shadow:0 0 24px rgba(0,212,255,0.4);}
+@media(min-width:1280px){.nav-links{display:flex;align-items:center;gap:16px;list-style:none;}.nav-links a{font-family:'Orbitron',monospace;font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-dim);transition:color var(--t);}.nav-links a:hover,.nav-links a.active{color:var(--cyan);}.hamburger{display:none!important;}}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:50px;font-family:'Orbitron',monospace;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;border:none;transition:var(--t);}
+.btn-primary{background:linear-gradient(135deg,var(--cyan),var(--purple));color:#fff;box-shadow:0 0 24px rgba(0,212,255,0.4);}
 .btn-primary:hover{transform:translateY(-3px);}
-.btn-outline{background:transparent;color:var(--cyan);border:1.5px solid var(--cyan);}
-.btn-outline:hover{background:rgba(0,212,255,0.1);transform:translateY(-3px);}
 .nav-cta{padding:8px 16px!important;font-size:8px!important;}
-.hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:8px;
-  border:none;background:transparent;z-index:1100;}
-.hamburger span{display:block;width:24px;height:2px;background:var(--cyan);
-  transition:var(--t);transform-origin:center;}
+.hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:8px;border:none;background:transparent;z-index:1100;}
+.hamburger span{display:block;width:24px;height:2px;background:var(--cyan);transition:var(--t);transform-origin:center;}
 .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
 .hamburger.open span:nth-child(2){opacity:0;}
 .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-.mobile-menu{position:fixed;inset:0;background:rgba(5,10,20,0.97);backdrop-filter:blur(24px);
-  z-index:1050;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:28px;transform:translateX(100%);transition:transform 0.45s cubic-bezier(0.25,0.8,0.25,1);}
+.mobile-menu{position:fixed;inset:0;background:rgba(5,10,20,0.97);backdrop-filter:blur(24px);z-index:1050;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;transform:translateX(100%);transition:transform 0.45s cubic-bezier(0.25,0.8,0.25,1);}
 .mobile-menu.open{transform:translateX(0);}
-.mobile-menu a{font-family:'Orbitron',monospace;font-size:18px;letter-spacing:3px;
-  text-transform:uppercase;color:var(--text-dim);}
+.mobile-menu a{font-family:'Orbitron',monospace;font-size:18px;letter-spacing:3px;text-transform:uppercase;color:var(--text-dim);}
 .mobile-menu a:hover{color:var(--cyan);}
-/* IMAGE PAGES */
 .images-wrap{padding-top:var(--nav-height);line-height:0;font-size:0;}
 .images-wrap img{width:100%;display:block;margin:0;padding:0;}
-/* FOOTER */
 footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:40px 0 24px;text-align:center;}
 .ftr-inner{max-width:1200px;margin:0 auto;padding:0 24px;}
 .footer-logo img{height:44px;margin:0 auto 16px;opacity:0.8;width:auto;}
@@ -83,21 +49,14 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
 .footer-links a{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;color:var(--text-dim);transition:color 0.3s;}
 .footer-links a:hover{color:var(--cyan);}
 .footer-copy{font-size:12px;color:rgba(232,244,255,0.3);}
-
 .tiktok-wrap{position:relative;padding-top:var(--nav-height);line-height:0;font-size:0;}
 .tiktok-wrap img{width:100%;display:block;}
 .tiktok-cta{position:absolute;bottom:7%;left:50%;transform:translateX(-50%);z-index:2;white-space:nowrap;}
-.tiktok-btn{background:linear-gradient(135deg,#69c9d0,#010101 80%);color:#fff;
-  border:1.5px solid rgba(105,201,208,0.35);font-family:'Orbitron',monospace;
-  font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
-  padding:14px 36px;border-radius:50px;display:inline-flex;align-items:center;gap:10px;
-  box-shadow:0 0 30px rgba(105,201,208,0.3);transition:.35s;text-decoration:none;}
-.tiktok-btn:hover{transform:translateY(-4px);box-shadow:0 0 60px rgba(105,201,208,0.5);}
+.tiktok-btn{background:linear-gradient(135deg,#69c9d0,#010101 80%);color:#fff;border:1.5px solid rgba(105,201,208,0.35);font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:14px 36px;border-radius:50px;display:inline-flex;align-items:center;gap:10px;box-shadow:0 0 30px rgba(105,201,208,0.3);transition:.35s;text-decoration:none;}
+.tiktok-btn:hover{transform:translateY(-4px);}
 </style>
 </head>
 <body>
-</div>
-</div>
 <div id="cursor-dot"></div>
 <div id="cursor-ring"></div>
 <nav id="navbar">
@@ -105,10 +64,10 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
     <a href="index.html" class="nav-logo"><img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav"/></a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
-      <li><a href="about.html" id="nav-about">About</a></li>
-      <li><a href="flavors.html" id="nav-flavors">Flavors</a></li>
-      <li><a href="howitworks.html" id="nav-how">How It Works</a></li>
-      <li><a href="tiktok.html" id="nav-tiktok" class="active">TikTok</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="flavors.html">Flavors</a></li>
+      <li><a href="howitworks.html">How It Works</a></li>
+      <li><a href="tiktok.html" class="active">TikTok</a></li>
       <li><a href="index.html#contact">Contact</a></li>
       <li><a href="index.html#faq">FAQ</a></li>
       <li><a href="index.html#shop" class="btn btn-primary nav-cta">Shop Now</a></li>
@@ -130,9 +89,7 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
   <img src="Flavorwav_TIKTOK_Action_Page.png" alt="FlavorWav TikTok"/>
   <div class="tiktok-cta">
     <a href="https://www.tiktok.com/@flavorwav" target="_blank" rel="noopener" class="tiktok-btn">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.73a4.85 4.85 0 0 1-1.01-.04z"/>
-      </svg>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.73a4.85 4.85 0 0 1-1.01-.04z"/></svg>
       Follow Us on TikTok
     </a>
   </div>
@@ -141,53 +98,16 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
   <div class="ftr-inner">
     <div class="footer-logo"><img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav"/></div>
     <nav class="footer-links">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="flavors.html">Flavors</a>
-      <a href="howitworks.html">How It Works</a>
-      <a href="tiktok.html">TikTok</a>
-      <a href="index.html#contact">Contact</a>
-      <a href="index.html#faq">FAQ</a>
+      <a href="index.html">Home</a><a href="about.html">About</a><a href="flavors.html">Flavors</a>
+      <a href="howitworks.html">How It Works</a><a href="tiktok.html">TikTok</a>
+      <a href="index.html#contact">Contact</a><a href="index.html#faq">FAQ</a>
     </nav>
     <p class="footer-copy">&copy; 2025 FlavorWav. All rights reserved. California, USA.</p>
   </div>
 </footer>
 <script>
-
-
-// CURSOR
-(function(){
-  var dot=document.getElementById('cursor-dot');
-  var ring=document.getElementById('cursor-ring');
-  if(!dot||!ring) return;
-  var mx=window.innerWidth/2, my=window.innerHeight/2, rx=mx, ry=my;
-  document.addEventListener('mousemove',function(e){ mx=e.clientX; my=e.clientY;
-    dot.style.left=mx+'px'; dot.style.top=my+'px'; });
-  (function tick(){ rx+=(mx-rx)*0.13; ry+=(my-ry)*0.13;
-    ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(tick); })();
-  document.querySelectorAll('a,button').forEach(function(el){
-    el.addEventListener('mouseenter',function(){ document.body.classList.add('ch'); });
-    el.addEventListener('mouseleave',function(){ document.body.classList.remove('ch'); });
-  });
-})();
-// HAMBURGER
-(function(){
-  var h=document.getElementById('hamburger'), m=document.getElementById('mobileMenu');
-  if(!h||!m) return;
-  h.addEventListener('click',function(){
-    var o=m.classList.toggle('open');
-    h.classList.toggle('open',o);
-    document.body.style.overflow=o?'hidden':'';
-  });
-  document.querySelectorAll('.mobile-link,.mobile-menu .btn').forEach(function(l){
-    l.addEventListener('click',function(){
-      m.classList.remove('open'); h.classList.remove('open');
-      document.body.style.overflow='';
-    });
-  });
-})();
-
-
+(function(){var dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');if(!dot||!ring)return;var mx=window.innerWidth/2,my=window.innerHeight/2,rx=mx,ry=my;document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});(function t(){rx+=(mx-rx)*0.13;ry+=(my-ry)*0.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(t);})();document.querySelectorAll('a,button').forEach(function(el){el.addEventListener('mouseenter',function(){document.body.classList.add('ch');});el.addEventListener('mouseleave',function(){document.body.classList.remove('ch');});});})();
+(function(){var h=document.getElementById('hamburger'),m=document.getElementById('mobileMenu');if(!h||!m)return;h.addEventListener('click',function(){var o=m.classList.toggle('open');h.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';});document.querySelectorAll('.mobile-link,.mobile-menu .btn').forEach(function(l){l.addEventListener('click',function(){m.classList.remove('open');h.classList.remove('open');document.body.style.overflow='';});});})();
 </script>
 </body>
 </html>

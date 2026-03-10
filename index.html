@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>FlavorWav &mdash; Infused Straws</title>
+<title>FlavorWav — Infused Straws</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
@@ -18,17 +18,7 @@ body{font-family:'Rajdhani',sans-serif;background:#000;color:var(--text);overflo
 img{display:block;}
 a{text-decoration:none;color:inherit;}
 
-
-
-
-
-
-  to{filter:drop-shadow(0 0 40px rgba(0,212,255,0.95)) drop-shadow(0 0 80px rgba(123,47,255,0.5));}}
-
-
-
-
-/* CURSOR - pointer-events:none so it NEVER blocks clicks */
+/* CURSOR */
 #cursor-dot{position:fixed;width:8px;height:8px;background:var(--cyan);border-radius:50%;
   pointer-events:none;z-index:9998;transform:translate(-50%,-50%);
   box-shadow:0 0 10px var(--cyan),0 0 20px rgba(0,212,255,0.4);}
@@ -45,12 +35,12 @@ body.ch #cursor-ring{width:54px;height:54px;border-color:rgba(255,45,158,0.5);}
 .float-btn{display:flex;align-items:center;gap:10px;padding:13px 22px;border-radius:50px;
   background:linear-gradient(135deg,var(--cyan),var(--purple));color:#fff;
   font-family:'Orbitron',monospace;font-size:11px;font-weight:700;letter-spacing:1.5px;
-  text-transform:uppercase;box-shadow:0 0 30px rgba(0,212,255,0.5),0 8px 32px rgba(0,0,0,0.4);
+  text-transform:uppercase;box-shadow:0 0 30px rgba(0,212,255,0.5);
   transition:var(--t);border:none;cursor:pointer;text-decoration:none;}
-.float-btn:hover{transform:translateY(-4px);box-shadow:0 0 50px rgba(0,212,255,0.7);}
+.float-btn:hover{transform:translateY(-4px);}
 .float-pulse{width:8px;height:8px;background:#fff;border-radius:50%;flex-shrink:0;
   animation:fpulse 1.4s ease-in-out infinite;}
-@keyframes fpulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.6);opacity:0.4}}
+@keyframes fpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.6);opacity:0.4}}
 
 /* NAV */
 nav#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-height);
@@ -103,26 +93,22 @@ nav#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-hei
   padding:0 24px;padding-top:var(--nav-height);}
 .hero-badge{display:inline-block;padding:6px 18px;background:var(--glass);
   border:1px solid var(--glass-border);border-radius:50px;font-family:'Orbitron',monospace;
-  font-size:10px;letter-spacing:3px;color:var(--cyan);margin-bottom:24px;
-  backdrop-filter:blur(10px);animation:fu 0.8s ease forwards;}
+  font-size:10px;letter-spacing:3px;color:var(--cyan);margin-bottom:24px;backdrop-filter:blur(10px);}
 .hero-title{font-family:'Orbitron',monospace;font-size:clamp(38px,9vw,96px);font-weight:900;
-  line-height:1;margin-bottom:20px;animation:fu 0.8s 0.15s ease forwards;opacity:0;}
+  line-height:1;margin-bottom:20px;}
 .hero-title span{background:linear-gradient(135deg,var(--cyan),var(--purple) 60%,var(--pink));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .hero-sub{font-size:clamp(15px,2.5vw,20px);font-weight:300;color:var(--text-dim);
-  max-width:520px;margin:0 auto 34px;animation:fu 0.8s 0.3s ease forwards;opacity:0;}
-.hero-actions{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;
-  animation:fu 0.8s 0.45s ease forwards;opacity:0;}
-@keyframes fu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+  max-width:520px;margin:0 auto 34px;}
+.hero-actions{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;}
 .hero-scroll{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);z-index:2;
-  display:flex;flex-direction:column;align-items:center;gap:8px;
-  animation:fu 0.8s 0.7s ease forwards;opacity:0;}
+  display:flex;flex-direction:column;align-items:center;gap:8px;}
 .hero-scroll span{font-size:10px;letter-spacing:2px;color:var(--text-dim);font-family:'Orbitron',monospace;}
 .scroll-line{width:1px;height:34px;background:linear-gradient(to bottom,var(--cyan),transparent);
   animation:spulse 2s ease-in-out infinite;}
 @keyframes spulse{0%,100%{opacity:0.4}50%{opacity:1}}
 
-/* BENEFITS (homepage only) */
+/* BENEFITS */
 #benefits{line-height:0;font-size:0;}
 #benefits img{width:100%;display:block;}
 
@@ -179,7 +165,7 @@ nav#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-hei
 .fg input,.fg textarea{background:var(--glass);border:1px solid var(--glass-border);
   border-radius:10px;padding:13px 16px;font-family:'Rajdhani',sans-serif;font-size:16px;
   color:var(--text);outline:none;transition:border-color 0.3s;resize:none;}
-.fg input:focus,.fg textarea:focus{border-color:var(--cyan);box-shadow:0 0 14px rgba(0,212,255,0.12);}
+.fg input:focus,.fg textarea:focus{border-color:var(--cyan);}
 .fg input::placeholder,.fg textarea::placeholder{color:rgba(232,244,255,0.3);}
 
 /* FAQ */
@@ -198,17 +184,17 @@ nav#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-hei
 .faq-group{display:none;}
 .faq-group.active{display:block;}
 .faq-item{background:var(--glass);border:1px solid var(--glass-border);
-  border-radius:var(--radius);margin-bottom:10px;overflow:hidden;transition:border-color 0.3s;}
+  border-radius:var(--radius);margin-bottom:10px;overflow:hidden;}
 .faq-item.open{border-color:rgba(0,212,255,0.35);}
 .faq-q{width:100%;background:transparent;border:none;text-align:left;padding:18px 22px;
   font-family:'Rajdhani',sans-serif;font-size:17px;font-weight:600;color:var(--text);
-  cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:14px;transition:color 0.3s;}
+  cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:14px;}
 .faq-q:hover,.faq-item.open .faq-q{color:var(--cyan);}
 .faq-icon{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--glass-border);
   flex-shrink:0;display:flex;align-items:center;justify-content:center;
   transition:var(--t);font-style:normal;font-size:14px;color:var(--text-dim);}
 .faq-item.open .faq-icon{border-color:var(--cyan);color:var(--cyan);transform:rotate(45deg);}
-.faq-a{max-height:0;overflow:hidden;transition:max-height 0.4s cubic-bezier(0.25,0.8,0.25,1);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height 0.4s ease;}
 .faq-a-inner{padding:14px 22px 18px;font-size:15px;color:var(--text-dim);line-height:1.8;
   border-top:1px solid var(--glass-border);}
 
@@ -220,23 +206,17 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
 .footer-links a{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;color:var(--text-dim);transition:color 0.3s;}
 .footer-links a:hover{color:var(--cyan);}
 .footer-copy{font-size:12px;color:rgba(232,244,255,0.3);}
+
 @media(max-width:900px){.contact-grid{grid-template-columns:1fr;gap:32px;}}
 @media(max-width:600px){.hero-actions{flex-direction:column;align-items:center;}.cards-grid{grid-template-columns:1fr 1fr;}}
 </style>
 </head>
 <body>
 
-</div>
-</div>
-
-<!-- CURSOR -->
 <div id="cursor-dot"></div>
 <div id="cursor-ring"></div>
-
-<!-- FLOATING SHOP BUTTON -->
 <div id="float-shop"><a href="#shop" class="float-btn"><div class="float-pulse"></div>Shop Now</a></div>
 
-<!-- NAV -->
 <nav id="navbar">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo"><img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav"/></a>
@@ -264,7 +244,6 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
   <a href="#shop" class="btn btn-primary" style="margin-top:8px;">Shop Now</a>
 </div>
 
-<!-- HERO -->
 <section id="hero">
   <div class="hero-bg" id="heroBg"></div>
   <div class="hero-overlay"></div>
@@ -281,12 +260,10 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
   <div class="hero-scroll"><span>Scroll</span><div class="scroll-line"></div></div>
 </section>
 
-<!-- BENEFITS IMAGE — homepage only -->
 <section id="benefits">
   <img src="FlavorWav_Benefits_Page.png" alt="FlavorWav Benefits"/>
 </section>
 
-<!-- NAV CARDS -->
 <section id="nav-cards">
   <div class="container">
     <div class="cards-grid">
@@ -298,7 +275,7 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
       <a href="flavors.html" class="nav-card">
         <div class="nc-icon">&#9889;</div>
         <div class="nc-title">Our Flavors</div>
-        <div class="nc-desc">Energy, probiotics, focus &amp; more — see all flavors.</div>
+        <div class="nc-desc">Energy, probiotics, focus &amp; more.</div>
       </a>
       <a href="howitworks.html" class="nav-card">
         <div class="nc-icon">&#128167;</div>
@@ -314,7 +291,6 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
   </div>
 </section>
 
-<!-- SHOP -->
 <section id="shop">
   <div class="shop-bg"></div>
   <div class="container">
@@ -330,7 +306,6 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
   </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
   <div class="container">
     <div style="text-align:center;margin-bottom:48px;">
@@ -339,13 +314,13 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
     </div>
     <div class="contact-grid">
       <div>
-        <div class="ci"><div class="ci-icon">&#128231;</div><div><strong>Email</strong><span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="caa2afa6a6a58aaca6abbca5b8bdabbce4a9a5a7">[email&#160;protected]</a></span></div></div>
+        <div class="ci"><div class="ci-icon">&#128231;</div><div><strong>Email</strong><span>hello@flavorwav.com</span></div></div>
         <div class="ci"><div class="ci-icon">&#128222;</div><div><strong>Phone</strong><span>+1 (800) FLAV-WAV</span></div></div>
         <div class="ci"><div class="ci-icon">&#128205;</div><div><strong>Location</strong><span>California, USA</span></div></div>
         <div class="social-links">
           <a href="tiktok.html" class="social-link">&#127925; TikTok</a>
-          <a href="#" target="_blank" class="social-link">&#128247; Instagram</a>
-          <a href="#" target="_blank" class="social-link">&#127760; Website</a>
+          <a href="#" class="social-link">&#128247; Instagram</a>
+          <a href="#" class="social-link">&#127760; Website</a>
         </div>
       </div>
       <div class="contact-form">
@@ -358,14 +333,13 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
   </div>
 </section>
 
-<!-- FAQ -->
 <section id="faq">
   <div class="container">
     <div class="faq-header">
       <span class="section-label">Help Center</span>
       <h2 class="section-title">Frequently Asked Questions</h2>
       <p style="color:var(--text-dim);font-size:16px;max-width:480px;margin:0 auto 16px;">Everything you need to know about FlavorWav.</p>
-      <a href="files/flavorwav-full-faq.pdf" download class="faq-dl">&#11015; Download Full FAQ (PDF)</a>
+      <a href="files/flavorwav-full-faq.pdf" download class="faq-dl">&#11015; Download Full FAQ</a>
     </div>
     <div class="faq-cats">
       <button class="faq-cat active" data-cat="ordering">Ordering</button>
@@ -386,127 +360,91 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
       <div class="faq-item"><button class="faq-q">How do I track my order? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">You'll receive a tracking number via email once your order ships.</div></div></div>
     </div>
     <div class="faq-group" id="faq-products">
-      <div class="faq-item"><button class="faq-q">What tumblers do they fit? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Our 12" straws fit 30oz and 40oz tumblers &mdash; Yeti, Stanley, RTIC, Hydro Flask, and similar.</div></div></div>
+      <div class="faq-item"><button class="faq-q">What tumblers do they fit? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Our 12" straws fit 30oz and 40oz tumblers — Yeti, Stanley, RTIC, Hydro Flask, and similar.</div></div></div>
       <div class="faq-item"><button class="faq-q">Are they safe and tested? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Yes. Tested for PFAS and key chemical screens. Glueless construction, no adhesive seam.</div></div></div>
       <div class="faq-item"><button class="faq-q">How does the flavor dissolve? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">The inner lining dissolves as liquid flows through during normal sipping. Just insert and drink.</div></div></div>
-      <div class="faq-item"><button class="faq-q">Are they biodegradable? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Yes &mdash; paper-based with a verified biodegradability report.</div></div></div>
+      <div class="faq-item"><button class="faq-q">Are they biodegradable? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Yes — paper-based with a verified biodegradability report.</div></div></div>
     </div>
     <div class="faq-group" id="faq-returns">
-      <div class="faq-item"><button class="faq-q">What is your return policy? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Returns within 30 days for unopened products. Email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="99f1fcf5f5f6d9fff5f8eff6ebeef8efb7faf6f4">[email&#160;protected]</a> with your order number.</div></div></div>
-      <div class="faq-item"><button class="faq-q">My order arrived damaged? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5e363b3232311e38323f28312c293f28703d3133">[email&#160;protected]</a> with a photo and order number. We'll make it right fast.</div></div></div>
-      <div class="faq-item"><button class="faq-q">How do I reach support? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Use the contact form above or email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="86eee3eaeae9c6e0eae7f0e9f4f1e7f0a8e5e9eb">[email&#160;protected]</a>. We respond within 1-2 business days.</div></div></div>
+      <div class="faq-item"><button class="faq-q">What is your return policy? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Returns within 30 days for unopened products. Email hello@flavorwav.com with your order number.</div></div></div>
+      <div class="faq-item"><button class="faq-q">My order arrived damaged? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Email hello@flavorwav.com with a photo and order number. We'll make it right fast.</div></div></div>
+      <div class="faq-item"><button class="faq-q">How do I reach support? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Use the contact form above or email hello@flavorwav.com. We respond within 1-2 business days.</div></div></div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="ftr-inner">
     <div class="footer-logo"><img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav"/></div>
     <nav class="footer-links">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="flavors.html">Flavors</a>
-      <a href="howitworks.html">How It Works</a>
-      <a href="tiktok.html">TikTok</a>
-      <a href="#contact">Contact</a>
-      <a href="#faq">FAQ</a>
+      <a href="index.html">Home</a><a href="about.html">About</a><a href="flavors.html">Flavors</a>
+      <a href="howitworks.html">How It Works</a><a href="tiktok.html">TikTok</a>
+      <a href="#contact">Contact</a><a href="#faq">FAQ</a>
     </nav>
     <p class="footer-copy">&copy; 2025 FlavorWav. All rights reserved. California, USA.</p>
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-
-
+<script>
 // CURSOR
 (function(){
-  var dot=document.getElementById('cursor-dot');
-  var ring=document.getElementById('cursor-ring');
-  if(!dot||!ring) return;
-  var mx=window.innerWidth/2, my=window.innerHeight/2, rx=mx, ry=my;
-  document.addEventListener('mousemove',function(e){ mx=e.clientX; my=e.clientY;
-    dot.style.left=mx+'px'; dot.style.top=my+'px'; });
-  (function tick(){ rx+=(mx-rx)*0.13; ry+=(my-ry)*0.13;
-    ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(tick); })();
+  var dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');
+  if(!dot||!ring)return;
+  var mx=window.innerWidth/2,my=window.innerHeight/2,rx=mx,ry=my;
+  document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});
+  (function t(){rx+=(mx-rx)*0.13;ry+=(my-ry)*0.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(t);})();
   document.querySelectorAll('a,button').forEach(function(el){
-    el.addEventListener('mouseenter',function(){ document.body.classList.add('ch'); });
-    el.addEventListener('mouseleave',function(){ document.body.classList.remove('ch'); });
+    el.addEventListener('mouseenter',function(){document.body.classList.add('ch');});
+    el.addEventListener('mouseleave',function(){document.body.classList.remove('ch');});
   });
 })();
-
-// HAMBURGER
-(function(){
-  var h=document.getElementById('hamburger'), m=document.getElementById('mobileMenu');
-  if(!h||!m) return;
-  h.addEventListener('click',function(){
-    var o=m.classList.toggle('open');
-    h.classList.toggle('open',o);
-    document.body.style.overflow=o?'hidden':'';
-  });
-  document.querySelectorAll('.mobile-link,.mobile-menu .btn').forEach(function(l){
-    l.addEventListener('click',function(){
-      m.classList.remove('open'); h.classList.remove('open');
-      document.body.style.overflow='';
-    });
-  });
-})();
-
-// FLOATING SHOP BUTTON
+// FLOAT BTN
 (function(){
   var fs=document.getElementById('float-shop');
-  if(!fs) return;
-  window.addEventListener('scroll',function(){
-    fs.classList.toggle('visible', window.scrollY > window.innerHeight*0.6);
-  },{passive:true});
+  if(!fs)return;
+  window.addEventListener('scroll',function(){fs.classList.toggle('visible',window.scrollY>window.innerHeight*0.6);},{passive:true});
 })();
-
 // PARALLAX
-(function(){
-  var hb=document.getElementById('heroBg');
-  if(!hb) return;
-  window.addEventListener('scroll',function(){
-    hb.style.transform='scale(1.05) translateY('+window.scrollY*0.18+'px)';
-  },{passive:true});
-})();
-
+window.addEventListener('scroll',function(){var h=document.getElementById('heroBg');if(h)h.style.transform='scale(1.05) translateY('+window.scrollY*0.18+'px)';},{passive:true});
 // PARTICLES
 (function(){
-  var c=document.getElementById('heroParticles');
-  if(!c) return;
-  for(var i=0;i<40;i++){
-    var p=document.createElement('span');
-    p.style.left=Math.random()*100+'%';
-    p.style.animationDuration=(8+Math.random()*12)+'s';
-    p.style.animationDelay=(Math.random()*10)+'s';
-    p.style.width=p.style.height=(1+Math.random()*2)+'px';
-    if(Math.random()>0.7) p.style.background='hsl('+(Math.random()>0.5?270:310)+',100%,70%)';
-    c.appendChild(p);
-  }
+  var c=document.getElementById('heroParticles');if(!c)return;
+  for(var i=0;i<40;i++){var p=document.createElement('span');p.style.left=Math.random()*100+'%';p.style.animationDuration=(8+Math.random()*12)+'s';p.style.animationDelay=(Math.random()*10)+'s';p.style.width=p.style.height=(1+Math.random()*2)+'px';if(Math.random()>0.7)p.style.background='hsl('+(Math.random()>0.5?270:310)+',100%,70%)';c.appendChild(p);}
 })();
-
+// HAMBURGER
+(function(){
+  var h=document.getElementById('hamburger'),m=document.getElementById('mobileMenu');
+  if(!h||!m)return;
+  h.addEventListener('click',function(){var o=m.classList.toggle('open');h.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';});
+  document.querySelectorAll('.mobile-link,.mobile-menu .btn').forEach(function(l){l.addEventListener('click',function(){m.classList.remove('open');h.classList.remove('open');document.body.style.overflow='';});});
+})();
 // FAQ
 document.querySelectorAll('.faq-q').forEach(function(btn){
   btn.addEventListener('click',function(){
-    var item=btn.closest('.faq-item'), ans=item.querySelector('.faq-a'), open=item.classList.contains('open');
-    item.closest('.faq-group').querySelectorAll('.faq-item').forEach(function(i){
-      i.classList.remove('open'); i.querySelector('.faq-a').style.maxHeight='0';
-    });
-    if(!open){ item.classList.add('open'); ans.style.maxHeight=ans.scrollHeight+'px'; }
+    var item=btn.closest('.faq-item'),ans=item.querySelector('.faq-a'),open=item.classList.contains('open');
+    item.closest('.faq-group').querySelectorAll('.faq-item').forEach(function(i){i.classList.remove('open');i.querySelector('.faq-a').style.maxHeight='0';});
+    if(!open){item.classList.add('open');ans.style.maxHeight=ans.scrollHeight+'px';}
   });
 });
 document.querySelectorAll('.faq-cat').forEach(function(btn){
   btn.addEventListener('click',function(){
-    document.querySelectorAll('.faq-cat').forEach(function(b){ b.classList.remove('active'); });
-    document.querySelectorAll('.faq-group').forEach(function(g){ g.classList.remove('active'); });
+    document.querySelectorAll('.faq-cat').forEach(function(b){b.classList.remove('active');});
+    document.querySelectorAll('.faq-group').forEach(function(g){g.classList.remove('active');});
     btn.classList.add('active');
-    var t=document.getElementById('faq-'+btn.dataset.cat);
-    if(t) t.classList.add('active');
+    var t=document.getElementById('faq-'+btn.dataset.cat);if(t)t.classList.add('active');
   });
 });
-
-// CONTACT FORM
+// CONTACT
 function sendMsg(){
-  var n=document.getElementById('cname').value.trim();
-  var e=document.getElementById('cemail').value.trim();
-  var m=document.getElementB
+  var n=document.getElementById('cname').value.trim(),e=document.getElementById('cemail').value.trim(),m=document.getElementById('cmsg').value.trim();
+  if(!n||!e||!m){alert('Please fill in all fields.');return;}
+  alert('Thanks '+n+'! Your message has been sent.');
+  document.getElementById('cname').value='';document.getElementById('cemail').value='';document.getElementById('cmsg').value='';
+}
+// SMOOTH SCROLL
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click',function(e){var t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}});
+});
+</script>
+</body>
+</html>

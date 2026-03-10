@@ -94,8 +94,12 @@ nav#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-hei
 .hero-badge{display:inline-block;padding:6px 18px;background:var(--glass);
   border:1px solid var(--glass-border);border-radius:50px;font-family:'Orbitron',monospace;
   font-size:10px;letter-spacing:3px;color:var(--cyan);margin-bottom:24px;backdrop-filter:blur(10px);}
-.hero-title{font-family:'Orbitron',monospace;font-size:clamp(38px,9vw,96px);font-weight:900;
-  line-height:1;margin-bottom:20px;}
+.hero-title{font-family:'Orbitron',monospace;font-size:clamp(28px,8vw,96px);font-weight:900;
+  line-height:1.05;margin-bottom:16px;}
+@media(max-width:480px){.hero-title{font-size:clamp(26px,10vw,48px);line-height:1.1;}
+  .hero-badge{font-size:8px;letter-spacing:2px;padding:5px 12px;}
+  .hero-sub{font-size:14px;margin-bottom:24px;}
+  .hero-content{padding-top:calc(var(--nav-height) + 10px);}}
 .hero-title span{background:linear-gradient(135deg,var(--cyan),var(--purple) 60%,var(--pink));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .hero-sub{font-size:clamp(15px,2.5vw,20px);font-weight:300;color:var(--text-dim);

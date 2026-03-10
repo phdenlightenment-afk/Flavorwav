@@ -3,129 +3,202 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>TikTok — FlavorWav</title>
+<title>TikTok &mdash; FlavorWav</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
-:root{--cyan:#00d4ff;--purple:#7b2fff;--dark:#050a14;--dark2:#070e1c;--glass:rgba(255,255,255,0.05);--glass-border:rgba(0,212,255,0.18);--text:#e8f4ff;--text-dim:rgba(232,244,255,0.6);--nav-height:70px;--t:0.35s cubic-bezier(0.25,0.8,0.25,1);}
+
+:root{--cyan:#00d4ff;--purple:#7b2fff;--pink:#ff2d9e;--dark:#050a14;--dark2:#070e1c;
+  --glass:rgba(255,255,255,0.06);--glass-border:rgba(0,212,255,0.18);
+  --text:#e8f4ff;--text-dim:rgba(232,244,255,0.6);--nav-height:70px;--radius:16px;
+  --t:0.35s cubic-bezier(0.25,0.8,0.25,1);}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
 body{font-family:'Rajdhani',sans-serif;background:#000;color:var(--text);overflow-x:hidden;}
-img{width:100%;display:block;}
+img{display:block;}
 a{text-decoration:none;color:inherit;}
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-height);display:flex;align-items:center;padding:0 24px;background:rgba(5,10,20,0.96);backdrop-filter:blur(20px);box-shadow:0 1px 0 var(--glass-border);}
+/* LOADER - pointer-events:none so it NEVER blocks clicks */
+#loader{position:fixed;inset:0;z-index:9999;background:#050a14;display:flex;
+  flex-direction:column;align-items:center;justify-content:center;gap:24px;
+  pointer-events:none;opacity:1;transition:opacity 0.7s ease;}
+#loader.done{opacity:0;}
+.loader-logo{height:70px;width:auto;animation:lp 1s ease-in-out infinite alternate;}
+@keyframes lp{from{filter:drop-shadow(0 0 12px rgba(0,212,255,0.4));}
+  to{filter:drop-shadow(0 0 40px rgba(0,212,255,0.95)) drop-shadow(0 0 80px rgba(123,47,255,0.5));}}
+.loader-bar-wrap{width:220px;height:2px;background:rgba(0,212,255,0.12);border-radius:2px;overflow:hidden;}
+.loader-bar{height:100%;width:0%;background:linear-gradient(90deg,var(--cyan),var(--purple));
+  border-radius:2px;transition:width 1s ease;}
+.loader-text{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:4px;color:var(--cyan);opacity:0.6;}
+/* CURSOR - pointer-events:none so it NEVER blocks clicks */
+#cursor-dot{position:fixed;width:8px;height:8px;background:var(--cyan);border-radius:50%;
+  pointer-events:none;z-index:9998;transform:translate(-50%,-50%);
+  box-shadow:0 0 10px var(--cyan),0 0 20px rgba(0,212,255,0.4);}
+#cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid rgba(0,212,255,0.45);
+  border-radius:50%;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);}
+body.ch #cursor-dot{background:var(--pink);box-shadow:0 0 16px var(--pink);}
+body.ch #cursor-ring{width:54px;height:54px;border-color:rgba(255,45,158,0.5);}
+@media(hover:none),(pointer:coarse){#cursor-dot,#cursor-ring{display:none;}}
+/* NAV */
+nav#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-height);
+  display:flex;align-items:center;padding:0 24px;background:rgba(5,10,20,0.96);
+  backdrop-filter:blur(20px);box-shadow:0 1px 0 var(--glass-border);}
 .nav-inner{width:100%;display:flex;align-items:center;justify-content:space-between;}
-.nav-logo img{width:auto;height:42px;}
+.nav-logo img{height:42px;width:auto;}
 .nav-links{display:none;}
 @media(min-width:1280px){
-  .nav-links{display:flex;align-items:center;gap:20px;list-style:none;}
-  .nav-links a{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-dim);transition:color var(--t);}
+  .nav-links{display:flex;align-items:center;gap:16px;list-style:none;}
+  .nav-links a{font-family:'Orbitron',monospace;font-size:8.5px;letter-spacing:1.5px;
+    text-transform:uppercase;color:var(--text-dim);transition:color var(--t);}
   .nav-links a:hover,.nav-links a.active{color:var(--cyan);}
-  .hamburger{display:none!important;}
-}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:50px;font-family:'Orbitron',monospace;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;border:none;transition:var(--t);}
-.btn-primary{background:linear-gradient(135deg,var(--cyan),var(--purple));color:#fff;}
+  .hamburger{display:none!important;}}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:50px;
+  font-family:'Orbitron',monospace;font-size:10px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;cursor:pointer;border:none;transition:var(--t);}
+.btn-primary{background:linear-gradient(135deg,var(--cyan),var(--purple));color:#fff;
+  box-shadow:0 0 24px rgba(0,212,255,0.4);}
 .btn-primary:hover{transform:translateY(-3px);}
-.hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:8px;border:none;background:transparent;}
-.hamburger span{display:block;width:24px;height:2px;background:var(--cyan);transition:var(--t);transform-origin:center;}
+.btn-outline{background:transparent;color:var(--cyan);border:1.5px solid var(--cyan);}
+.btn-outline:hover{background:rgba(0,212,255,0.1);transform:translateY(-3px);}
+.nav-cta{padding:8px 16px!important;font-size:8px!important;}
+.hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:8px;
+  border:none;background:transparent;z-index:1100;}
+.hamburger span{display:block;width:24px;height:2px;background:var(--cyan);
+  transition:var(--t);transform-origin:center;}
 .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
 .hamburger.open span:nth-child(2){opacity:0;}
 .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
-.mobile-menu{position:fixed;inset:0;background:rgba(5,10,20,0.97);backdrop-filter:blur(24px);z-index:1050;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;transform:translateX(100%);transition:transform 0.45s cubic-bezier(0.25,0.8,0.25,1);}
+.mobile-menu{position:fixed;inset:0;background:rgba(5,10,20,0.97);backdrop-filter:blur(24px);
+  z-index:1050;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:28px;transform:translateX(100%);transition:transform 0.45s cubic-bezier(0.25,0.8,0.25,1);}
 .mobile-menu.open{transform:translateX(0);}
-.mobile-menu a{font-family:'Orbitron',monospace;font-size:20px;letter-spacing:3px;text-transform:uppercase;color:var(--text-dim);}
+.mobile-menu a{font-family:'Orbitron',monospace;font-size:18px;letter-spacing:3px;
+  text-transform:uppercase;color:var(--text-dim);}
 .mobile-menu a:hover{color:var(--cyan);}
-.images-wrap{padding-top:var(--nav-height);position:relative;}
-.images-wrap img{width:100%;display:block;margin:0;padding:0;vertical-align:bottom;}
-.tiktok-cta{position:absolute;bottom:6%;left:50%;transform:translateX(-50%);z-index:2;white-space:nowrap;}
-.tiktok-btn{background:linear-gradient(135deg,#69c9d0,#010101 70%);color:#fff;border:1.5px solid rgba(105,201,208,0.4);font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:14px 36px;border-radius:50px;cursor:pointer;display:inline-flex;align-items:center;gap:10px;box-shadow:0 0 30px rgba(105,201,208,0.3);transition:0.35s;text-decoration:none;}
-.tiktok-btn:hover{transform:translateY(-4px);box-shadow:0 0 60px rgba(105,201,208,0.5);}
-footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:36px 0 20px;text-align:center;}
-.footer-logo img{height:42px;margin:0 auto 14px;opacity:0.8;width:auto;}
-.footer-links{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;margin-bottom:18px;}
+/* IMAGE PAGES */
+.images-wrap{padding-top:var(--nav-height);line-height:0;font-size:0;}
+.images-wrap img{width:100%;display:block;margin:0;padding:0;}
+/* FOOTER */
+footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:40px 0 24px;text-align:center;}
+.ftr-inner{max-width:1200px;margin:0 auto;padding:0 24px;}
+.footer-logo img{height:44px;margin:0 auto 16px;opacity:0.8;width:auto;}
+.footer-links{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:20px;}
 .footer-links a{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;color:var(--text-dim);transition:color 0.3s;}
 .footer-links a:hover{color:var(--cyan);}
 .footer-copy{font-size:12px;color:rgba(232,244,255,0.3);}
 
-/* LOADER */
-#loader{position:fixed;inset:0;z-index:9999;background:#050a14;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;transition:opacity 0.6s ease,visibility 0.6s ease;}
-#loader.done{opacity:0;visibility:hidden;}
-.loader-logo{height:70px;width:auto;animation:lp 1s ease-in-out infinite alternate;}
-@keyframes lp{from{filter:drop-shadow(0 0 10px rgba(0,212,255,0.4))}to{filter:drop-shadow(0 0 40px rgba(0,212,255,0.9)) drop-shadow(0 0 80px rgba(123,47,255,0.5));}}
-.loader-bar-wrap{width:200px;height:2px;background:rgba(0,212,255,0.15);border-radius:2px;overflow:hidden;}
-.loader-bar{height:100%;width:0%;background:linear-gradient(90deg,#00d4ff,#7b2fff);border-radius:2px;transition:width 0.9s ease;}
-.loader-text{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:4px;color:#00d4ff;opacity:0.7;}
-/* CURSOR */
-body{cursor:none;}
-#cursor-dot{position:fixed;width:8px;height:8px;background:#00d4ff;border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);box-shadow:0 0 10px #00d4ff,0 0 20px rgba(0,212,255,0.5);mix-blend-mode:screen;}
-#cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid rgba(0,212,255,0.5);border-radius:50%;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);mix-blend-mode:screen;}
-body.ch #cursor-dot{width:12px;height:12px;background:#ff2d9e;box-shadow:0 0 16px #ff2d9e;}
-body.ch #cursor-ring{width:56px;height:56px;border-color:rgba(255,45,158,0.6);}
-@media(hover:none),(pointer:coarse){#cursor-dot,#cursor-ring{display:none;}body{cursor:auto;}}
-
+.tiktok-wrap{position:relative;padding-top:var(--nav-height);line-height:0;font-size:0;}
+.tiktok-wrap img{width:100%;display:block;}
+.tiktok-cta{position:absolute;bottom:7%;left:50%;transform:translateX(-50%);z-index:2;white-space:nowrap;}
+.tiktok-btn{background:linear-gradient(135deg,#69c9d0,#010101 80%);color:#fff;
+  border:1.5px solid rgba(105,201,208,0.35);font-family:'Orbitron',monospace;
+  font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  padding:14px 36px;border-radius:50px;display:inline-flex;align-items:center;gap:10px;
+  box-shadow:0 0 30px rgba(105,201,208,0.3);transition:.35s;text-decoration:none;}
+.tiktok-btn:hover{transform:translateY(-4px);box-shadow:0 0 60px rgba(105,201,208,0.5);}
 </style>
 </head>
 <body>
-<div id="cursor-dot"></div><div id="cursor-ring"></div>
-<div id="loader"><img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav" class="loader-logo"/><div class="loader-bar-wrap"><div class="loader-bar" id="loaderBar"></div></div><div class="loader-text">LOADING THE WAV...</div></div><div id="cursor-dot"></div><div id="cursor-ring"></div>
+<div id="loader">
+  <img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav" class="loader-logo"/>
+  <div class="loader-bar-wrap"><div class="loader-bar" id="loaderBar"></div></div>
+  <div class="loader-text">LOADING THE WAV...</div>
+</div>
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
 <nav id="navbar">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo"><img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav"/></a>
     <ul class="nav-links">
-      <li><a href="index.html#shop">Shop</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="flavors.html">Flavors</a></li>
-      <li><a href="index.html#how-it-works">How It Works</a></li>
-      <li><a href="tiktok.html" class="active">TikTok</a></li>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html" id="nav-about">About</a></li>
+      <li><a href="flavors.html" id="nav-flavors">Flavors</a></li>
+      <li><a href="howitworks.html" id="nav-how">How It Works</a></li>
+      <li><a href="tiktok.html" id="nav-tiktok" class="active">TikTok</a></li>
       <li><a href="index.html#contact">Contact</a></li>
       <li><a href="index.html#faq">FAQ</a></li>
-      <li><a href="index.html#shop" class="btn btn-primary">Shop Now</a></li>
+      <li><a href="index.html#shop" class="btn btn-primary nav-cta">Shop Now</a></li>
     </ul>
     <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
   </div>
 </nav>
 <div class="mobile-menu" id="mobileMenu">
-  <a href="index.html#shop" class="mobile-link">Shop</a>
-  <a href="about.html" class="mobile-link">About Us</a>
+  <a href="index.html" class="mobile-link">Home</a>
+  <a href="about.html" class="mobile-link">About</a>
   <a href="flavors.html" class="mobile-link">Flavors</a>
-  <a href="index.html#how-it-works" class="mobile-link">How It Works</a>
+  <a href="howitworks.html" class="mobile-link">How It Works</a>
   <a href="tiktok.html" class="mobile-link">TikTok</a>
   <a href="index.html#contact" class="mobile-link">Contact</a>
   <a href="index.html#faq" class="mobile-link">FAQ</a>
   <a href="index.html#shop" class="btn btn-primary" style="margin-top:8px;">Shop Now</a>
 </div>
-
-<div class="images-wrap">
+<div class="tiktok-wrap">
   <img src="Flavorwav%20TIKTOK%20Action%20Page.png" alt="FlavorWav TikTok"/>
   <div class="tiktok-cta">
     <a href="https://www.tiktok.com/@flavorwav" target="_blank" rel="noopener" class="tiktok-btn">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.73a4.85 4.85 0 0 1-1.01-.04z"/></svg>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.73a4.85 4.85 0 0 1-1.01-.04z"/>
+      </svg>
       Follow Us on TikTok
     </a>
   </div>
 </div>
-
 <footer>
-  <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+  <div class="ftr-inner">
     <div class="footer-logo"><img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav"/></div>
     <nav class="footer-links">
-      <a href="index.html">Home</a><a href="index.html#shop">Shop</a><a href="about.html">About</a>
-      <a href="flavors.html">Flavors</a><a href="tiktok.html">TikTok</a>
-      <a href="index.html#contact">Contact</a><a href="index.html#faq">FAQ</a>
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="flavors.html">Flavors</a>
+      <a href="howitworks.html">How It Works</a>
+      <a href="tiktok.html">TikTok</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="index.html#faq">FAQ</a>
     </nav>
-    <p class="footer-copy">© 2025 FlavorWav. All rights reserved. California, USA.</p>
+    <p class="footer-copy">&copy; 2025 FlavorWav. All rights reserved. California, USA.</p>
   </div>
 </footer>
 <script>
-const h=document.getElementById('hamburger'),m=document.getElementById('mobileMenu');
-h.addEventListener('click',()=>{const o=m.classList.toggle('open');h.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';});
-document.querySelectorAll('.mobile-link,.mobile-menu .btn').forEach(l=>l.addEventListener('click',()=>{m.classList.remove('open');h.classList.remove('open');document.body.style.overflow='';}));
 
-(function(){const b=document.getElementById('loaderBar'),l=document.getElementById('loader');if(!b||!l)return;setTimeout(()=>{b.style.width='100%';},50);setTimeout(()=>{l.classList.add('done');document.body.style.overflow='';},1200);})();
-const _dot=document.getElementById('cursor-dot'),_ring=document.getElementById('cursor-ring');
-let _mx=0,_my=0,_rx=0,_ry=0;
-document.addEventListener('mousemove',e=>{_mx=e.clientX;_my=e.clientY;_dot.style.left=_mx+'px';_dot.style.top=_my+'px';});
-(function _ar(){_rx+=(_mx-_rx)*0.12;_ry+=(_my-_ry)*0.12;_ring.style.left=_rx+'px';_ring.style.top=_ry+'px';requestAnimationFrame(_ar);})();
-document.querySelectorAll('a,button,.nav-card').forEach(el=>{el.addEventListener('mouseenter',()=>document.body.classList.add('ch'));el.addEventListener('mouseleave',()=>document.body.classList.remove('ch'));});
+// LOADER: always dismisses after 1.3s
+(function(){
+  var lb=document.getElementById('loaderBar');
+  var ld=document.getElementById('loader');
+  if(lb){ setTimeout(function(){ lb.style.width='100%'; }, 60); }
+  if(ld){ setTimeout(function(){ ld.classList.add('done'); }, 1350); }
+})();
+// CURSOR
+(function(){
+  var dot=document.getElementById('cursor-dot');
+  var ring=document.getElementById('cursor-ring');
+  if(!dot||!ring) return;
+  var mx=window.innerWidth/2, my=window.innerHeight/2, rx=mx, ry=my;
+  document.addEventListener('mousemove',function(e){ mx=e.clientX; my=e.clientY;
+    dot.style.left=mx+'px'; dot.style.top=my+'px'; });
+  (function tick(){ rx+=(mx-rx)*0.13; ry+=(my-ry)*0.13;
+    ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(tick); })();
+  document.querySelectorAll('a,button').forEach(function(el){
+    el.addEventListener('mouseenter',function(){ document.body.classList.add('ch'); });
+    el.addEventListener('mouseleave',function(){ document.body.classList.remove('ch'); });
+  });
+})();
+// HAMBURGER
+(function(){
+  var h=document.getElementById('hamburger'), m=document.getElementById('mobileMenu');
+  if(!h||!m) return;
+  h.addEventListener('click',function(){
+    var o=m.classList.toggle('open');
+    h.classList.toggle('open',o);
+    document.body.style.overflow=o?'hidden':'';
+  });
+  document.querySelectorAll('.mobile-link,.mobile-menu .btn').forEach(function(l){
+    l.addEventListener('click',function(){
+      m.classList.remove('open'); h.classList.remove('open');
+      document.body.style.overflow='';
+    });
+  });
+})();
+
 
 </script>
 </body>

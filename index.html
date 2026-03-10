@@ -341,7 +341,7 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
     </div>
     <div class="contact-grid">
       <div>
-        <div class="ci"><div class="ci-icon">📧</div><div><strong>Email</strong><span>hello@flavorwav.com</span></div></div>
+        <div class="ci"><div class="ci-icon">📧</div><div><strong>Email</strong><span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="573f323b3b3817313b362138252036217934383a">[email&#160;protected]</a></span></div></div>
         <div class="ci"><div class="ci-icon">📞</div><div><strong>Phone</strong><span>+1 (800) FLAV-WAV</span></div></div>
         <div class="ci"><div class="ci-icon">📍</div><div><strong>Location</strong><span>California, USA</span></div></div>
         <div class="social-links">
@@ -394,9 +394,9 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
       <div class="faq-item"><button class="faq-q">Are they biodegradable? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Yes — paper-based with a verified biodegradability report.</div></div></div>
     </div>
     <div class="faq-group" id="faq-returns">
-      <div class="faq-item"><button class="faq-q">What is your return policy? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Returns within 30 days for unopened products. Email hello@flavorwav.com with your order number.</div></div></div>
-      <div class="faq-item"><button class="faq-q">My order arrived damaged — help? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Email hello@flavorwav.com with a photo and order number. We'll make it right fast.</div></div></div>
-      <div class="faq-item"><button class="faq-q">How do I reach support? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Use the contact form above or email hello@flavorwav.com. We respond within 1–2 business days.</div></div></div>
+      <div class="faq-item"><button class="faq-q">What is your return policy? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Returns within 30 days for unopened products. Email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2f474a4343406f49434e59405d584e59014c4042">[email&#160;protected]</a> with your order number.</div></div></div>
+      <div class="faq-item"><button class="faq-q">My order arrived damaged — help? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a3cbc6cfcfcce3c5cfc2d5ccd1d4c2d58dc0ccce">[email&#160;protected]</a> with a photo and order number. We'll make it right fast.</div></div></div>
+      <div class="faq-item"><button class="faq-q">How do I reach support? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Use the contact form above or email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="5a323f3636351a3c363b2c35282d3b2c74393537">[email&#160;protected]</a>. We respond within 1–2 business days.</div></div></div>
     </div>
   </div>
 </section>
@@ -413,14 +413,9 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ══ LOADER ══ */
-window.addEventListener('load', () => {
-  const bar = document.getElementById('loaderBar');
-  const loader = document.getElementById('loader');
-  bar.style.width = '100%';
-  setTimeout(() => { loader.classList.add('done'); }, 1100);
-});
+(function(){const bar=document.getElementById('loaderBar'),loader=document.getElementById('loader');if(!bar||!loader)return;setTimeout(()=>{bar.style.width='100%';},50);setTimeout(()=>{loader.classList.add('done');document.body.style.overflow='';},1200);})();
 
 /* ══ CUSTOM CURSOR ══ */
 const dot = document.getElementById('cursor-dot');
@@ -504,21 +499,4 @@ document.querySelectorAll('.faq-cat').forEach(btn=>{
 function sendMsg(){
   const n=document.getElementById('cname').value.trim();
   const e=document.getElementById('cemail').value.trim();
-  const m=document.getElementById('cmsg').value.trim();
-  if(!n||!e||!m){ alert('Please fill in all fields.'); return; }
-  alert('Thanks '+n+'! Your message has been sent.');
-  document.getElementById('cname').value='';
-  document.getElementById('cemail').value='';
-  document.getElementById('cmsg').value='';
-}
-
-/* ══ SMOOTH SCROLL ══ */
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click',e=>{
-    const t=document.querySelector(a.getAttribute('href'));
-    if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
-  });
-});
-</script>
-</body>
-</html>
+  const 

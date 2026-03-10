@@ -65,7 +65,6 @@ body.ch #cursor-ring{width:56px;height:56px;border-color:rgba(255,45,158,0.6);}
 </style>
 </head>
 <body>
-<div id="loader"><img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav" class="loader-logo"/><div class="loader-bar-wrap"><div class="loader-bar" id="loaderBar"></div></div><div class="loader-text">LOADING THE WAV...</div></div>
 <div id="cursor-dot"></div><div id="cursor-ring"></div>
 <div id="loader"><img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav" class="loader-logo"/><div class="loader-bar-wrap"><div class="loader-bar" id="loaderBar"></div></div><div class="loader-text">LOADING THE WAV...</div></div><div id="cursor-dot"></div><div id="cursor-ring"></div>
 <nav id="navbar">
@@ -121,7 +120,7 @@ const h=document.getElementById('hamburger'),m=document.getElementById('mobileMe
 h.addEventListener('click',()=>{const o=m.classList.toggle('open');h.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';});
 document.querySelectorAll('.mobile-link,.mobile-menu .btn').forEach(l=>l.addEventListener('click',()=>{m.classList.remove('open');h.classList.remove('open');document.body.style.overflow='';}));
 
-window.addEventListener('load',()=>{const b=document.getElementById('loaderBar'),l=document.getElementById('loader');b.style.width='100%';setTimeout(()=>l.classList.add('done'),1100);});
+(function(){const b=document.getElementById('loaderBar'),l=document.getElementById('loader');if(!b||!l)return;setTimeout(()=>{b.style.width='100%';},50);setTimeout(()=>{l.classList.add('done');document.body.style.overflow='';},1200);})();
 const _dot=document.getElementById('cursor-dot'),_ring=document.getElementById('cursor-ring');
 let _mx=0,_my=0,_rx=0,_ry=0;
 document.addEventListener('mousemove',e=>{_mx=e.clientX;_my=e.clientY;_dot.style.left=_mx+'px';_dot.style.top=_my+'px';});

@@ -44,9 +44,29 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
 .footer-links a{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;color:var(--text-dim);transition:color 0.3s;}
 .footer-links a:hover{color:var(--cyan);}
 .footer-copy{font-size:12px;color:rgba(232,244,255,0.3);}
+
+/* LOADER */
+#loader{position:fixed;inset:0;z-index:9999;background:#050a14;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;transition:opacity 0.6s ease,visibility 0.6s ease;}
+#loader.done{opacity:0;visibility:hidden;}
+.loader-logo{height:70px;width:auto;animation:lp 1s ease-in-out infinite alternate;}
+@keyframes lp{from{filter:drop-shadow(0 0 10px rgba(0,212,255,0.4))}to{filter:drop-shadow(0 0 40px rgba(0,212,255,0.9)) drop-shadow(0 0 80px rgba(123,47,255,0.5));}}
+.loader-bar-wrap{width:200px;height:2px;background:rgba(0,212,255,0.15);border-radius:2px;overflow:hidden;}
+.loader-bar{height:100%;width:0%;background:linear-gradient(90deg,#00d4ff,#7b2fff);border-radius:2px;transition:width 0.9s ease;}
+.loader-text{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:4px;color:#00d4ff;opacity:0.7;}
+/* CURSOR */
+body{cursor:none;}
+#cursor-dot{position:fixed;width:8px;height:8px;background:#00d4ff;border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);box-shadow:0 0 10px #00d4ff,0 0 20px rgba(0,212,255,0.5);mix-blend-mode:screen;}
+#cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid rgba(0,212,255,0.5);border-radius:50%;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);mix-blend-mode:screen;}
+body.ch #cursor-dot{width:12px;height:12px;background:#ff2d9e;box-shadow:0 0 16px #ff2d9e;}
+body.ch #cursor-ring{width:56px;height:56px;border-color:rgba(255,45,158,0.6);}
+@media(hover:none),(pointer:coarse){#cursor-dot,#cursor-ring{display:none;}body{cursor:auto;}}
+
 </style>
 </head>
 <body>
+<div id="loader"><img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav" class="loader-logo"/><div class="loader-bar-wrap"><div class="loader-bar" id="loaderBar"></div></div><div class="loader-text">LOADING THE WAV...</div></div>
+<div id="cursor-dot"></div><div id="cursor-ring"></div>
+<div id="loader"><img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav" class="loader-logo"/><div class="loader-bar-wrap"><div class="loader-bar" id="loaderBar"></div></div><div class="loader-text">LOADING THE WAV...</div></div><div id="cursor-dot"></div><div id="cursor-ring"></div>
 <nav id="navbar">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo"><img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav"/></a>
@@ -95,6 +115,14 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
 const h=document.getElementById('hamburger'),m=document.getElementById('mobileMenu');
 h.addEventListener('click',()=>{const o=m.classList.toggle('open');h.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';});
 document.querySelectorAll('.mobile-link,.mobile-menu .btn').forEach(l=>l.addEventListener('click',()=>{m.classList.remove('open');h.classList.remove('open');document.body.style.overflow='';}));
+
+window.addEventListener('load',()=>{const b=document.getElementById('loaderBar'),l=document.getElementById('loader');b.style.width='100%';setTimeout(()=>l.classList.add('done'),1100);});
+const _dot=document.getElementById('cursor-dot'),_ring=document.getElementById('cursor-ring');
+let _mx=0,_my=0,_rx=0,_ry=0;
+document.addEventListener('mousemove',e=>{_mx=e.clientX;_my=e.clientY;_dot.style.left=_mx+'px';_dot.style.top=_my+'px';});
+(function _ar(){_rx+=(_mx-_rx)*0.12;_ry+=(_my-_ry)*0.12;_ring.style.left=_rx+'px';_ring.style.top=_ry+'px';requestAnimationFrame(_ar);})();
+document.querySelectorAll('a,button,.nav-card').forEach(el=>{el.addEventListener('mouseenter',()=>document.body.classList.add('ch'));el.addEventListener('mouseleave',()=>document.body.classList.remove('ch'));});
+
 </script>
 </body>
 </html>

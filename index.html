@@ -196,14 +196,14 @@ nav.scrolled {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 18px;
   list-style: none;
 }
 
 .nav-links a {
   font-family: 'Orbitron', monospace;
-  font-size: 11px;
-  letter-spacing: 2px;
+  font-size: 10px;
+  letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--text-dim);
   transition: color var(--transition), text-shadow var(--transition);
@@ -301,13 +301,13 @@ nav.scrolled {
 
 /* ============================
    HERO BACKGROUND IMAGE
-   Replace the background-image URL with: FLAVPACK_14.png
-   Example: background-image: url('FLAVPACK_14.png');
+   Replace the background-image URL with: FLAVPACK%2014.png
+   Example: background-image: url('FLAVPACK%2014.png');
 ============================ */
 .hero-bg {
   position: absolute;
   inset: 0;
-  background-image: url('FLAVPACK_14.png');
+  background-image: url('FLAVPACK%2014.png');
   background-size: cover;
   background-position: center 20%;
   background-repeat: no-repeat;
@@ -456,12 +456,12 @@ nav.scrolled {
 
 /* ============================
    ABOUT BACKGROUND IMAGE
-   Replace with: about_us_no_glow_city.png
+   Replace with: about%20us%20no%20glow%20city.png
 ============================ */
 .about-bg {
   position: absolute;
   inset: 0;
-  background-image: url('about_us_no_glow_city.png');
+  background-image: url('about%20us%20no%20glow%20city.png');
   background-size: cover;
   background-position: center;
   opacity: 0.25;
@@ -553,7 +553,7 @@ nav.scrolled {
 
 /* ============================
    BENEFITS IMAGE
-   Replace with: FlavorWav_Benefits_Page.png
+   Replace with: FlavorWav%20Benefits%20Page.png
 ============================ */
 #benefits img.benefits-full {
   width: 100%;
@@ -572,12 +572,12 @@ nav.scrolled {
 
 /* ============================
    FLAVORS BACKGROUND IMAGE
-   Replace with: FlavorWav_Flavor_Menu.png
+   Replace with: FlavorWav%20Flavor%20Menu.png
 ============================ */
 .flavors-bg {
   position: absolute;
   inset: 0;
-  background-image: url('FlavorWav_Flavor_Menu.png');
+  background-image: url('FlavorWav%20Flavor%20Menu.png');
   background-size: cover;
   background-position: center;
   opacity: 0.12;
@@ -695,7 +695,7 @@ nav.scrolled {
 
 /* ============================
    HOW IT WORKS IMAGE
-   Replace with: how_it_works_no_city_glow.png
+   Replace with: how%20it%20works%20no%20city%20glow.png
 ============================ */
 #how-it-works img.hiw-full {
   width: 100%;
@@ -712,7 +712,7 @@ nav.scrolled {
 
 /* ============================
    RELEASE PROFILES IMAGE
-   Replace with: Release_Profiles_Page.png
+   Replace with: Release%20Profiles%20Page.png
 ============================ */
 #release-profiles img.rp-full {
   width: 100%;
@@ -780,7 +780,7 @@ nav.scrolled {
 
 /* ============================
    SHOP PRODUCT IMAGE
-   Replace with: FLAVPACK_14.png
+   Replace with: FLAVPACK%2014.png
 ============================ */
 
 .shop-title {
@@ -820,7 +820,7 @@ nav.scrolled {
 
 /* ============================
    TIKTOK IMAGE
-   Replace with: Flavorwav_TIKTOK_Action_Page.png
+   Replace with: Flavorwav%20TIKTOK%20Action%20Page.png
 ============================ */
 .tiktok-image-wrap {
   position: relative;
@@ -1165,6 +1165,10 @@ footer {
 /* ===========================
    RESPONSIVE
 =========================== */
+@media (max-width: 1100px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+}
 @media (max-width: 900px) {
   .nav-links { display: none; }
   .hamburger { display: flex; }
@@ -1228,7 +1232,7 @@ footer {
 <!-- ===========================
      HERO SECTION
 =========================== -->
-<!-- HERO BACKGROUND: Replace URL in CSS .hero-bg with FLAVPACK_14.png -->
+<!-- HERO BACKGROUND: Replace URL in CSS .hero-bg with FLAVPACK%2014.png -->
 <section id="hero">
   <div class="hero-bg" id="heroBg"></div>
   <div class="hero-overlay"></div>
@@ -1260,15 +1264,15 @@ footer {
 <!-- ===========================
      ABOUT SECTION
 =========================== -->
-<!-- ABOUT BACKGROUND: Replace URL in CSS .about-bg with about_us_no_glow_city.png -->
+<!-- ABOUT BACKGROUND: Replace URL in CSS .about-bg with about%20us%20no%20glow%20city.png -->
 <section id="about">
   <div class="about-bg"></div>
   <div class="about-bg-overlay"></div>
   <div class="container">
     <div class="about-inner">
       <div class="about-image-wrap reveal">
-        <!-- REPLACE src with about_us_no_glow_city.png -->
-        <img src="about_us_no_glow_city.png" alt="About FlavorWav" />
+        <!-- REPLACE src with about%20us%20no%20glow%20city.png -->
+        <img src="about%20us%20no%20glow%20city.png" alt="About FlavorWav" />
       </div>
 
       <div class="about-text">
@@ -1318,15 +1322,15 @@ footer {
 <!-- ===========================
      BENEFITS SECTION (Full Image)
 =========================== -->
-<!-- BENEFITS IMAGE: Replace src with FlavorWav_Benefits_Page.png -->
+<!-- BENEFITS IMAGE: Replace src with FlavorWav%20Benefits%20Page.png -->
 <section id="benefits">
-  <img src="FlavorWav_Benefits_Page.png" alt="FlavorWav Infused Straw Benefits" class="benefits-full reveal" />
+  <img src="FlavorWav%20Benefits%20Page.png" alt="FlavorWav Infused Straw Benefits" class="benefits-full reveal" />
 </section>
 
 <!-- ===========================
      FLAVORS SECTION
 =========================== -->
-<!-- FLAVORS BACKGROUND: Replace URL in CSS .flavors-bg with FlavorWav_Flavor_Menu.png -->
+<!-- FLAVORS BACKGROUND: Replace URL in CSS .flavors-bg with FlavorWav%20Flavor%20Menu.png -->
 <section id="flavors">
   <div class="flavors-bg"></div>
   <div class="container">
@@ -1390,17 +1394,17 @@ footer {
 <!-- ===========================
      HOW IT WORKS SECTION (Full Image)
 =========================== -->
-<!-- HOW IT WORKS IMAGE: Replace src with how_it_works_no_city_glow.png -->
+<!-- HOW IT WORKS IMAGE: Replace src with how%20it%20works%20no%20city%20glow.png -->
 <section id="how-it-works">
-  <img src="how_it_works_no_city_glow.png" alt="How FlavorWav Works" class="hiw-full reveal" />
+  <img src="how%20it%20works%20no%20city%20glow.png" alt="How FlavorWav Works" class="hiw-full reveal" />
 </section>
 
 <!-- ===========================
      RELEASE PROFILES SECTION (Full Image)
 =========================== -->
-<!-- RELEASE PROFILES IMAGE: Replace src with Release_Profiles_Page.png -->
+<!-- RELEASE PROFILES IMAGE: Replace src with Release%20Profiles%20Page.png -->
 <section id="release-profiles">
-  <img src="Release_Profiles_Page.png" alt="FlavorWav Release Profiles" class="rp-full reveal" />
+  <img src="Release%20Profiles%20Page.png" alt="FlavorWav Release Profiles" class="rp-full reveal" />
 </section>
 
 <!-- ===========================
@@ -1414,8 +1418,8 @@ footer {
 
   <div class="container">
     <div class="shop-content">
-      <!-- SHOP PRODUCT IMAGE: Replace src with FLAVPACK_14.png -->
-      <img src="FLAVPACK_14.png" alt="FlavorWav Pack" class="shop-product-img reveal" />
+      <!-- SHOP PRODUCT IMAGE: Replace src with FLAVPACK%2014.png -->
+      <img src="FLAVPACK%2014.png" alt="FlavorWav Pack" class="shop-product-img reveal" />
 
       <!-- EDIT: Shop section headline and description -->
       <h2 class="shop-title reveal reveal-delay-1">Ready to Ride<br/>the Wav?</h2>
@@ -1433,10 +1437,10 @@ footer {
 <!-- ===========================
      TIKTOK SECTION
 =========================== -->
-<!-- TIKTOK IMAGE: Replace src with Flavorwav_TIKTOK_Action_Page.png -->
+<!-- TIKTOK IMAGE: Replace src with Flavorwav%20TIKTOK%20Action%20Page.png -->
 <section id="tiktok">
   <div class="tiktok-image-wrap">
-    <img src="Flavorwav_TIKTOK_Action_Page.png" alt="FlavorWav on TikTok" />
+    <img src="Flavorwav%20TIKTOK%20Action%20Page.png" alt="FlavorWav on TikTok" />
     <div class="tiktok-overlay-cta">
       <!-- EDIT: Replace href with your actual TikTok URL e.g. https://www.tiktok.com/@flavorwav -->
       <a href="https://www.tiktok.com/@flavorwav" target="_blank" rel="noopener" class="btn tiktok-btn">
@@ -1465,7 +1469,7 @@ footer {
           <div>
             <strong>Email</strong>
             <!-- EDIT: Replace with your actual email -->
-            <span>hello@flavorwav.com</span>
+            <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="93fbf6fffffcd3f5fff2e5fce1e4f2e5bdf0fcfe">[email&#160;protected]</a></span>
           </div>
         </div>
 
@@ -1610,15 +1614,15 @@ footer {
     <div class="faq-section-group" id="faq-returns">
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">What is your return policy? <i class="faq-icon">+</i></button>
-        <div class="faq-a"><div class="faq-a-inner">We accept returns within 30 days of purchase for unopened, unused products. Please contact us at hello@flavorwav.com with your order number to initiate a return.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">We accept returns within 30 days of purchase for unopened, unused products. Please contact us at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dcb4b9b0b0b39cbab0bdaab3aeabbdaaf2bfb3b1">[email&#160;protected]</a> with your order number to initiate a return.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">What if my order arrives damaged? <i class="faq-icon">+</i></button>
-        <div class="faq-a"><div class="faq-a-inner">We're sorry to hear that! Please email us at hello@flavorwav.com with a photo of the damaged item and your order number. We'll make it right as quickly as possible.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">We're sorry to hear that! Please email us at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="234b464f4f4c63454f42554c515442550d404c4e">[email&#160;protected]</a> with a photo of the damaged item and your order number. We'll make it right as quickly as possible.</div></div>
       </div>
       <div class="faq-item">
         <button class="faq-q" aria-expanded="false">How do I contact customer support? <i class="faq-icon">+</i></button>
-        <div class="faq-a"><div class="faq-a-inner">You can reach us via the contact form on this page, by email at hello@flavorwav.com, or through our social media channels. We typically respond within 1–2 business days.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">You can reach us via the contact form on this page, by email at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="58303d343437183e34392e372a2f392e763b3735">[email&#160;protected]</a>, or through our social media channels. We typically respond within 1–2 business days.</div></div>
       </div>
     </div>
   </div>
@@ -1654,7 +1658,7 @@ footer {
 <!-- ===========================
      JAVASCRIPT
 =========================== -->
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // === NAVBAR SCROLL ===
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
@@ -1759,22 +1763,4 @@ function handleContactSubmit() {
     return;
   }
   // EDIT: Replace with your actual form submission logic (e.g., Formspree, EmailJS, etc.)
-  alert('Thank you, ' + name + '! Your message has been sent. We\'ll be in touch soon.');
-  document.getElementById('contact-name').value = '';
-  document.getElementById('contact-email').value = '';
-  document.getElementById('contact-msg').value = '';
-}
-
-// === SMOOTH SCROLL (fallback for older browsers) ===
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-  link.addEventListener('click', e => {
-    const target = document.querySelector(link.getAttribute('href'));
-    if (target) {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
-});
-</script>
-</body>
-</html>
+  alert('Thank you, ' + name + '! Your 

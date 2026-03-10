@@ -1,150 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>FlavorWav — Infused Straws</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 <style>
-:root {
-  --cyan: #00d4ff; --cyan-dim: rgba(0,212,255,0.15); --purple: #7b2fff; --pink: #ff2d9e;
-  --dark: #050a14; --dark2: #070e1c; --glass: rgba(255,255,255,0.06);
-  --glass-border: rgba(0,212,255,0.18); --text: #e8f4ff; --text-dim: rgba(232,244,255,0.6);
-  --nav-height: 70px; --radius: 16px; --transition: 0.35s cubic-bezier(0.25,0.8,0.25,1);
+:root{
+  --cyan:#00d4ff;--cyan-dim:rgba(0,212,255,0.15);--purple:#7b2fff;--pink:#ff2d9e;
+  --dark:#050a14;--dark2:#070e1c;--glass:rgba(255,255,255,0.06);
+  --glass-border:rgba(0,212,255,0.18);--text:#e8f4ff;--text-dim:rgba(232,244,255,0.6);
+  --nav-height:70px;--radius:16px;--t:0.35s cubic-bezier(0.25,0.8,0.25,1);
 }
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body { font-family: 'Rajdhani', sans-serif; background: var(--dark); color: var(--text); overflow-x: hidden; line-height: 1.6; }
-img { max-width: 100%; display: block; }
-a { text-decoration: none; color: inherit; }
-.container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-.section-label { font-family: 'Orbitron', monospace; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--cyan); margin-bottom: 12px; opacity: 0.8; display: block; }
-.section-title { font-family: 'Orbitron', monospace; font-size: clamp(28px,5vw,52px); font-weight: 900; line-height: 1.1; margin-bottom: 20px; background: linear-gradient(135deg,#fff 30%,var(--cyan) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Rajdhani',sans-serif;background:#000;color:var(--text);overflow-x:hidden;line-height:1.6;}
+img{display:block;}
+a{text-decoration:none;color:inherit;}
+.container{width:100%;max-width:1200px;margin:0 auto;padding:0 24px;}
 
-.btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 32px; border-radius: 50px; font-family: 'Orbitron', monospace; font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; border: none; transition: var(--transition); }
-.btn-primary { background: linear-gradient(135deg,var(--cyan),var(--purple)); color:#fff; box-shadow:0 0 30px rgba(0,212,255,0.4); }
-.btn-primary:hover { transform:translateY(-3px); box-shadow:0 0 50px rgba(0,212,255,0.6); }
-.btn-outline { background:transparent; color:var(--cyan); border:1.5px solid var(--cyan); }
-.btn-outline:hover { background:var(--cyan-dim); transform:translateY(-3px); }
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:50px;font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;border:none;transition:var(--t);}
+.btn-primary{background:linear-gradient(135deg,var(--cyan),var(--purple));color:#fff;box-shadow:0 0 28px rgba(0,212,255,0.4);}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 0 50px rgba(0,212,255,0.6);}
+.btn-outline{background:transparent;color:var(--cyan);border:1.5px solid var(--cyan);}
+.btn-outline:hover{background:var(--cyan-dim);transform:translateY(-3px);}
 
-/* NAV */
-nav#navbar { position:fixed; top:0; left:0; right:0; z-index:1000; height:var(--nav-height); display:flex; align-items:center; padding:0 24px; background:transparent; transition:background 0.4s,box-shadow 0.4s; }
-nav#navbar.scrolled { background:rgba(5,10,20,0.95); backdrop-filter:blur(20px); box-shadow:0 1px 0 var(--glass-border),0 4px 30px rgba(0,0,0,0.5); }
-.nav-inner { width:100%; display:flex; align-items:center; justify-content:space-between; }
-.nav-logo img { height:42px; }
-.nav-links { display:none; }
-@media (min-width:1280px) {
-  .nav-links { display:flex; align-items:center; gap:20px; list-style:none; }
-  .nav-links a { font-family:'Orbitron',monospace; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-dim); transition:color var(--transition); }
-  .nav-links a:hover { color:var(--cyan); }
-  .hamburger { display:none !important; }
+/* ── NAV ── */
+nav#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-height);display:flex;align-items:center;padding:0 24px;background:transparent;transition:background 0.4s,box-shadow 0.4s;}
+nav#navbar.scrolled{background:rgba(5,10,20,0.96);backdrop-filter:blur(20px);box-shadow:0 1px 0 var(--glass-border),0 4px 30px rgba(0,0,0,0.5);}
+.nav-inner{width:100%;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo img{height:42px;width:auto;}
+.nav-links{display:none;}
+@media(min-width:1280px){
+  .nav-links{display:flex;align-items:center;gap:20px;list-style:none;}
+  .nav-links a{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-dim);transition:color var(--t);}
+  .nav-links a:hover{color:var(--cyan);}
+  .hamburger{display:none!important;}
 }
-.nav-cta { padding:9px 18px !important; font-size:9px !important; }
-.hamburger { display:flex; flex-direction:column; gap:5px; cursor:pointer; padding:8px; border:none; background:transparent; z-index:1100; }
-.hamburger span { display:block; width:24px; height:2px; background:var(--cyan); transition:var(--transition); transform-origin:center; }
-.hamburger.open span:nth-child(1) { transform:translateY(7px) rotate(45deg); }
-.hamburger.open span:nth-child(2) { opacity:0; }
-.hamburger.open span:nth-child(3) { transform:translateY(-7px) rotate(-45deg); }
-.mobile-menu { position:fixed; inset:0; background:rgba(5,10,20,0.97); backdrop-filter:blur(24px); z-index:1050; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:28px; transform:translateX(100%); transition:transform 0.45s cubic-bezier(0.25,0.8,0.25,1); }
-.mobile-menu.open { transform:translateX(0); }
-.mobile-menu a { font-family:'Orbitron',monospace; font-size:20px; letter-spacing:3px; text-transform:uppercase; color:var(--text-dim); transition:color var(--transition); }
-.mobile-menu a:hover { color:var(--cyan); }
+.nav-cta{padding:9px 18px!important;font-size:9px!important;}
+.hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:8px;border:none;background:transparent;z-index:1100;}
+.hamburger span{display:block;width:24px;height:2px;background:var(--cyan);transition:var(--t);transform-origin:center;}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.mobile-menu{position:fixed;inset:0;background:rgba(5,10,20,0.97);backdrop-filter:blur(24px);z-index:1050;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;transform:translateX(100%);transition:transform 0.45s cubic-bezier(0.25,0.8,0.25,1);}
+.mobile-menu.open{transform:translateX(0);}
+.mobile-menu a{font-family:'Orbitron',monospace;font-size:20px;letter-spacing:3px;text-transform:uppercase;color:var(--text-dim);}
+.mobile-menu a:hover{color:var(--cyan);}
 
-/* HERO */
-#hero { position:relative; height:100vh; display:flex; align-items:center; justify-content:center; overflow:hidden; }
-.hero-bg { position:absolute; inset:0; background-image:url('FLAVPACK%2014.png'); background-size:cover; background-position:center 20%; transform:scale(1.05); }
-.hero-overlay { position:absolute; inset:0; background:linear-gradient(135deg,rgba(5,10,20,0.85) 0%,rgba(5,10,20,0.45) 50%,rgba(5,10,20,0.75) 100%); }
-.hero-particles { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
-.hero-particles span { position:absolute; width:2px; height:2px; background:var(--cyan); border-radius:50%; animation:float-particle linear infinite; opacity:0; }
-@keyframes float-particle { 0%{opacity:0;transform:translateY(100vh)} 10%{opacity:1} 90%{opacity:1} 100%{opacity:0;transform:translateY(-10vh)} }
-.hero-content { position:relative; z-index:2; text-align:center; max-width:800px; padding:0 24px; padding-top:var(--nav-height); }
-.hero-badge { display:inline-block; padding:6px 18px; background:var(--glass); border:1px solid var(--glass-border); border-radius:50px; font-family:'Orbitron',monospace; font-size:10px; letter-spacing:3px; color:var(--cyan); margin-bottom:24px; backdrop-filter:blur(10px); animation:fade-up 0.8s ease forwards; }
-.hero-title { font-family:'Orbitron',monospace; font-size:clamp(42px,9vw,96px); font-weight:900; line-height:1; margin-bottom:20px; animation:fade-up 0.8s 0.15s ease forwards; opacity:0; }
-.hero-title span { background:linear-gradient(135deg,var(--cyan),var(--purple) 60%,var(--pink)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-.hero-sub { font-size:clamp(16px,3vw,20px); font-weight:300; color:var(--text-dim); max-width:540px; margin:0 auto 36px; animation:fade-up 0.8s 0.3s ease forwards; opacity:0; }
-.hero-actions { display:flex; align-items:center; justify-content:center; gap:16px; flex-wrap:wrap; animation:fade-up 0.8s 0.45s ease forwards; opacity:0; }
-@keyframes fade-up { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
-.hero-scroll { position:absolute; bottom:28px; left:50%; transform:translateX(-50%); z-index:2; display:flex; flex-direction:column; align-items:center; gap:8px; animation:fade-up 0.8s 0.7s ease forwards; opacity:0; }
-.hero-scroll span { font-size:10px; letter-spacing:2px; color:var(--text-dim); font-family:'Orbitron',monospace; }
-.scroll-line { width:1px; height:36px; background:linear-gradient(to bottom,var(--cyan),transparent); animation:pulse 2s ease-in-out infinite; }
-@keyframes pulse { 0%,100%{opacity:0.4} 50%{opacity:1} }
+/* ── HERO ── */
+#hero{position:relative;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background-image:url('FLAVPACK%2014.png');background-size:cover;background-position:center 20%;transform:scale(1.05);}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(5,10,20,0.85) 0%,rgba(5,10,20,0.42) 50%,rgba(5,10,20,0.75) 100%);}
+.hero-particles{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+.hero-particles span{position:absolute;width:2px;height:2px;background:var(--cyan);border-radius:50%;animation:floatp linear infinite;opacity:0;}
+@keyframes floatp{0%{opacity:0;transform:translateY(100vh)}10%{opacity:1}90%{opacity:1}100%{opacity:0;transform:translateY(-10vh)}}
+.hero-content{position:relative;z-index:2;text-align:center;max-width:800px;padding:0 24px;padding-top:var(--nav-height);}
+.hero-badge{display:inline-block;padding:6px 18px;background:var(--glass);border:1px solid var(--glass-border);border-radius:50px;font-family:'Orbitron',monospace;font-size:10px;letter-spacing:3px;color:var(--cyan);margin-bottom:24px;backdrop-filter:blur(10px);animation:fu 0.8s ease forwards;}
+.hero-title{font-family:'Orbitron',monospace;font-size:clamp(40px,9vw,96px);font-weight:900;line-height:1;margin-bottom:20px;animation:fu 0.8s 0.15s ease forwards;opacity:0;}
+.hero-title span{background:linear-gradient(135deg,var(--cyan),var(--purple) 60%,var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{font-size:clamp(15px,2.5vw,20px);font-weight:300;color:var(--text-dim);max-width:520px;margin:0 auto 34px;animation:fu 0.8s 0.3s ease forwards;opacity:0;}
+.hero-actions{display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;animation:fu 0.8s 0.45s ease forwards;opacity:0;}
+@keyframes fu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.hero-scroll{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;animation:fu 0.8s 0.7s ease forwards;opacity:0;}
+.hero-scroll span{font-size:10px;letter-spacing:2px;color:var(--text-dim);font-family:'Orbitron',monospace;}
+.scroll-line{width:1px;height:34px;background:linear-gradient(to bottom,var(--cyan),transparent);animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:0.4}50%{opacity:1}}
 
-/* NAV CARDS */
-#nav-cards { padding:60px 0; background:var(--dark2); }
-.cards-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px; }
-.nav-card { display:flex; flex-direction:column; align-items:center; gap:12px; padding:30px 20px; background:var(--glass); border:1px solid var(--glass-border); border-radius:var(--radius); text-align:center; transition:var(--transition); color:var(--text); }
-.nav-card:hover { transform:translateY(-6px); border-color:rgba(0,212,255,0.4); box-shadow:0 16px 50px rgba(0,0,0,0.4),0 0 30px rgba(0,212,255,0.1); }
-.nav-card-icon { font-size:32px; }
-.nav-card-title { font-family:'Orbitron',monospace; font-size:12px; font-weight:700; letter-spacing:1px; color:var(--cyan); }
-.nav-card-desc { font-size:13px; color:var(--text-dim); line-height:1.5; }
+/* ── FULL-WIDTH IMAGE STACK (no gaps) ── */
+.img-stack{display:block;line-height:0;font-size:0;}
+.img-stack img{width:100%;display:block;margin:0;padding:0;vertical-align:bottom;line-height:0;}
 
-/* CURRENT IMAGE (full width) */
-#current-image { padding:0; }
-#current-image img { width:100%; display:block; }
+/* ── NAV CARDS ── */
+#nav-cards{padding:56px 0;background:var(--dark2);}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;}
+.nav-card{display:flex;flex-direction:column;align-items:center;gap:10px;padding:28px 16px;background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);text-align:center;transition:var(--t);color:var(--text);}
+.nav-card:hover{transform:translateY(-6px);border-color:rgba(0,212,255,0.4);box-shadow:0 16px 50px rgba(0,0,0,0.4),0 0 30px rgba(0,212,255,0.1);}
+.nc-icon{font-size:30px;}
+.nc-title{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;letter-spacing:1px;color:var(--cyan);}
+.nc-desc{font-size:13px;color:var(--text-dim);line-height:1.5;}
 
-/* BENEFITS IMAGE (full width) */
-#benefits { padding:0; }
-#benefits img { width:100%; display:block; }
+/* ── SHOP ── */
+#shop{padding:80px 0;position:relative;text-align:center;overflow:hidden;background:var(--dark);}
+.shop-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(0,212,255,0.07) 0%,transparent 70%);}
+.shop-content{position:relative;z-index:2;max-width:620px;margin:0 auto;}
+.shop-product-img{width:190px;margin:0 auto 32px;filter:drop-shadow(0 0 40px rgba(0,212,255,0.4)) drop-shadow(0 0 70px rgba(123,47,255,0.3));animation:bob 4s ease-in-out infinite;}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.shop-title{font-family:'Orbitron',monospace;font-size:clamp(26px,5vw,50px);font-weight:900;line-height:1.1;margin-bottom:14px;background:linear-gradient(135deg,#fff,var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.shop-desc{font-size:17px;color:var(--text-dim);margin-bottom:30px;}
+.shop-actions{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;}
 
-/* SHOP */
-#shop { padding:80px 0; position:relative; overflow:hidden; text-align:center; }
-.shop-bg { position:absolute; inset:0; background:radial-gradient(ellipse at 50% 50%,rgba(0,212,255,0.07) 0%,transparent 70%); }
-.shop-content { position:relative; z-index:2; max-width:640px; margin:0 auto; }
-.shop-product-img { width:200px; margin:0 auto 36px; filter:drop-shadow(0 0 40px rgba(0,212,255,0.4)) drop-shadow(0 0 80px rgba(123,47,255,0.3)); animation:float-bob 4s ease-in-out infinite; }
-@keyframes float-bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-16px)} }
-.shop-title { font-family:'Orbitron',monospace; font-size:clamp(28px,5vw,52px); font-weight:900; line-height:1.1; margin-bottom:14px; background:linear-gradient(135deg,#fff,var(--cyan)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-.shop-desc { font-size:17px; color:var(--text-dim); margin-bottom:32px; }
-.shop-actions { display:flex; justify-content:center; gap:16px; flex-wrap:wrap; }
+/* ── CONTACT ── */
+#contact{padding:80px 0;background:var(--dark2);}
+.section-label{font-family:'Orbitron',monospace;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--cyan);margin-bottom:10px;opacity:0.8;display:block;}
+.section-title{font-family:'Orbitron',monospace;font-size:clamp(26px,4vw,46px);font-weight:900;line-height:1.1;margin-bottom:16px;background:linear-gradient(135deg,#fff 30%,var(--cyan) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start;}
+.ci{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
+.ci-icon{width:44px;height:44px;border-radius:50%;background:var(--glass);border:1px solid var(--glass-border);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.ci strong{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:1px;color:var(--cyan);display:block;margin-bottom:3px;}
+.ci span{font-size:15px;color:var(--text-dim);}
+.social-links{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap;}
+.social-link{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:50px;background:var(--glass);border:1px solid var(--glass-border);font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1.5px;color:var(--text-dim);transition:var(--t);}
+.social-link:hover{color:var(--cyan);border-color:rgba(0,212,255,0.4);background:var(--cyan-dim);transform:translateY(-2px);}
+.contact-form{display:flex;flex-direction:column;gap:13px;}
+.fg{display:flex;flex-direction:column;gap:6px;}
+.fg label{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;color:var(--cyan);text-transform:uppercase;}
+.fg input,.fg textarea{background:var(--glass);border:1px solid var(--glass-border);border-radius:10px;padding:13px 16px;font-family:'Rajdhani',sans-serif;font-size:16px;color:var(--text);outline:none;transition:border-color 0.3s;resize:none;}
+.fg input:focus,.fg textarea:focus{border-color:var(--cyan);box-shadow:0 0 14px rgba(0,212,255,0.12);}
+.fg input::placeholder,.fg textarea::placeholder{color:rgba(232,244,255,0.3);}
 
-/* CONTACT */
-#contact { padding:80px 0; background:var(--dark2); }
-.contact-header { text-align:center; margin-bottom:50px; }
-.contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start; }
-.contact-info-item { display:flex; align-items:center; gap:16px; margin-bottom:22px; }
-.contact-icon { width:46px; height:46px; border-radius:50%; background:var(--glass); border:1px solid var(--glass-border); display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
-.contact-info-item strong { font-family:'Orbitron',monospace; font-size:10px; letter-spacing:1px; color:var(--cyan); display:block; margin-bottom:3px; }
-.contact-info-item span { font-size:15px; color:var(--text-dim); }
-.social-links { display:flex; gap:10px; margin-top:28px; flex-wrap:wrap; }
-.social-link { display:inline-flex; align-items:center; gap:6px; padding:9px 18px; border-radius:50px; background:var(--glass); border:1px solid var(--glass-border); font-family:'Orbitron',monospace; font-size:9px; letter-spacing:1.5px; color:var(--text-dim); transition:var(--transition); }
-.social-link:hover { color:var(--cyan); border-color:rgba(0,212,255,0.4); background:var(--cyan-dim); transform:translateY(-2px); }
-.contact-form { display:flex; flex-direction:column; gap:14px; }
-.form-group { display:flex; flex-direction:column; gap:6px; }
-.form-group label { font-family:'Orbitron',monospace; font-size:9px; letter-spacing:2px; color:var(--cyan); text-transform:uppercase; }
-.form-group input,.form-group textarea { background:var(--glass); border:1px solid var(--glass-border); border-radius:10px; padding:13px 16px; font-family:'Rajdhani',sans-serif; font-size:16px; color:var(--text); outline:none; transition:border-color 0.3s; resize:none; }
-.form-group input:focus,.form-group textarea:focus { border-color:var(--cyan); box-shadow:0 0 16px rgba(0,212,255,0.12); }
-.form-group input::placeholder,.form-group textarea::placeholder { color:rgba(232,244,255,0.3); }
+/* ── FAQ ── */
+#faq{padding:80px 0;background:var(--dark);}
+.faq-header{text-align:center;margin-bottom:46px;}
+.faq-dl{display:inline-flex;align-items:center;gap:8px;padding:10px 24px;border-radius:50px;background:var(--glass);border:1.5px solid var(--cyan);font-family:'Orbitron',monospace;font-size:10px;letter-spacing:1.5px;color:var(--cyan);transition:var(--t);text-decoration:none;margin-top:16px;}
+.faq-dl:hover{background:var(--cyan-dim);transform:translateY(-2px);}
+.faq-cats{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:36px;}
+.faq-cat{padding:8px 18px;border-radius:50px;background:var(--glass);border:1px solid var(--glass-border);font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1.5px;color:var(--text-dim);cursor:pointer;transition:var(--t);}
+.faq-cat:hover,.faq-cat.active{background:var(--cyan-dim);border-color:var(--cyan);color:var(--cyan);}
+.faq-group{display:none;}
+.faq-group.active{display:block;}
+.faq-item{background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);margin-bottom:10px;overflow:hidden;transition:border-color 0.3s;}
+.faq-item.open{border-color:rgba(0,212,255,0.35);}
+.faq-q{width:100%;background:transparent;border:none;text-align:left;padding:18px 22px;font-family:'Rajdhani',sans-serif;font-size:17px;font-weight:600;color:var(--text);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:14px;transition:color 0.3s;}
+.faq-q:hover,.faq-item.open .faq-q{color:var(--cyan);}
+.faq-icon{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--glass-border);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:var(--t);font-style:normal;font-size:14px;color:var(--text-dim);}
+.faq-item.open .faq-icon{border-color:var(--cyan);color:var(--cyan);transform:rotate(45deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height 0.4s cubic-bezier(0.25,0.8,0.25,1);}
+.faq-a-inner{padding:14px 22px 18px;font-size:15px;color:var(--text-dim);line-height:1.8;border-top:1px solid var(--glass-border);}
 
-/* FAQ */
-#faq { padding:80px 0; }
-.faq-header { text-align:center; margin-bottom:50px; }
-.faq-download-btn { display:inline-flex; align-items:center; gap:8px; padding:11px 26px; border-radius:50px; background:var(--glass); border:1.5px solid var(--cyan); font-family:'Orbitron',monospace; font-size:10px; letter-spacing:1.5px; color:var(--cyan); transition:var(--transition); text-decoration:none; margin-top:18px; }
-.faq-download-btn:hover { background:var(--cyan-dim); transform:translateY(-2px); }
-.faq-categories { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:40px; }
-.faq-cat-btn { padding:8px 18px; border-radius:50px; background:var(--glass); border:1px solid var(--glass-border); font-family:'Orbitron',monospace; font-size:9px; letter-spacing:1.5px; color:var(--text-dim); cursor:pointer; transition:var(--transition); }
-.faq-cat-btn:hover,.faq-cat-btn.active { background:var(--cyan-dim); border-color:var(--cyan); color:var(--cyan); }
-.faq-section-group { display:none; }
-.faq-section-group.active { display:block; }
-.faq-item { background:var(--glass); border:1px solid var(--glass-border); border-radius:var(--radius); margin-bottom:10px; overflow:hidden; transition:border-color 0.3s; }
-.faq-item.open { border-color:rgba(0,212,255,0.35); }
-.faq-q { width:100%; background:transparent; border:none; text-align:left; padding:18px 22px; font-family:'Rajdhani',sans-serif; font-size:17px; font-weight:600; color:var(--text); cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:16px; transition:color 0.3s; }
-.faq-q:hover,.faq-item.open .faq-q { color:var(--cyan); }
-.faq-icon { width:22px; height:22px; border-radius:50%; border:1.5px solid var(--glass-border); flex-shrink:0; display:flex; align-items:center; justify-content:center; transition:var(--transition); font-style:normal; font-size:15px; color:var(--text-dim); }
-.faq-item.open .faq-icon { border-color:var(--cyan); color:var(--cyan); transform:rotate(45deg); }
-.faq-a { max-height:0; overflow:hidden; transition:max-height 0.4s cubic-bezier(0.25,0.8,0.25,1); }
-.faq-a-inner { padding:14px 22px 18px; font-size:15px; color:var(--text-dim); line-height:1.8; border-top:1px solid var(--glass-border); }
+/* ── FOOTER ── */
+footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:46px 0 26px;text-align:center;}
+.footer-logo img{height:44px;margin:0 auto 18px;opacity:0.8;width:auto;}
+.footer-links{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;margin-bottom:24px;}
+.footer-links a{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;color:var(--text-dim);transition:color 0.3s;}
+.footer-links a:hover{color:var(--cyan);}
+.footer-copy{font-size:12px;color:rgba(232,244,255,0.3);}
 
-/* FOOTER */
-footer { background:var(--dark2); border-top:1px solid var(--glass-border); padding:50px 0 28px; text-align:center; }
-.footer-logo img { height:46px; margin:0 auto 20px; opacity:0.8; }
-.footer-links { display:flex; justify-content:center; gap:24px; flex-wrap:wrap; margin-bottom:28px; }
-.footer-links a { font-family:'Orbitron',monospace; font-size:9px; letter-spacing:2px; color:var(--text-dim); transition:color 0.3s; }
-.footer-links a:hover { color:var(--cyan); }
-.footer-copy { font-size:12px; color:rgba(232,244,255,0.3); }
-
-@media (max-width:900px) { .contact-grid { grid-template-columns:1fr; gap:36px; } }
-@media (max-width:600px) { .hero-actions { flex-direction:column; align-items:center; } .cards-grid { grid-template-columns:1fr 1fr; } }
+@media(max-width:900px){.contact-grid{grid-template-columns:1fr;gap:32px;}}
+@media(max-width:600px){.hero-actions{flex-direction:column;align-items:center;}.cards-grid{grid-template-columns:1fr 1fr;}}
 </style>
 </head>
 <body>
@@ -152,12 +148,12 @@ footer { background:var(--dark2); border-top:1px solid var(--glass-border); padd
 <!-- NAV -->
 <nav id="navbar">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo"><img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav" /></a>
+    <a href="index.html" class="nav-logo"><img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav"/></a>
     <ul class="nav-links">
       <li><a href="#shop">Shop</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="flavors.html">Flavors</a></li>
-      <li><a href="index.html#how-it-works">How It Works</a></li>
+      <li><a href="#how-it-works">How It Works</a></li>
       <li><a href="tiktok.html">TikTok</a></li>
       <li><a href="#contact">Contact</a></li>
       <li><a href="#faq">FAQ</a></li>
@@ -195,42 +191,39 @@ footer { background:var(--dark2); border-top:1px solid var(--glass-border); padd
   <div class="hero-scroll"><span>Scroll</span><div class="scroll-line"></div></div>
 </section>
 
+<!-- FULL-WIDTH IMAGE STACK: Flavor Menu → Benefits → How It Works — all flush, zero gaps -->
+<div class="img-stack" id="how-it-works">
+  <img src="FlavorWav%20Flavor%20Menu.png" alt="FlavorWav Flavor Collection"/>
+  <img src="FlavorWav%20Benefits%20Page.png" alt="FlavorWav Benefits"/>
+  <img src="how%20it%20works%20no%20city%20glow.png" alt="How FlavorWav Works"/>
+</div>
+
 <!-- NAV CARDS -->
 <section id="nav-cards">
   <div class="container">
     <div class="cards-grid">
       <a href="about.html" class="nav-card">
-        <div class="nav-card-icon">🧪</div>
-        <div class="nav-card-title">About Us</div>
-        <div class="nav-card-desc">California-made straws built for real tumbler users.</div>
+        <div class="nc-icon">🧪</div>
+        <div class="nc-title">About Us</div>
+        <div class="nc-desc">California-made straws built for real tumbler users.</div>
       </a>
       <a href="flavors.html" class="nav-card">
-        <div class="nav-card-icon">⚡</div>
-        <div class="nav-card-title">Our Flavors</div>
-        <div class="nav-card-desc">Energy, probiotics, focus & more — see all flavors.</div>
+        <div class="nc-icon">⚡</div>
+        <div class="nc-title">Our Flavors</div>
+        <div class="nc-desc">Energy, probiotics, focus & more — see all flavors.</div>
       </a>
       <a href="tiktok.html" class="nav-card">
-        <div class="nav-card-icon">🎵</div>
-        <div class="nav-card-title">TikTok</div>
-        <div class="nav-card-desc">Watch us in action. Follow for drops & reviews.</div>
+        <div class="nc-icon">🎵</div>
+        <div class="nc-title">TikTok</div>
+        <div class="nc-desc">Watch us in action. Follow for drops & reviews.</div>
       </a>
       <a href="#contact" class="nav-card">
-        <div class="nav-card-icon">📬</div>
-        <div class="nav-card-title">Contact Us</div>
-        <div class="nav-card-desc">Questions? We'd love to hear from you.</div>
+        <div class="nc-icon">📬</div>
+        <div class="nc-title">Contact Us</div>
+        <div class="nc-desc">Questions? We'd love to hear from you.</div>
       </a>
     </div>
   </div>
-</section>
-
-<!-- CURRENT (Flavor Menu full image) -->
-<section id="current-image">
-  <img src="FlavorWav%20Flavor%20Menu.png" alt="FlavorWav Current Collection" />
-</section>
-
-<!-- BENEFITS (full image) -->
-<section id="benefits">
-  <img src="FlavorWav%20Benefits%20Page.png" alt="FlavorWav Benefits" />
 </section>
 
 <!-- SHOP -->
@@ -238,7 +231,7 @@ footer { background:var(--dark2); border-top:1px solid var(--glass-border); padd
   <div class="shop-bg"></div>
   <div class="container">
     <div class="shop-content">
-      <img src="FLAVPACK%2014.png" alt="FlavorWav Pack" class="shop-product-img" />
+      <img src="FLAVPACK%2014.png" alt="FlavorWav Pack" class="shop-product-img"/>
       <h2 class="shop-title">Ready to Ride<br/>the Wav?</h2>
       <p class="shop-desc">Premium infused straws packed with flavor, vitamins, caffeine, and fiber. Free shipping on qualifying orders.</p>
       <div class="shop-actions">
@@ -252,24 +245,15 @@ footer { background:var(--dark2); border-top:1px solid var(--glass-border); padd
 <!-- CONTACT -->
 <section id="contact">
   <div class="container">
-    <div class="contact-header">
+    <div style="text-align:center;margin-bottom:48px;">
       <span class="section-label">Get In Touch</span>
       <h2 class="section-title">Contact Us</h2>
     </div>
     <div class="contact-grid">
       <div>
-        <div class="contact-info-item">
-          <div class="contact-icon">📧</div>
-          <div><strong>Email</strong><span>hello@flavorwav.com</span></div>
-        </div>
-        <div class="contact-info-item">
-          <div class="contact-icon">📞</div>
-          <div><strong>Phone</strong><span>+1 (800) FLAV-WAV</span></div>
-        </div>
-        <div class="contact-info-item">
-          <div class="contact-icon">📍</div>
-          <div><strong>Location</strong><span>California, USA</span></div>
-        </div>
+        <div class="ci"><div class="ci-icon">📧</div><div><strong>Email</strong><span>hello@flavorwav.com</span></div></div>
+        <div class="ci"><div class="ci-icon">📞</div><div><strong>Phone</strong><span>+1 (800) FLAV-WAV</span></div></div>
+        <div class="ci"><div class="ci-icon">📍</div><div><strong>Location</strong><span>California, USA</span></div></div>
         <div class="social-links">
           <a href="tiktok.html" class="social-link">🎵 TikTok</a>
           <a href="#" target="_blank" class="social-link">📸 Instagram</a>
@@ -277,18 +261,9 @@ footer { background:var(--dark2); border-top:1px solid var(--glass-border); padd
         </div>
       </div>
       <div class="contact-form">
-        <div class="form-group">
-          <label for="cname">Name</label>
-          <input type="text" id="cname" placeholder="Your name" />
-        </div>
-        <div class="form-group">
-          <label for="cemail">Email</label>
-          <input type="email" id="cemail" placeholder="your@email.com" />
-        </div>
-        <div class="form-group">
-          <label for="cmsg">Message</label>
-          <textarea id="cmsg" rows="5" placeholder="How can we help?"></textarea>
-        </div>
+        <div class="fg"><label for="cname">Name</label><input type="text" id="cname" placeholder="Your name"/></div>
+        <div class="fg"><label for="cemail">Email</label><input type="email" id="cemail" placeholder="your@email.com"/></div>
+        <div class="fg"><label for="cmsg">Message</label><textarea id="cmsg" rows="5" placeholder="How can we help?"></textarea></div>
         <button class="btn btn-primary" onclick="sendMsg()" style="width:100%;justify-content:center;">Send Message</button>
       </div>
     </div>
@@ -301,37 +276,37 @@ footer { background:var(--dark2); border-top:1px solid var(--glass-border); padd
     <div class="faq-header">
       <span class="section-label">Help Center</span>
       <h2 class="section-title">Frequently Asked Questions</h2>
-      <p style="color:var(--text-dim);font-size:16px;max-width:500px;margin:0 auto 18px;">Everything you need to know about FlavorWav.</p>
-      <a href="files/flavorwav-full-faq.pdf" download class="faq-download-btn">⬇ Download Full FAQ (PDF)</a>
+      <p style="color:var(--text-dim);font-size:16px;max-width:480px;margin:0 auto 16px;">Everything you need to know about FlavorWav.</p>
+      <a href="files/flavorwav-full-faq.pdf" download class="faq-dl">⬇ Download Full FAQ (PDF)</a>
     </div>
-    <div class="faq-categories">
-      <button class="faq-cat-btn active" data-cat="ordering">Ordering</button>
-      <button class="faq-cat-btn" data-cat="shipping">Shipping</button>
-      <button class="faq-cat-btn" data-cat="products">Products</button>
-      <button class="faq-cat-btn" data-cat="returns">Returns</button>
+    <div class="faq-cats">
+      <button class="faq-cat active" data-cat="ordering">Ordering</button>
+      <button class="faq-cat" data-cat="shipping">Shipping</button>
+      <button class="faq-cat" data-cat="products">Products</button>
+      <button class="faq-cat" data-cat="returns">Returns</button>
     </div>
-    <div class="faq-section-group active" id="faq-ordering">
+    <div class="faq-group active" id="faq-ordering">
       <div class="faq-item"><button class="faq-q">How do I place an order? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Visit our Shop page, choose your flavors, add to cart, and check out. We accept all major credit cards and PayPal.</div></div></div>
-      <div class="faq-item"><button class="faq-q">Can I order multiple flavors in one pack? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Yes! We offer variety packs so you can mix and match your favorite flavors.</div></div></div>
-      <div class="faq-item"><button class="faq-q">Is there a minimum order quantity? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">No minimum required. Order a single pack or stock up with larger bundles.</div></div></div>
-      <div class="faq-item"><button class="faq-q">Do you offer subscriptions? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Subscriptions are coming soon! Sign up for our newsletter to be first to know.</div></div></div>
+      <div class="faq-item"><button class="faq-q">Can I order multiple flavors? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Yes! We offer variety packs so you can mix and match your favorite flavors.</div></div></div>
+      <div class="faq-item"><button class="faq-q">Is there a minimum order? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">No minimum required. Order a single pack or stock up with larger bundles.</div></div></div>
+      <div class="faq-item"><button class="faq-q">Do you offer subscriptions? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Subscriptions coming soon! Sign up for our newsletter to be first to know.</div></div></div>
     </div>
-    <div class="faq-section-group" id="faq-shipping">
-      <div class="faq-item"><button class="faq-q">How long does shipping take? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Standard shipping: 5–7 business days. Expedited options available at checkout.</div></div></div>
-      <div class="faq-item"><button class="faq-q">Do you offer free shipping? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Yes! Free standard shipping on all qualifying orders.</div></div></div>
-      <div class="faq-item"><button class="faq-q">Do you ship internationally? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Currently US only. International shipping coming soon.</div></div></div>
-      <div class="faq-item"><button class="faq-q">How do I track my order? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">You'll get a confirmation email with tracking number once your order ships.</div></div></div>
+    <div class="faq-group" id="faq-shipping">
+      <div class="faq-item"><button class="faq-q">How long does shipping take? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Standard: 5–7 business days. Expedited options available at checkout.</div></div></div>
+      <div class="faq-item"><button class="faq-q">Do you offer free shipping? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Yes! Free standard shipping on qualifying orders.</div></div></div>
+      <div class="faq-item"><button class="faq-q">Do you ship internationally? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Currently US only. International coming soon.</div></div></div>
+      <div class="faq-item"><button class="faq-q">How do I track my order? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">You'll receive a tracking number via email once your order ships.</div></div></div>
     </div>
-    <div class="faq-section-group" id="faq-products">
-      <div class="faq-item"><button class="faq-q">What tumblers do FlavorWav straws fit? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Our 12" straws fit 30oz and 40oz tumblers — Yeti, Stanley, RTIC, Hydro Flask, and similar.</div></div></div>
-      <div class="faq-item"><button class="faq-q">Are the straws safe and tested? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Yes. Tested for PFAS and key chemical screens. Glueless construction — no adhesive seam.</div></div></div>
+    <div class="faq-group" id="faq-products">
+      <div class="faq-item"><button class="faq-q">What tumblers do they fit? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Our 12" straws fit 30oz and 40oz tumblers — Yeti, Stanley, RTIC, Hydro Flask, and similar.</div></div></div>
+      <div class="faq-item"><button class="faq-q">Are they safe and tested? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Yes. Tested for PFAS and key chemical screens. Glueless construction, no adhesive seam.</div></div></div>
       <div class="faq-item"><button class="faq-q">How does the flavor dissolve? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">The inner lining dissolves as liquid flows through during normal sipping. Just insert and drink.</div></div></div>
-      <div class="faq-item"><button class="faq-q">Are the straws biodegradable? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Yes — paper-based and biodegradable with a verified biodegradability report.</div></div></div>
+      <div class="faq-item"><button class="faq-q">Are they biodegradable? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Yes — paper-based with a verified biodegradability report.</div></div></div>
     </div>
-    <div class="faq-section-group" id="faq-returns">
-      <div class="faq-item"><button class="faq-q">What is your return policy? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Returns accepted within 30 days for unopened products. Email hello@flavorwav.com with your order number.</div></div></div>
-      <div class="faq-item"><button class="faq-q">What if my order arrives damaged? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Email hello@flavorwav.com with a photo and order number — we'll make it right fast.</div></div></div>
-      <div class="faq-item"><button class="faq-q">How do I reach customer support? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Use the contact form above or email hello@flavorwav.com. We respond within 1–2 business days.</div></div></div>
+    <div class="faq-group" id="faq-returns">
+      <div class="faq-item"><button class="faq-q">What is your return policy? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Returns within 30 days for unopened products. Email hello@flavorwav.com with your order number.</div></div></div>
+      <div class="faq-item"><button class="faq-q">My order arrived damaged — help? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Email hello@flavorwav.com with a photo and order number. We'll make it right fast.</div></div></div>
+      <div class="faq-item"><button class="faq-q">How do I reach support? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Use the contact form above or email hello@flavorwav.com. We respond within 1–2 business days.</div></div></div>
     </div>
   </div>
 </section>
@@ -339,88 +314,68 @@ footer { background:var(--dark2); border-top:1px solid var(--glass-border); padd
 <!-- FOOTER -->
 <footer>
   <div class="container">
-    <div class="footer-logo"><img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav" /></div>
+    <div class="footer-logo"><img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav"/></div>
     <nav class="footer-links">
-      <a href="#shop">Shop</a>
-      <a href="about.html">About</a>
-      <a href="flavors.html">Flavors</a>
-      <a href="tiktok.html">TikTok</a>
-      <a href="#contact">Contact</a>
-      <a href="#faq">FAQ</a>
+      <a href="#shop">Shop</a><a href="about.html">About</a><a href="flavors.html">Flavors</a>
+      <a href="tiktok.html">TikTok</a><a href="#contact">Contact</a><a href="#faq">FAQ</a>
     </nav>
     <p class="footer-copy">© 2025 FlavorWav. All rights reserved. California, USA.</p>
   </div>
 </footer>
 
 <script>
-// NAV SCROLL
-const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => { navbar.classList.toggle('scrolled', window.scrollY > 40); });
+// NAV
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',window.scrollY>40),{passive:true});
 
 // PARALLAX
-const heroBg = document.getElementById('heroBg');
-window.addEventListener('scroll', () => { if(heroBg) heroBg.style.transform = `scale(1.05) translateY(${window.scrollY*0.2}px)`; }, {passive:true});
+const heroBg=document.getElementById('heroBg');
+window.addEventListener('scroll',()=>{if(heroBg)heroBg.style.transform=`scale(1.05) translateY(${window.scrollY*0.18}px)`;},{passive:true});
 
 // PARTICLES
 (function(){
-  const c = document.getElementById('heroParticles');
-  if(!c) return;
+  const c=document.getElementById('heroParticles');
+  if(!c)return;
   for(let i=0;i<40;i++){
-    const p = document.createElement('span');
-    p.style.left = Math.random()*100+'%';
-    p.style.animationDuration = (8+Math.random()*12)+'s';
-    p.style.animationDelay = (Math.random()*10)+'s';
-    p.style.width = p.style.height = (1+Math.random()*2)+'px';
-    if(Math.random()>0.7) p.style.background=`hsl(${Math.random()>0.5?270:310},100%,70%)`;
+    const p=document.createElement('span');
+    p.style.left=Math.random()*100+'%';
+    p.style.animationDuration=(8+Math.random()*12)+'s';
+    p.style.animationDelay=(Math.random()*10)+'s';
+    p.style.width=p.style.height=(1+Math.random()*2)+'px';
+    if(Math.random()>0.7)p.style.background=`hsl(${Math.random()>0.5?270:310},100%,70%)`;
     c.appendChild(p);
   }
 })();
 
 // HAMBURGER
-const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobileMenu');
-hamburger.addEventListener('click', () => {
-  const open = mobileMenu.classList.toggle('open');
-  hamburger.classList.toggle('open', open);
-  document.body.style.overflow = open ? 'hidden' : '';
-});
-document.querySelectorAll('.mobile-link,.mobile-menu .btn').forEach(l => {
-  l.addEventListener('click', () => {
-    mobileMenu.classList.remove('open');
-    hamburger.classList.remove('open');
-    document.body.style.overflow = '';
-  });
-});
+const hbg=document.getElementById('hamburger'),mob=document.getElementById('mobileMenu');
+hbg.addEventListener('click',()=>{const o=mob.classList.toggle('open');hbg.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';});
+document.querySelectorAll('.mobile-link,.mobile-menu .btn').forEach(l=>l.addEventListener('click',()=>{mob.classList.remove('open');hbg.classList.remove('open');document.body.style.overflow='';}));
 
 // FAQ
-document.querySelectorAll('.faq-q').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const item = btn.closest('.faq-item');
-    const ans = item.querySelector('.faq-a');
-    const open = item.classList.contains('open');
-    item.closest('.faq-section-group').querySelectorAll('.faq-item').forEach(i => {
-      i.classList.remove('open');
-      i.querySelector('.faq-a').style.maxHeight = '0';
-    });
-    if(!open){ item.classList.add('open'); ans.style.maxHeight = ans.scrollHeight+'px'; }
+document.querySelectorAll('.faq-q').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const item=btn.closest('.faq-item'),ans=item.querySelector('.faq-a'),open=item.classList.contains('open');
+    item.closest('.faq-group').querySelectorAll('.faq-item').forEach(i=>{i.classList.remove('open');i.querySelector('.faq-a').style.maxHeight='0';});
+    if(!open){item.classList.add('open');ans.style.maxHeight=ans.scrollHeight+'px';}
   });
 });
-document.querySelectorAll('.faq-cat-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.faq-cat-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.faq-section-group').forEach(g => g.classList.remove('active'));
+document.querySelectorAll('.faq-cat').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.faq-cat').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.faq-group').forEach(g=>g.classList.remove('active'));
     btn.classList.add('active');
-    const t = document.getElementById('faq-'+btn.dataset.cat);
-    if(t) t.classList.add('active');
+    const t=document.getElementById('faq-'+btn.dataset.cat);
+    if(t)t.classList.add('active');
   });
 });
 
 // CONTACT
 function sendMsg(){
-  const n = document.getElementById('cname').value.trim();
-  const e = document.getElementById('cemail').value.trim();
-  const m = document.getElementById('cmsg').value.trim();
-  if(!n||!e||!m){ alert('Please fill in all fields.'); return; }
+  const n=document.getElementById('cname').value.trim();
+  const e=document.getElementById('cemail').value.trim();
+  const m=document.getElementById('cmsg').value.trim();
+  if(!n||!e||!m){alert('Please fill in all fields.');return;}
   alert('Thanks '+n+'! Your message has been sent.');
   document.getElementById('cname').value='';
   document.getElementById('cemail').value='';
@@ -428,10 +383,10 @@ function sendMsg(){
 }
 
 // SMOOTH SCROLL
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const t = document.querySelector(a.getAttribute('href'));
-    if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}
   });
 });
 </script>

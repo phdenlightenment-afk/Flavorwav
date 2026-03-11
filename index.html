@@ -80,7 +80,7 @@ nav#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-hei
 .mobile-menu a:hover{color:var(--cyan);}
 
 /* HERO */
-#hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;padding:calc(var(--nav-height) + 30px) 24px 60px;background: url('flav_hero_background.png') center 58% / cover no-repeat;}
+#hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;padding:calc(var(--nav-height) + 30px) 24px 60px;background: url('flav%20hero%20background.png') center 58% / cover no-repeat;}
 
 
 
@@ -364,6 +364,22 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
 </div>
 
 <section id="hero">
+  <div class="hero-scan"></div>
+  <div class="hero-rings">
+    <div class="hr-ring"></div>
+    <div class="hr-ring"></div>
+    <div class="hr-ring"></div>
+  </div>
+  <div class="hero-logo-wrap">
+    <img id="hero-logo" class="hero-logo" src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav"/>
+  </div>
+  <div class="hero-waves">
+    <div class="hw hw1"></div>
+    <div class="hw hw2"></div>
+    <div class="hw hw3"></div>
+    <div class="hw hw4"></div>
+  </div>
+  <div class="hero-particles" id="heroParticles"></div>
   <div class="hero-content">
     <div class="hero-badge"><span class="hbadge-dot"></span>Premium Infused Straws</div>
     <h1 class="hero-title">
@@ -538,6 +554,20 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
 })();
 // Logo parallax
 (function(){var l=document.getElementById('hero-logo');if(!l)return;document.addEventListener('mousemove',function(e){var cx=(e.clientX/window.innerWidth-0.5)*18;var cy=(e.clientY/window.innerHeight-0.5)*12;l.style.transform='translate('+cx+'px,'+cy+'px)';});})();
+// PARTICLES
+(function(){
+  var c=document.getElementById('heroParticles');if(!c)return;
+  var cols=['rgba(0,212,255,','rgba(0,180,255,','rgba(100,220,255,','rgba(0,150,255,'];
+  for(var i=0;i<28;i++){
+    var p=document.createElement('div');p.className='hp';
+    var sz=Math.random()*3+1.5;
+    p.style.cssText='width:'+sz+'px;height:'+sz+'px;left:'+Math.random()*100+'%;bottom:'+Math.random()*20+'%;'+
+      'background:'+cols[Math.floor(Math.random()*cols.length)]+(0.4+Math.random()*0.5)+');'+
+      'box-shadow:0 0 '+(sz*3)+'px '+cols[0]+'0.6);'+
+      'animation-duration:'+(6+Math.random()*10)+'s;animation-delay:'+(Math.random()*8)+'s;';
+    c.appendChild(p);
+  }
+})();
 // HAMBURGER
 (function(){
   var h=document.getElementById('hamburger'),m=document.getElementById('mobileMenu');

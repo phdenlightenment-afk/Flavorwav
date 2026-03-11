@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>FlavorWav — Infused Straws</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--cyan:#00d4ff;--purple:#7b2fff;--pink:#ff2d9e;--dark:#050a14;--dark2:#070e1c;
+  --glass:rgba(255,255,255,0.06);--glass-border:rgba(0,212,255,0.18);
+  --text:#e8f4ff;--text-dim:rgba(232,244,255,0.6);--nav-height:70px;--radius:16px;
+  --t:0.35s cubic-bezier(0.25,0.8,0.25,1);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Rajdhani',sans-serif;background:#000;color:var(--text);overflow-x:hidden;}
+img{display:block;}
+a{text-decoration:none;color:inherit;}
+
+/* CURSOR */
+#cursor-dot{position:fixed;width:8px;height:8px;background:var(--cyan);border-radius:50%;
+  pointer-events:none;z-index:9998;transform:translate(-50%,-50%);
+  box-shadow:0 0 10px var(--cyan),0 0 20px rgba(0,212,255,0.4);}
+#cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid rgba(0,212,255,0.45);
+  border-radius:50%;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);}
+body.ch #cursor-dot{background:var(--pink);box-shadow:0 0 16px var(--pink);}
+body.ch #cursor-ring{width:54px;height:54px;border-color:rgba(255,45,158,0.5);}
+@media(hover:none),(pointer:coarse){#cursor-dot,#cursor-ring{display:none;}}
+
+/* FLOATING SHOP BTN */
+#float-shop{position:fixed;bottom:28px;right:28px;z-index:900;opacity:0;
+  transform:translateY(20px);transition:opacity 0.4s,transform 0.4s;pointer-events:none;}
+#float-shop.visible{opacity:1;transform:translateY(0);pointer-events:auto;}
+.float-btn{display:flex;align-items:center;gap:10px;padding:13px 22px;border-radius:50px;
+  background:linear-gradient(135deg,var(--cyan),var(--purple));color:#fff;
+  font-family:'Orbitron',monospace;font-size:11px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;box-shadow:0 0 30px rgba(0,212,255,0.5);
+  transition:var(--t);border:none;cursor:pointer;text-decoration:none;}
+.float-btn:hover{transform:translateY(-4px);}
+.float-pulse{width:8px;height:8px;background:#fff;border-radius:50%;flex-shrink:0;
+  animation:fpulse 1.4s ease-in-out infinite;}
+@keyframes fpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.6);opacity:0.4}}
+
+/* NAV */
+nav#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-height);
+  display:flex;align-items:center;padding:0 24px;background:rgba(5,10,20,0.96);
+  backdrop-filter:blur(20px);box-shadow:0 1px 0 var(--glass-border);}
+.nav-inner{width:100%;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo img{height:42px;width:auto;}
+.nav-links{display:none;}
+@media(min-width:1280px){
+  .nav-links{display:flex;align-items:center;gap:16px;list-style:none;}
+  .nav-links a{font-family:'Orbitron',monospace;font-size:8.5px;letter-spacing:1.5px;
+    text-transform:uppercase;color:var(--text-dim);transition:color var(--t);}
+  .nav-links a:hover,.nav-links a.active{color:var(--cyan);}
+  .hamburger{display:none!important;}}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:50px;
+  font-family:'Orbitron',monospace;font-size:10px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;cursor:pointer;border:none;transition:var(--t);}
+.btn-primary{background:linear-gradient(135deg,var(--cyan),var(--purple));color:#fff;
+  box-shadow:0 0 24px rgba(0,212,255,0.4);}
+.btn-primary:hover{transform:translateY(-3px);}
+.btn-outline{background:transparent;color:var(--cyan);border:1.5px solid var(--cyan);}
+.btn-outline:hover{background:rgba(0,212,255,0.1);transform:translateY(-3px);}
+.nav-cta{padding:8px 16px!important;font-size:8px!important;}
+.hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:8px;
+  border:none;background:transparent;z-index:1100;}
+.hamburger span{display:block;width:24px;height:2px;background:var(--cyan);
+  transition:var(--t);transform-origin:center;}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.mobile-menu{position:fixed;inset:0;background:rgba(5,10,20,0.97);backdrop-filter:blur(24px);
+  z-index:1050;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:28px;transform:translateX(100%);transition:transform 0.45s cubic-bezier(0.25,0.8,0.25,1);}
+.mobile-menu.open{transform:translateX(0);}
+.mobile-menu a{font-family:'Orbitron',monospace;font-size:18px;letter-spacing:3px;
+  text-transform:uppercase;color:var(--text-dim);}
+.mobile-menu a:hover{color:var(--cyan);}
+
+/* HERO */
+#hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;overflow:hidden;padding:calc(var(--nav-height) + 30px) 24px 60px;background: url('flav%20hero%20background.png') center 58% / cover no-repeat;}
+
+
+
+/* HERO ATMOSPHERE */
+#hero::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 38%, rgba(0,180,255,0.08) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 35% at 25% 60%, rgba(0,80,220,0.05) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 35% at 75% 60%, rgba(0,200,255,0.05) 0%, transparent 60%);
+  animation: atmosPulse 7s ease-in-out infinite alternate;
+}
+@keyframes atmosPulse {
+  from { opacity: 0.35; transform: scale(1); }
+  to   { opacity: 0.65; transform: scale(1.04); }
+}
+#hero::after {
+  content: '';
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    repeating-linear-gradient(to bottom, transparent 0px, transparent 49px, rgba(0,200,255,0.012) 49px, rgba(0,200,255,0.012) 50px),
+    repeating-linear-gradient(to right,  transparent 0px, transparent 49px, rgba(0,200,255,0.012) 49px, rgba(0,200,255,0.012) 50px);
+}
+
+
+/* SCAN BEAM */
+.hero-scan{position:absolute;inset:0;z-index:4;pointer-events:none;overflow:hidden;}
+.hero-scan::before{content:'';position:absolute;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent 0%,rgba(0,220,255,0.24) 20%,rgba(0,240,255,0.42) 50%,rgba(0,220,255,0.24) 80%,transparent 100%);
+  box-shadow:0 0 12px 3px rgba(0,220,255,0.18),0 0 40px 8px rgba(0,180,255,0.10);
+  animation:scanDown 5s linear infinite;}
+.hero-scan::after{content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(to bottom,transparent 0px,transparent 49px,rgba(0,200,255,0.012) 49px,rgba(0,200,255,0.012) 50px),
+             repeating-linear-gradient(to right,transparent 0px,transparent 49px,rgba(0,200,255,0.012) 49px,rgba(0,200,255,0.012) 50px);}
+@keyframes scanDown{0%{top:-2px;opacity:0}5%{opacity:1}95%{opacity:1}100%{top:100%;opacity:0}}
+
+/* ORBS */
+.hero-rings{position:absolute;inset:0;z-index:4;pointer-events:none;display:flex;align-items:flex-start;justify-content:center;padding-top:10%;}
+/* MIST CLOUDS */
+.hr-ring{
+  position:absolute;
+  border-radius:50%;
+  width:420px;height:220px;
+  background:radial-gradient(ellipse at center,
+    rgba(0,200,255,0.13) 0%,
+    rgba(0,160,255,0.08) 35%,
+    rgba(0,120,255,0.04) 60%,
+    transparent 100%);
+  filter:blur(28px);
+  animation:mistDrift 8s ease-in-out infinite;
+}
+.hr-ring:nth-child(2){
+  width:320px;height:160px;
+  background:radial-gradient(ellipse at center,
+    rgba(0,220,255,0.10) 0%,
+    rgba(0,140,255,0.06) 40%,
+    transparent 100%);
+  filter:blur(22px);
+  animation:mistDrift2 11s ease-in-out infinite;
+  animation-delay:1.5s;
+}
+.hr-ring:nth-child(3){
+  width:500px;height:180px;
+  background:radial-gradient(ellipse at center,
+    rgba(0,180,255,0.08) 0%,
+    rgba(0,100,220,0.05) 45%,
+    transparent 100%);
+  filter:blur(36px);
+  animation:mistDrift3 14s ease-in-out infinite;
+  animation-delay:3s;
+}
+@keyframes mistDrift{
+  0%,100%{transform:translate(0px, 0px) scale(1);   opacity:0.7;}
+  33%    {transform:translate(18px,-10px) scale(1.06);opacity:1;}
+  66%    {transform:translate(-14px, 8px) scale(0.96);opacity:0.8;}
+}
+@keyframes mistDrift2{
+  0%,100%{transform:translate(0px, 0px) scale(1);    opacity:0.6;}
+  40%    {transform:translate(-20px,-14px) scale(1.1);opacity:0.9;}
+  75%    {transform:translate(16px,  6px) scale(0.94);opacity:0.7;}
+}
+@keyframes mistDrift3{
+  0%,100%{transform:translate(0px,0px)  scale(1);    opacity:0.5;}
+  50%    {transform:translate(10px,-8px) scale(1.08); opacity:0.85;}
+}
+
+/* AMBIENT GLOW BEHIND LOGO */
+.hero-logo-wrap{position:relative;z-index:10;margin-bottom:0;}
+.hero-logo-wrap::before{content:'';position:absolute;inset:-60px;border-radius:50%;
+  background:radial-gradient(circle,rgba(0,200,255,0.25) 0%,rgba(0,120,255,0.15) 35%,transparent 70%);
+  animation:glowPulse 3s ease-in-out infinite;z-index:-1;}
+@keyframes glowPulse{0%,100%{transform:scale(1);opacity:0.7}50%{transform:scale(1.15);opacity:1}}
+
+/* WAVES */
+.hero-waves{position:absolute;bottom:0;left:0;right:0;z-index:4;pointer-events:none;height:40%;overflow:hidden;}
+.hw{position:absolute;left:-10%;width:120%;border-radius:50%;border-top-width:2px;border-top-style:solid;border-left:none;border-right:none;border-bottom:none;}
+.hw1{height:110px;bottom:-20px;border-color:rgba(0,220,255,0.65);box-shadow:0 -4px 18px rgba(0,220,255,0.35);animation:waveAnim 4s ease-in-out infinite;}
+.hw2{height:150px;bottom:-45px;border-color:rgba(0,170,255,0.45);box-shadow:0 -3px 12px rgba(0,170,255,0.25);animation:waveAnim 5.5s ease-in-out infinite reverse;animation-delay:0.6s;}
+.hw3{height:190px;bottom:-75px;border-color:rgba(0,200,255,0.3);animation:waveAnim 7s ease-in-out infinite;animation-delay:1.2s;}
+.hw4{height:240px;bottom:-110px;border-color:rgba(0,120,255,0.2);animation:waveAnim 8.5s ease-in-out infinite reverse;animation-delay:1.8s;}
+@keyframes waveAnim{0%,100%{transform:translateX(0) scaleY(1)}50%{transform:translateX(-3%) scaleY(1.12)}}
+
+/* PARTICLES */
+.hero-particles{position:absolute;inset:0;z-index:5;pointer-events:none;overflow:hidden;}
+.hp{position:absolute;border-radius:50%;animation:floatUp linear infinite;opacity:0;}
+@keyframes floatUp{
+  0%  {opacity:0;transform:translateY(0) scale(1);}
+  8%  {opacity:1;}
+  88% {opacity:0.9;}
+  100%{opacity:0;transform:translateY(-90vh) scale(0.3);}
+}
+
+.hero-logo{width:clamp(380px,65vw,720px);height:auto;mix-blend-mode:screen;opacity:0;
+  animation:hlogoIn 1.3s cubic-bezier(0.16,1,0.3,1) 0.3s forwards;
+  transition:transform 0.1s ease;}
+@keyframes hlogoIn{from{opacity:0;transform:scale(0.85) translateY(16px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.hero-content{position:relative;z-index:10;text-align:center;max-width:680px;width:100%;display:flex;flex-direction:column;align-items:center;margin-top:0;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:5px 16px;border:1px solid rgba(0,212,255,0.3);border-radius:50px;background:rgba(0,212,255,0.08);backdrop-filter:blur(10px);font-family:'Orbitron',monospace;font-size:8px;letter-spacing:3px;color:var(--cyan);margin-bottom:16px;opacity:0;animation:hslideUp 0.8s ease 1s forwards;}
+.hbadge-dot{width:5px;height:5px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px var(--cyan);animation:hblink 1.6s ease-in-out infinite;}
+@keyframes hblink{0%,100%{opacity:1}50%{opacity:0.2}}
+.hero-title{font-family:'Orbitron',monospace;font-weight:900;font-size:clamp(22px,5vw,64px);line-height:1.08;margin-bottom:14px;opacity:0;animation:hslideUp 0.9s ease 1.15s forwards;}
+.htl1{display:block;color:#fff;text-shadow:0 0 40px rgba(0,212,255,0.35);}
+.htl2{display:block;background:linear-gradient(100deg,#00d4ff 0%,#0af 40%,#0062ff 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 0 18px rgba(0,212,255,0.45));}
+.hero-divider{width:50px;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);margin:0 auto 14px;opacity:0;animation:hslideUp 0.8s ease 1.3s forwards;}
+.hero-sub{font-size:clamp(13px,2vw,17px);color:var(--text-dim);max-width:400px;line-height:1.7;margin-bottom:26px;opacity:0;animation:hslideUp 0.8s ease 1.4s forwards;}
+.hero-actions{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;opacity:0;animation:hslideUp 0.8s ease 1.55s forwards;}
+.hero-stats{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:32px;padding-top:18px;border-top:1px solid rgba(0,212,255,0.1);width:100%;max-width:480px;opacity:0;animation:hslideUp 0.8s ease 1.7s forwards;}
+.hstat{text-align:center;}
+.hstat-num{font-family:'Orbitron',monospace;font-size:clamp(16px,3vw,24px);font-weight:900;color:var(--cyan);display:block;line-height:1;margin-bottom:4px;text-shadow:0 0 16px rgba(0,212,255,0.5);}
+.hstat-lbl{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim);font-family:'Orbitron',monospace;}
+.hstat-sep{width:1px;height:28px;background:rgba(0,212,255,0.12);align-self:center;}
+.hero-scroll{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);z-index:10;display:flex;flex-direction:column;align-items:center;gap:6px;opacity:0;animation:hslideUp 1s ease 2s forwards;}
+.hero-scroll span{font-family:'Orbitron',monospace;font-size:7px;letter-spacing:3px;color:rgba(0,212,255,0.4);text-transform:uppercase;}
+.scroll-line{width:1px;height:28px;background:linear-gradient(to bottom,var(--cyan),transparent);animation:hspulse 2s ease-in-out infinite;}
+@keyframes hspulse{0%,100%{opacity:0.2}50%{opacity:1}}
+@keyframes hslideUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:600px){
+  #hero{padding:calc(var(--nav-height)+12px) 16px 50px;}
+  .hero-logo{width:clamp(300px,88vw,480px);}
+  .hero-title{font-size:clamp(18px,7vw,28px);}
+  .hero-sub{font-size:13px;}
+  .hero-stats{gap:12px;}
+  .hstat-sep{display:none;}
+}
+
+/* BENEFITS */
+#benefits{line-height:0;font-size:0;}
+#benefits img{width:100%;display:block;}
+
+/* NAV CARDS */
+#nav-cards{padding:56px 0;background:var(--dark2);}
+.container{width:100%;max-width:1200px;margin:0 auto;padding:0 24px;}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;}
+.nav-card{display:flex;flex-direction:column;align-items:center;gap:10px;padding:28px 16px;
+  background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius);
+  text-align:center;transition:var(--t);color:var(--text);}
+.nav-card:hover{transform:translateY(-6px);border-color:rgba(0,212,255,0.4);
+  box-shadow:0 16px 50px rgba(0,0,0,0.4),0 0 30px rgba(0,212,255,0.1);}
+.nc-icon{font-size:30px;}
+.nc-title{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;letter-spacing:1px;color:var(--cyan);}
+.nc-desc{font-size:13px;color:var(--text-dim);line-height:1.5;}
+
+/* SHOP */
+#shop{padding:80px 0;position:relative;text-align:center;overflow:hidden;background:var(--dark);}
+.shop-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(0,212,255,0.07) 0%,transparent 70%);}
+.shop-content{position:relative;z-index:2;max-width:620px;margin:0 auto;}
+.shop-product-img{width:190px;margin:0 auto 32px;
+  filter:drop-shadow(0 0 40px rgba(0,212,255,0.4)) drop-shadow(0 0 70px rgba(123,47,255,0.3));
+  animation:bob 4s ease-in-out infinite;}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.shop-title{font-family:'Orbitron',monospace;font-size:clamp(26px,5vw,50px);font-weight:900;
+  line-height:1.1;margin-bottom:14px;background:linear-gradient(135deg,#fff,var(--cyan));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.shop-desc{font-size:17px;color:var(--text-dim);margin-bottom:30px;}
+.shop-actions{display:flex;justify-content:center;gap:14px;flex-wrap:wrap;}
+
+/* CONTACT */
+#contact{padding:80px 0;background:var(--dark2);}
+.section-label{font-family:'Orbitron',monospace;font-size:11px;letter-spacing:4px;
+  text-transform:uppercase;color:var(--cyan);margin-bottom:10px;opacity:0.8;display:block;}
+.section-title{font-family:'Orbitron',monospace;font-size:clamp(26px,4vw,46px);font-weight:900;
+  line-height:1.1;margin-bottom:16px;background:linear-gradient(135deg,#fff 30%,var(--cyan) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start;}
+.ci{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
+.ci-icon{width:44px;height:44px;border-radius:50%;background:var(--glass);
+  border:1px solid var(--glass-border);display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;}
+.ci strong{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:1px;
+  color:var(--cyan);display:block;margin-bottom:3px;}
+.ci span{font-size:15px;color:var(--text-dim);}
+.social-links{display:flex;gap:10px;margin-top:24px;flex-wrap:wrap;}
+.social-link{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:50px;
+  background:var(--glass);border:1px solid var(--glass-border);font-family:'Orbitron',monospace;
+  font-size:9px;letter-spacing:1.5px;color:var(--text-dim);transition:var(--t);}
+.social-link:hover{color:var(--cyan);border-color:rgba(0,212,255,0.4);transform:translateY(-2px);}
+.contact-form{display:flex;flex-direction:column;gap:13px;}
+.fg{display:flex;flex-direction:column;gap:6px;}
+.fg label{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;color:var(--cyan);text-transform:uppercase;}
+.fg input,.fg textarea{background:var(--glass);border:1px solid var(--glass-border);
+  border-radius:10px;padding:13px 16px;font-family:'Rajdhani',sans-serif;font-size:16px;
+  color:var(--text);outline:none;transition:border-color 0.3s;resize:none;}
+.fg input:focus,.fg textarea:focus{border-color:var(--cyan);}
+.fg input::placeholder,.fg textarea::placeholder{color:rgba(232,244,255,0.3);}
+
+/* FAQ */
+#faq{padding:80px 0;background:var(--dark);}
+.faq-header{text-align:center;margin-bottom:46px;}
+.faq-dl{display:inline-flex;align-items:center;gap:8px;padding:10px 24px;border-radius:50px;
+  background:var(--glass);border:1.5px solid var(--cyan);font-family:'Orbitron',monospace;
+  font-size:10px;letter-spacing:1.5px;color:var(--cyan);transition:var(--t);
+  text-decoration:none;margin-top:16px;}
+.faq-dl:hover{background:rgba(0,212,255,0.1);transform:translateY(-2px);}
+.faq-cats{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:36px;}
+.faq-cat{padding:8px 18px;border-radius:50px;background:var(--glass);
+  border:1px solid var(--glass-border);font-family:'Orbitron',monospace;font-size:9px;
+  letter-spacing:1.5px;color:var(--text-dim);cursor:pointer;transition:var(--t);}
+.faq-cat:hover,.faq-cat.active{background:rgba(0,212,255,0.1);border-color:var(--cyan);color:var(--cyan);}
+.faq-group{display:none;}
+.faq-group.active{display:block;}
+.faq-item{background:var(--glass);border:1px solid var(--glass-border);
+  border-radius:var(--radius);margin-bottom:10px;overflow:hidden;}
+.faq-item.open{border-color:rgba(0,212,255,0.35);}
+.faq-q{width:100%;background:transparent;border:none;text-align:left;padding:18px 22px;
+  font-family:'Rajdhani',sans-serif;font-size:17px;font-weight:600;color:var(--text);
+  cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:14px;}
+.faq-q:hover,.faq-item.open .faq-q{color:var(--cyan);}
+.faq-icon{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--glass-border);
+  flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  transition:var(--t);font-style:normal;font-size:14px;color:var(--text-dim);}
+.faq-item.open .faq-icon{border-color:var(--cyan);color:var(--cyan);transform:rotate(45deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height 0.4s ease;}
+.faq-a-inner{padding:14px 22px 18px;font-size:15px;color:var(--text-dim);line-height:1.8;
+  border-top:1px solid var(--glass-border);}
+
+/* FOOTER */
+footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:40px 0 24px;text-align:center;}
+.ftr-inner{max-width:1200px;margin:0 auto;padding:0 24px;}
+.footer-logo img{height:44px;margin:0 auto 16px;opacity:0.8;width:auto;}
+.footer-links{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:20px;}
+.footer-links a{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;color:var(--text-dim);transition:color 0.3s;}
+.footer-links a:hover{color:var(--cyan);}
+.footer-copy{font-size:12px;color:rgba(232,244,255,0.3);}
+
+@media(max-width:900px){.contact-grid{grid-template-columns:1fr;gap:32px;}}
+@media(max-width:600px){.hero-actions{flex-direction:column;align-items:center;}.cards-grid{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+<div id="float-shop"><a href="#shop" class="float-btn"><div class="float-pulse"></div>Shop Now</a></div>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav"/></a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="flavors.html">Flavors</a></li>
+      <li><a href="howitworks.html">How It Works</a></li>
+      <li><a href="tiktok.html">TikTok</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#shop" class="btn btn-primary nav-cta">Shop Now</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" class="mobile-link">Home</a>
+  <a href="about.html" class="mobile-link">About Us</a>
+  <a href="flavors.html" class="mobile-link">Flavors</a>
+  <a href="howitworks.html" class="mobile-link">How It Works</a>
+  <a href="tiktok.html" class="mobile-link">TikTok</a>
+  <a href="#contact" class="mobile-link">Contact</a>
+  <a href="#faq" class="mobile-link">FAQ</a>
+  <a href="#shop" class="btn btn-primary" style="margin-top:8px;">Shop Now</a>
+</div>
+
+<section id="hero">
+  <div class="hero-scan"></div>
+  <div class="hero-rings">
+    <div class="hr-ring"></div>
+    <div class="hr-ring"></div>
+    <div class="hr-ring"></div>
+  </div>
+  <div class="hero-logo-wrap">
+    <img id="hero-logo" class="hero-logo" src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav"/>
+  </div>
+  <div class="hero-waves">
+    <div class="hw hw1"></div>
+    <div class="hw hw2"></div>
+    <div class="hw hw3"></div>
+    <div class="hw hw4"></div>
+  </div>
+  <div class="hero-particles" id="heroParticles"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span class="hbadge-dot"></span>Premium Infused Straws</div>
+    <h1 class="hero-title">
+      <span class="htl1">Taste the Flavor.</span>
+      <span class="htl2">Ride the Wave.</span>
+    </h1>
+    <div class="hero-divider"></div>
+    <p class="hero-sub">Bold flavor experiences designed to stand out. Vitamins, caffeine &amp; fiber in every sip.</p>
+    <div class="hero-actions">
+      <a href="#shop" class="btn btn-primary">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Shop Now
+      </a>
+      <a href="flavors.html" class="btn btn-outline">Explore Flavors</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><span class="hstat-num">4</span><span class="hstat-lbl">Flavors</span></div>
+      <div class="hstat-sep"></div>
+      <div class="hstat"><span class="hstat-num">0g</span><span class="hstat-lbl">Sugar</span></div>
+      <div class="hstat-sep"></div>
+      <div class="hstat"><span class="hstat-num">100%</span><span class="hstat-lbl">Bio</span></div>
+      <div class="hstat-sep"></div>
+      <div class="hstat"><span class="hstat-num">4.9&#9733;</span><span class="hstat-lbl">Rating</span></div>
+    </div>
+  </div>
+  <div class="hero-scroll"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<section id="benefits">
+  <img src="FlavorWav%20Benefits%20Page.png" alt="FlavorWav Benefits" onerror="if(!this._tried){this._tried=true;this.src='FlavorWav_Benefits_Page.png';}" />
+</section>
+
+<section id="nav-cards">
+  <div class="container">
+    <div class="cards-grid">
+      <a href="about.html" class="nav-card">
+        <div class="nc-icon">&#129514;</div>
+        <div class="nc-title">About Us</div>
+        <div class="nc-desc">California-made straws built for real tumbler users.</div>
+      </a>
+      <a href="flavors.html" class="nav-card">
+        <div class="nc-icon">&#9889;</div>
+        <div class="nc-title">Our Flavors</div>
+        <div class="nc-desc">Energy, probiotics, focus &amp; more.</div>
+      </a>
+      <a href="howitworks.html" class="nav-card">
+        <div class="nc-icon">&#128167;</div>
+        <div class="nc-title">How It Works</div>
+        <div class="nc-desc">Insert. Sip. Dissolve. Three steps to a better drink.</div>
+      </a>
+      <a href="tiktok.html" class="nav-card">
+        <div class="nc-icon">&#127925;</div>
+        <div class="nc-title">TikTok</div>
+        <div class="nc-desc">Watch us in action. Follow for drops &amp; reviews.</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="shop">
+  <div class="shop-bg"></div>
+  <div class="container">
+    <div class="shop-content">
+      <img src="FLAVPACK%2014.png" alt="FlavorWav Pack" class="shop-product-img" onerror="if(!this._tried){this._tried=true;this.src='FLAVPACK_14.png';}" />
+      <h2 class="shop-title">Ready to Ride<br/>the Wav?</h2>
+      <p class="shop-desc">Premium infused straws packed with flavor, vitamins, caffeine, and fiber. Free shipping on qualifying orders.</p>
+      <div class="shop-actions">
+        <a href="#" class="btn btn-primary">Shop All Flavors</a>
+        <a href="flavors.html" class="btn btn-outline">View Flavors</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:48px;">
+      <span class="section-label">Get In Touch</span>
+      <h2 class="section-title">Contact Us</h2>
+    </div>
+    <div class="contact-grid">
+      <div>
+        <div class="ci"><div class="ci-icon">&#128231;</div><div><strong>Email</strong><span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7d15181111123d1b111c0b120f0a1c0b531e1210">[email&#160;protected]</a></span></div></div>
+        <div class="ci"><div class="ci-icon">&#128222;</div><div><strong>Phone</strong><span>+1 (800) FLAV-WAV</span></div></div>
+        <div class="ci"><div class="ci-icon">&#128205;</div><div><strong>Location</strong><span>California, USA</span></div></div>
+        <div class="social-links">
+          <a href="tiktok.html" class="social-link">&#127925; TikTok</a>
+          <a href="#" class="social-link">&#128247; Instagram</a>
+          <a href="#" class="social-link">&#127760; Website</a>
+        </div>
+      </div>
+      <div class="contact-form">
+        <div class="fg"><label for="cname">Name</label><input type="text" id="cname" placeholder="Your name"/></div>
+        <div class="fg"><label for="cemail">Email</label><input type="email" id="cemail" placeholder="your@email.com"/></div>
+        <div class="fg"><label for="cmsg">Message</label><textarea id="cmsg" rows="5" placeholder="How can we help?"></textarea></div>
+        <button class="btn btn-primary" onclick="sendMsg()" style="width:100%;justify-content:center;">Send Message</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="container">
+    <div class="faq-header">
+      <span class="section-label">Help Center</span>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <p style="color:var(--text-dim);font-size:16px;max-width:480px;margin:0 auto 16px;">Everything you need to know about FlavorWav.</p>
+      <a href="files/flavorwav-full-faq.pdf" download class="faq-dl">&#11015; Download Full FAQ</a>
+    </div>
+    <div class="faq-cats">
+      <button class="faq-cat active" data-cat="ordering">Ordering</button>
+      <button class="faq-cat" data-cat="shipping">Shipping</button>
+      <button class="faq-cat" data-cat="products">Products</button>
+      <button class="faq-cat" data-cat="returns">Returns</button>
+    </div>
+    <div class="faq-group active" id="faq-ordering">
+      <div class="faq-item"><button class="faq-q">How do I place an order? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Visit our Shop page, choose your flavors, add to cart, and check out. We accept all major credit cards and PayPal.</div></div></div>
+      <div class="faq-item"><button class="faq-q">Can I order multiple flavors? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Yes! We offer variety packs so you can mix and match your favorite flavors.</div></div></div>
+      <div class="faq-item"><button class="faq-q">Is there a minimum order? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">No minimum required. Order a single pack or stock up with larger bundles.</div></div></div>
+      <div class="faq-item"><button class="faq-q">Do you offer subscriptions? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Subscriptions coming soon! Sign up for our newsletter to be first to know.</div></div></div>
+    </div>
+    <div class="faq-group" id="faq-shipping">
+      <div class="faq-item"><button class="faq-q">How long does shipping take? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Standard: 5-7 business days. Expedited options available at checkout.</div></div></div>
+      <div class="faq-item"><button class="faq-q">Do you offer free shipping? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Yes! Free standard shipping on qualifying orders.</div></div></div>
+      <div class="faq-item"><button class="faq-q">Do you ship internationally? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Currently US only. International coming soon.</div></div></div>
+      <div class="faq-item"><button class="faq-q">How do I track my order? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">You'll receive a tracking number via email once your order ships.</div></div></div>
+    </div>
+    <div class="faq-group" id="faq-products">
+      <div class="faq-item"><button class="faq-q">What tumblers do they fit? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Our 12" straws fit 30oz and 40oz tumblers — Yeti, Stanley, RTIC, Hydro Flask, and similar.</div></div></div>
+      <div class="faq-item"><button class="faq-q">Are they safe and tested? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Yes. Tested for PFAS and key chemical screens. Glueless construction, no adhesive seam.</div></div></div>
+      <div class="faq-item"><button class="faq-q">How does the flavor dissolve? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">The inner lining dissolves as liquid flows through during normal sipping. Just insert and drink.</div></div></div>
+      <div class="faq-item"><button class="faq-q">Are they biodegradable? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Yes — paper-based with a verified biodegradability report.</div></div></div>
+    </div>
+    <div class="faq-group" id="faq-returns">
+      <div class="faq-item"><button class="faq-q">What is your return policy? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Returns within 30 days for unopened products. Email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7c14191010133c1a101d0a130e0b1d0a521f1311">[email&#160;protected]</a> with your order number.</div></div></div>
+      <div class="faq-item"><button class="faq-q">My order arrived damaged? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c5ada0a9a9aa85a3a9a4b3aab7b2a4b3eba6aaa8">[email&#160;protected]</a> with a photo and order number. We'll make it right fast.</div></div></div>
+      <div class="faq-item"><button class="faq-q">How do I reach support? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Use the contact form above or email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4b232e2727240b2d272a3d24393c2a3d65282426">[email&#160;protected]</a>. We respond within 1-2 business days.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ftr-inner">
+    <div class="footer-logo"><img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav"/></div>
+    <nav class="footer-links">
+      <a href="index.html">Home</a><a href="about.html">About</a><a href="flavors.html">Flavors</a>
+      <a href="howitworks.html">How It Works</a><a href="tiktok.html">TikTok</a>
+      <a href="#contact">Contact</a><a href="#faq">FAQ</a>
+    </nav>
+    <p class="footer-copy">&copy; 2025 FlavorWav. All rights reserved. California, USA.</p>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// CURSOR
+(function(){
+  var dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');
+  if(!dot||!ring)return;
+  var mx=window.innerWidth/2,my=window.innerHeight/2,rx=mx,ry=my;
+  document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});
+  (function t(){rx+=(mx-rx)*0.13;ry+=(my-ry)*0.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(t);})();
+  document.querySelectorAll('a,button').forEach(function(el){
+    el.addEventListener('mouseenter',function(){document.body.classList.add('ch');});
+    el.addEventListener('mouseleave',function(){document.body.classList.remove('ch');});
+  });
+})();
+// FLOAT BTN
+(function(){
+  var fs=document.getElementById('float-shop');
+  if(!fs)return;
+  window.addEventListener('scroll',function(){fs.classList.toggle('visible',window.scrollY>window.innerHeight*0.6);},{passive:true});
+})();
+// Logo parallax
+(function(){var l=document.getElementById('hero-logo');if(!l)return;document.addEventListener('mousemove',function(e){var cx=(e.clientX/window.innerWidth-0.5)*18;var cy=(e.clientY/window.innerHeight-0.5)*12;l.style.transform='translate('+cx+'px,'+cy+'px)';});})();
+// PARTICLES
+(function(){
+  var c=document.getElementById('heroParticles');if(!c)return;
+  var cols=['rgba(0,212,255,','rgba(0,180,255,','rgba(100,220,255,','rgba(0,150,255,'];
+  for(var i=0;i<28;i++){
+    var p=document.createElement('div');p.className='hp';
+    var sz=Math.random()*3+1.5;
+    p.style.cssText='width:'+sz+'px;height:'+sz+'px;left:'+Math.random()*100+'%;bottom:'+Math.random()*20+'%;'+
+      'background:'+cols[Math.floor(Math.random()*cols.length)]+(0.4+Math.random()*0.5)+');'+
+      'box-shadow:0 0 '+(sz*3)+'px '+cols[0]+'0.6);'+
+      'animation-duration:'+(6+Math.random()*10)+'s;animation-delay:'+(Math.random()*8)+'s;';
+    c.appendChild(p);
+  }
+})();
+// HAMBURGER
+(function(){
+  var h=document.getElementById('hamburger'),m=document.getElementById('mobileMenu');
+  if(!h||!m)return;
+  h.addEventListener('click',function(){var o=m.classList.toggle('open');h.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';});
+  document.querySelectorAll('.mobile-link,.mobile-menu .btn').forEach(function(l){l.addEventListener('click',function(){m.classList.remove('open');h.classList.remove('open');document.body.style.overflow='';});});
+})();
+// FAQ
+document.querySelectorAll('.faq-q').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var item=btn.closest('.faq-item'),ans=item.querySelector('.faq-a'),open=item.classList.contains('open');
+    item.closest('.faq-group').querySelectorAll('.faq-item').forEach(function(i){i.classList.remove('open');i.querySelector('.faq-a').style.maxHeight='0';});
+    if(!open){item.classList.add('open');ans.style.maxHeight=ans.scrollHeight+'px';}
+  });
+});
+document.querySelectorAll('.faq-cat').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('.faq-cat').forEach(function(b){b.classList.remove('active');});
+    document.querySelectorAll('.faq-group').forEach(function(g){g.classList.remove('active');});
+    btn.classList.add('active');
+    var t=document.getElementById('faq-'+btn.dataset.cat);if(t)t.classList.add('active');
+  });
+});
+// CONTACT
+function sendMsg(){
+  var n=document.getElementById('cname').value.trim(),e=document.getElemen

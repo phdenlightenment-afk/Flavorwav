@@ -83,6 +83,90 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
 <div class="images-wrap">
   <img src="how%20it%20works%20no%20city%20glow.png" alt="How FlavorWav Works" onerror="if(!this._tried){this._tried=true;this.src='how_it_works_no_city_glow.png';}" />
 </div>
+
+<style>
+.video-section{background:var(--dark);padding:80px 24px 100px;}
+.video-section-inner{max-width:1200px;margin:0 auto;}
+.video-section-header{text-align:center;margin-bottom:56px;}
+.vs-label{font-family:'Orbitron',monospace;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--cyan);opacity:0.8;display:block;margin-bottom:12px;}
+.vs-title{font-family:'Orbitron',monospace;font-weight:900;font-size:clamp(26px,4vw,48px);line-height:1.1;background:linear-gradient(135deg,#fff 30%,var(--cyan) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:12px;}
+.vs-sub{color:var(--text-dim);font-size:17px;}
+.video-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+.video-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:20px;overflow:hidden;transition:0.35s cubic-bezier(0.25,0.8,0.25,1);}
+.video-card:hover{transform:translateY(-6px);box-shadow:0 20px 50px rgba(0,0,0,0.5),0 0 0 1px rgba(0,212,255,0.2);}
+.video-wrap{position:relative;width:100%;aspect-ratio:9/16;background:#000;overflow:hidden;}
+.video-wrap video{width:100%;height:100%;object-fit:cover;display:block;}
+.video-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:radial-gradient(ellipse at center,rgba(0,212,255,0.05) 0%,transparent 70%);border-bottom:1px solid var(--glass-border);}
+.placeholder-icon{width:56px;height:56px;border-radius:50%;border:1.5px solid rgba(0,212,255,0.3);display:flex;align-items:center;justify-content:center;}
+.placeholder-icon svg{opacity:0.4;}
+.placeholder-text{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;color:var(--text-dim);text-transform:uppercase;}
+.video-card-info{padding:20px;}
+.vc-step{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:3px;color:var(--cyan);text-transform:uppercase;margin-bottom:6px;display:block;}
+.vc-title{font-family:'Orbitron',monospace;font-weight:700;font-size:16px;color:#fff;margin-bottom:6px;}
+.vc-desc{font-size:14px;color:var(--text-dim);line-height:1.6;}
+@media(max-width:900px){.video-grid{grid-template-columns:1fr;max-width:400px;margin:0 auto;}}
+</style>
+
+<section class="video-section">
+  <div class="video-section-inner">
+    <div class="video-section-header">
+      <span class="vs-label">✦ See It In Action</span>
+      <h2 class="vs-title">Watch How It Works</h2>
+      <p class="vs-sub">Three steps. One sip. Total flavor.</p>
+    </div>
+    <div class="video-grid">
+
+      <!-- STEP 1 — LIVE -->
+      <div class="video-card">
+        <div class="video-wrap">
+          <video autoplay muted loop playsinline>
+            <source src="vid1strawinsert.webm" type="video/webm">
+          </video>
+        </div>
+        <div class="video-card-info">
+          <span class="vc-step">Step 01</span>
+          <div class="vc-title">Insert the Straw</div>
+          <p class="vc-desc">Drop your FlavorWav straw into any 30oz or 40oz tumbler filled with water or ice.</p>
+        </div>
+      </div>
+
+      <!-- STEP 2 — PLACEHOLDER -->
+      <div class="video-card">
+        <div class="video-wrap">
+          <div class="video-placeholder">
+            <div class="placeholder-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <span class="placeholder-text">Coming Soon</span>
+          </div>
+        </div>
+        <div class="video-card-info">
+          <span class="vc-step">Step 02</span>
+          <div class="vc-title">The Dissolve</div>
+          <p class="vc-desc">As liquid flows through, the inner lining dissolves — releasing flavor, vitamins, and more into every sip.</p>
+        </div>
+      </div>
+
+      <!-- STEP 3 — PLACEHOLDER -->
+      <div class="video-card">
+        <div class="video-wrap">
+          <div class="video-placeholder">
+            <div class="placeholder-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <span class="placeholder-text">Coming Soon</span>
+          </div>
+        </div>
+        <div class="video-card-info">
+          <span class="vc-step">Step 03</span>
+          <div class="vc-title">Sip & Enjoy</div>
+          <p class="vc-desc">That's it. Bold flavor, zero sugar, vitamins and fiber — delivered in every sip. Ride the wave.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
 <footer>
   <div class="ftr-inner">
     <div class="footer-logo"><img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav"/></div>

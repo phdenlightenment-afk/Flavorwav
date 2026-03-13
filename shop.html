@@ -65,7 +65,9 @@ nav#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-hei
 
 /* PAGE HERO */
 .shop-hero{padding:calc(var(--nav-height) + 60px) 24px 40px;text-align:center;position:relative;
-  background:radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0,212,255,0.07) 0%, transparent 70%);}
+  background:url('flav%20hero%20background.png') center/cover no-repeat;}
+.shop-hero::before{content:'';position:absolute;inset:0;background:rgba(5,10,20,0.78);}
+.shop-hero-inner{position:relative;z-index:1;}
 .shop-hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
   background:linear-gradient(90deg,transparent,var(--glass-border),transparent);}
 .page-label{font-family:'Orbitron',monospace;font-size:11px;letter-spacing:4px;
@@ -200,9 +202,11 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
 
 <!-- PAGE HERO -->
 <div class="shop-hero">
-  <span class="page-label">✦ Official Store</span>
-  <h1 class="page-title">Shop FlavorWav</h1>
-  <p class="page-sub">Premium infused straws. Vitamins, caffeine & fiber in every sip. Pick your flavor.</p>
+  <div class="shop-hero-inner">
+    <span class="page-label">✦ Official Store</span>
+    <h1 class="page-title">Shop FlavorWav</h1>
+    <p class="page-sub">Premium infused straws. Vitamins, caffeine & fiber in every sip. Pick your flavor.</p>
+  </div>
 </div>
 
 <!-- PRODUCTS -->

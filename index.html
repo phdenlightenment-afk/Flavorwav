@@ -522,10 +522,10 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
       <p style="color:var(--text-dim);font-size:16px;max-width:480px;margin:0 auto 16px;">Everything you need to know about FlavorWav.</p>
     </div>
     <div class="faq-cats">
-      <button class="faq-cat active" onclick="switchCat('ordering',this)">Ordering</button>
-      <button class="faq-cat" onclick="switchCat('shipping',this)">Shipping</button>
-      <button class="faq-cat" onclick="switchCat('products',this)">Products</button>
-      <button class="faq-cat" onclick="switchCat('returns',this)">Returns</button>
+      <button class="faq-cat active" data-cat="ordering">Ordering</button>
+      <button class="faq-cat" data-cat="shipping">Shipping</button>
+      <button class="faq-cat" data-cat="products">Products</button>
+      <button class="faq-cat" data-cat="returns">Returns</button>
     </div>
     <div class="faq-group active" id="faq-ordering">
       <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How do I place an order? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Visit our Shop page, choose your flavors, add to cart, and check out.</div></div></div>
@@ -552,6 +552,38 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
     </div>
   </div>
 </section>
+
+<script>
+(function(){
+  function initFaq(){
+    document.querySelectorAll('.faq-q').forEach(function(btn){
+      btn.onclick = function(){
+        var item = btn.closest('.faq-item');
+        var ans = item.querySelector('.faq-a');
+        var isOpen = item.classList.contains('open');
+        item.closest('.faq-group').querySelectorAll('.faq-item').forEach(function(i){
+          i.classList.remove('open');
+          i.querySelector('.faq-a').style.maxHeight = '0';
+        });
+        if(!isOpen){ item.classList.add('open'); ans.style.maxHeight = ans.scrollHeight + 'px'; }
+        return false;
+      };
+    });
+    document.querySelectorAll('.faq-cat').forEach(function(btn){
+      btn.onclick = function(){
+        document.querySelectorAll('.faq-cat').forEach(function(b){ b.classList.remove('active'); });
+        document.querySelectorAll('.faq-group').forEach(function(g){ g.classList.remove('active'); });
+        btn.classList.add('active');
+        var t = document.getElementById('faq-' + btn.getAttribute('data-cat'));
+        if(t) t.classList.add('active');
+        return false;
+      };
+    });
+  }
+  if(document.readyState === 'loading'){ document.addEventListener('DOMContentLoaded', initFaq); }
+  else { initFaq(); }
+})();
+</script>
 
 <footer>
   <div class="ftr-inner">

@@ -359,7 +359,7 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
 
 <div id="cursor-dot"></div>
 <div id="cursor-ring"></div>
-<div id="float-shop"><a href="#shop" class="float-btn"><div class="float-pulse"></div>Shop Now</a></div>
+<div id="float-shop"><a href="shop.html" class="float-btn"><div class="float-pulse"></div>Shop Now</a></div>
 
 <nav id="navbar">
   <div class="nav-inner">
@@ -372,7 +372,7 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
       <li><a href="tiktok.html">TikTok</a></li>
       <li><a href="#contact">Contact</a></li>
       <li><a href="#faq">FAQ</a></li>
-      <li><a href="#shop" class="btn btn-primary nav-cta">Shop Now</a></li>
+      <li><a href="shop.html" class="btn btn-primary nav-cta">Shop Now</a></li>
     </ul>
     <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
   </div>
@@ -385,7 +385,7 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
   <a href="tiktok.html" class="mobile-link">TikTok</a>
   <a href="#contact" class="mobile-link">Contact</a>
   <a href="#faq" class="mobile-link">FAQ</a>
-  <a href="#shop" class="btn btn-primary" style="margin-top:8px;">Shop Now</a>
+  <a href="shop.html" class="btn btn-primary" style="margin-top:8px;">Shop Now</a>
 </div>
 
 <section id="hero">
@@ -422,7 +422,7 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
     <div class="hero-divider"></div>
     <p class="hero-sub">Bold flavor experiences designed to stand out. Vitamins, caffeine &amp; fiber in every sip.</p>
     <div class="hero-actions">
-      <a href="#shop" class="btn btn-primary">
+      <a href="shop.html" class="btn btn-primary">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         Shop Now
       </a>
@@ -609,6 +609,7 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
   document.querySelectorAll('.mobile-link,.mobile-menu .btn').forEach(function(l){l.addEventListener('click',function(){m.classList.remove('open');h.classList.remove('open');document.body.style.overflow='';});});
 })();
 // FAQ
+document.addEventListener('DOMContentLoaded', function(){
 document.querySelectorAll('.faq-q').forEach(function(btn){
   btn.addEventListener('click',function(){
     var item=btn.closest('.faq-item'),ans=item.querySelector('.faq-a'),open=item.classList.contains('open');
@@ -623,6 +624,7 @@ document.querySelectorAll('.faq-cat').forEach(function(btn){
     btn.classList.add('active');
     var t=document.getElementById('faq-'+btn.dataset.cat);if(t)t.classList.add('active');
   });
+});
 });
 // CONTACT
 function sendMsg(){

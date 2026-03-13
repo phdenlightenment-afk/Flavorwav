@@ -101,7 +101,35 @@ nav#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-hei
 .review-meta{font-size:12px;color:var(--text-dim);}
 .review-verified{display:inline-flex;align-items:center;gap:4px;font-size:11px;color:var(--cyan);margin-top:4px;}
 
-/* EMPTY STATE */
+/* SUBMIT REVIEW FORM */
+.submit-section{background:var(--dark2);padding:80px 24px;position:relative;overflow:hidden;}
+.submit-section::before{content:'';position:absolute;inset:0;background:url('flav%20hero%20background.png') center/cover no-repeat;opacity:0.06;}
+.submit-inner{max-width:700px;margin:0 auto;position:relative;z-index:1;}
+.submit-header{text-align:center;margin-bottom:48px;}
+.submit-form{background:rgba(255,255,255,0.04);border:1px solid var(--glass-border);border-radius:24px;padding:40px;}
+@media(max-width:600px){.submit-form{padding:24px 20px;}}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+@media(max-width:580px){.form-row{grid-template-columns:1fr;}}
+.form-group{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+.form-label{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim);}
+.form-input,.form-select,.form-textarea{background:rgba(255,255,255,0.05);border:1.5px solid var(--glass-border);
+  border-radius:12px;padding:13px 16px;color:var(--text);font-family:'Rajdhani',sans-serif;font-size:15px;
+  outline:none;transition:border-color var(--t);width:100%;}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--text-dim);}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--cyan);}
+.form-select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2300d4ff' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;}
+.form-select option{background:#070e1c;color:var(--text);}
+.form-textarea{resize:vertical;min-height:120px;}
+.star-rating{display:flex;flex-direction:row-reverse;justify-content:flex-end;gap:4px;}
+.star-rating input{display:none;}
+.star-rating label{font-size:28px;color:rgba(255,255,255,0.15);cursor:pointer;transition:color 0.15s;}
+.star-rating input:checked ~ label,.star-rating label:hover,.star-rating label:hover ~ label{color:#ffd700;}
+.form-submit-row{display:flex;justify-content:center;margin-top:24px;}
+.submit-note{text-align:center;margin-top:16px;font-size:12px;color:rgba(232,244,255,0.3);}
+.submit-success{display:none;text-align:center;padding:32px;border-radius:16px;
+  background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.25);}
+.submit-success h3{font-family:'Orbitron',monospace;font-size:16px;color:var(--cyan);margin-bottom:8px;}
+.submit-success p{color:var(--text-dim);font-size:15px;}
 .empty-state{grid-column:1/-1;text-align:center;padding:60px 24px;color:var(--text-dim);}
 .empty-state h3{font-family:'Orbitron',monospace;font-size:16px;color:var(--text);margin-bottom:8px;}
 
@@ -274,6 +302,75 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
   </div>
 </section>
 
+<!-- SUBMIT A REVIEW -->
+<section class="submit-section">
+  <div class="submit-inner">
+    <div class="submit-header">
+      <span class="section-label">Share Your Experience</span>
+      <h2 class="section-title" style="font-size:clamp(24px,4vw,42px);">Leave a <span>Review</span></h2>
+      <p style="color:var(--text-dim);font-size:16px;margin-top:8px;">Tried FlavorWav? Let the world know.</p>
+    </div>
+
+    <!-- REPLACE YOUR_FORM_ID with your Formspree endpoint -->
+    <form class="submit-form" id="reviewForm" action="https://formspree.io/f/xkoqzgnj" method="POST">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Your Name *</label>
+          <input class="form-input" type="text" name="name" placeholder="First name + last initial" required/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Your Email *</label>
+          <input class="form-input" type="email" name="email" placeholder="Not shown publicly" required/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">City, State</label>
+          <input class="form-input" type="text" name="location" placeholder="e.g. Los Angeles, CA"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Flavor *</label>
+          <select class="form-select" name="flavor" required>
+            <option value="" disabled selected>Select a flavor</option>
+            <option value="Energy Lemon">🍋 Energy Lemon</option>
+            <option value="Zenergy Grape">⚡ Zenergy Grape</option>
+            <option value="Blue Raspberry C4">💙 Blue Raspberry C4</option>
+            <option value="Mixed Berry Probiotic">🫐 Mixed Berry Probiotic</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Rating *</label>
+        <div class="star-rating">
+          <input type="radio" name="rating" id="s5" value="5"/><label for="s5">★</label>
+          <input type="radio" name="rating" id="s4" value="4"/><label for="s4">★</label>
+          <input type="radio" name="rating" id="s3" value="3"/><label for="s3">★</label>
+          <input type="radio" name="rating" id="s2" value="2"/><label for="s2">★</label>
+          <input type="radio" name="rating" id="s1" value="1"/><label for="s1">★</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Review Headline *</label>
+        <input class="form-input" type="text" name="headline" placeholder="e.g. Best thing I've added to my routine" required/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Your Review *</label>
+        <textarea class="form-textarea" name="review" placeholder="Tell us about your experience with FlavorWav..." required></textarea>
+      </div>
+      <input type="hidden" name="_subject" value="New FlavorWav Review Submission!"/>
+      <div class="form-submit-row">
+        <button type="submit" class="btn btn-primary" style="font-size:11px;padding:14px 40px;">Submit My Review 🌊</button>
+      </div>
+      <p class="submit-note">Reviews are approved before being published. Your email will never be shown publicly.</p>
+    </form>
+
+    <div class="submit-success" id="submitSuccess">
+      <h3>🌊 Review Received!</h3>
+      <p>Thanks for riding the Wav! Your review will appear on this page once approved.</p>
+    </div>
+  </div>
+</section>
+
 <!-- CTA -->
 <section class="reviews-cta">
   <span class="section-label">Ready to Ride the Wav?</span>
@@ -309,7 +406,24 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
 (function(){var dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');if(!dot||!ring)return;var mx=window.innerWidth/2,my=window.innerHeight/2,rx=mx,ry=my;document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});(function t(){rx+=(mx-rx)*0.13;ry+=(my-ry)*0.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(t);})();document.querySelectorAll('a,button').forEach(function(el){el.addEventListener('mouseenter',function(){document.body.classList.add('ch');});el.addEventListener('mouseleave',function(){document.body.classList.remove('ch');});});})();
 // HAMBURGER
 (function(){var h=document.getElementById('hamburger'),m=document.getElementById('mobileMenu');if(!h||!m)return;h.addEventListener('click',function(){var o=m.classList.toggle('open');h.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';});document.querySelectorAll('.mobile-link,.mobile-menu .btn').forEach(function(l){l.addEventListener('click',function(){m.classList.remove('open');h.classList.remove('open');document.body.style.overflow='';});});})();
-// FILTER
+// REVIEW FORM
+(function(){
+  var form = document.getElementById('reviewForm');
+  var success = document.getElementById('submitSuccess');
+  if(!form) return;
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var data = new FormData(form);
+    fetch(form.action, {method:'POST', body:data, headers:{'Accept':'application/json'}})
+    .then(function(r){
+      if(r.ok){
+        form.style.display='none';
+        success.style.display='block';
+      } else { alert('Something went wrong. Please try again.'); }
+    })
+    .catch(function(){ alert('Network error. Please try again.'); });
+  });
+})();
 function filterReviews(flavor, btn){
   document.querySelectorAll('.filter-tab').forEach(function(b){b.classList.remove('active');});
   btn.classList.add('active');

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Reviews &mdash; FlavorWav</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--cyan:#00d4ff;--purple:#7b2fff;--pink:#ff2d9e;--dark:#050a14;--dark2:#070e1c;
+  --glass:rgba(255,255,255,0.06);--glass-border:rgba(0,212,255,0.18);
+  --text:#e8f4ff;--text-dim:rgba(232,244,255,0.6);--nav-height:70px;--radius:16px;
+  --t:0.35s cubic-bezier(0.25,0.8,0.25,1);}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Rajdhani',sans-serif;background:#000;color:var(--text);overflow-x:hidden;}
+img{display:block;}a{text-decoration:none;color:inherit;}
+
+#scroll-bar{position:fixed;top:0;left:0;height:3px;width:0%;z-index:9999;
+  background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink));
+  box-shadow:0 0 10px var(--cyan);}
+#cursor-dot{position:fixed;width:8px;height:8px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);box-shadow:0 0 10px var(--cyan),0 0 20px rgba(0,212,255,0.4);}
+#cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid rgba(0,212,255,0.45);border-radius:50%;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);}
+body.ch #cursor-dot{background:var(--pink);box-shadow:0 0 16px var(--pink);}
+body.ch #cursor-ring{width:54px;height:54px;border-color:rgba(255,45,158,0.5);}
+@media(hover:none),(pointer:coarse){#cursor-dot,#cursor-ring{display:none;}}
+
+nav#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-height);display:flex;align-items:center;padding:0 24px;background:rgba(5,10,20,0.96);backdrop-filter:blur(20px);box-shadow:0 1px 0 var(--glass-border);}
+.nav-inner{width:100%;display:flex;align-items:center;justify-content:space-between;}
+.nav-logo img{height:42px;width:auto;}
+.nav-links{display:none;}
+@media(min-width:1280px){.nav-links{display:flex;align-items:center;gap:16px;list-style:none;}.nav-links a{font-family:'Orbitron',monospace;font-size:8.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-dim);transition:color var(--t);}.nav-links a:hover,.nav-links a.active{color:var(--cyan);}.hamburger{display:none!important;}}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:50px;font-family:'Orbitron',monospace;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;border:none;transition:var(--t);}
+.btn-primary{background:linear-gradient(135deg,var(--cyan),var(--purple));color:#fff;box-shadow:0 0 24px rgba(0,212,255,0.4);}
+.btn-primary:hover{transform:translateY(-3px);}
+.nav-cta{padding:8px 16px!important;font-size:8px!important;}
+.hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:8px;border:none;background:transparent;z-index:1100;}
+.hamburger span{display:block;width:24px;height:2px;background:var(--cyan);transition:var(--t);transform-origin:center;}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+.mobile-menu{position:fixed;inset:0;background:rgba(5,10,20,0.97);backdrop-filter:blur(24px);z-index:1050;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;transform:translateX(100%);transition:transform 0.45s cubic-bezier(0.25,0.8,0.25,1);}
+.mobile-menu.open{transform:translateX(0);}
+.mobile-menu a{font-family:'Orbitron',monospace;font-size:18px;letter-spacing:3px;text-transform:uppercase;color:var(--text-dim);}
+.mobile-menu a:hover,.mobile-menu a.active{color:var(--cyan);}
+.section-label{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);display:block;margin-bottom:12px;}
+.section-title{font-family:'Orbitron',monospace;font-weight:900;line-height:1.1;margin-bottom:16px;}
+.section-title span{background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+/* HERO */
+.page-hero{padding:calc(var(--nav-height) + 60px) 24px 60px;text-align:center;background:url('flav%20hero%20background.png') center/cover no-repeat;position:relative;}
+.page-hero::before{content:'';position:absolute;inset:0;background:rgba(5,10,20,0.75);}
+.page-hero-inner{position:relative;z-index:1;}
+
+/* STATS BAR */
+.stats-bar{background:var(--dark2);border-bottom:1px solid var(--glass-border);padding:28px 24px;}
+.stats-bar-inner{max-width:900px;margin:0 auto;display:flex;justify-content:center;gap:60px;flex-wrap:wrap;}
+.stat-item{text-align:center;}
+.stat-num{font-family:'Orbitron',monospace;font-size:32px;font-weight:900;background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.stat-label{font-size:13px;color:var(--text-dim);margin-top:4px;letter-spacing:1px;}
+
+/* FILTER TABS */
+.filter-bar{background:var(--dark);padding:32px 24px 0;text-align:center;}
+.filter-tabs{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.filter-tab{padding:8px 20px;border-radius:50px;background:var(--glass);border:1px solid var(--glass-border);
+  font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--text-dim);cursor:pointer;transition:var(--t);}
+.filter-tab:hover,.filter-tab.active{background:rgba(0,212,255,0.1);border-color:var(--cyan);color:var(--cyan);}
+
+/* REVIEWS GRID */
+.reviews-section{background:var(--dark);padding:40px 24px 80px;}
+.reviews-inner{max-width:1200px;margin:0 auto;}
+.reviews-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px;margin-top:32px;}
+
+.review-card{background:var(--dark2);border:1px solid var(--glass-border);border-radius:20px;padding:28px;
+  transition:border-color var(--t),transform var(--t);position:relative;overflow:hidden;}
+.review-card:hover{transform:translateY(-4px);}
+.review-card.lemon{border-color:rgba(255,220,0,0.2);}.review-card.lemon:hover{border-color:rgba(255,220,0,0.4);box-shadow:0 16px 48px rgba(255,220,0,0.1);}
+.review-card.grape{border-color:rgba(168,85,247,0.2);}.review-card.grape:hover{border-color:rgba(168,85,247,0.4);box-shadow:0 16px 48px rgba(168,85,247,0.1);}
+.review-card.c4{border-color:rgba(0,212,255,0.2);}.review-card.c4:hover{border-color:rgba(0,212,255,0.4);box-shadow:0 16px 48px rgba(0,212,255,0.1);}
+.review-card.berry{border-color:rgba(255,45,158,0.2);}.review-card.berry:hover{border-color:rgba(255,45,158,0.4);box-shadow:0 16px 48px rgba(255,45,158,0.1);}
+
+.review-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:16px;}
+.review-stars{color:#ffd700;font-size:15px;letter-spacing:1px;}
+.review-flavor-badge{padding:4px 12px;border-radius:20px;font-family:'Orbitron',monospace;font-size:8px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;}
+.lemon .review-flavor-badge{background:rgba(255,220,0,0.1);color:#ffd700;border:1px solid rgba(255,220,0,0.2);}
+.grape .review-flavor-badge{background:rgba(168,85,247,0.1);color:#c084fc;border:1px solid rgba(168,85,247,0.2);}
+.c4 .review-flavor-badge{background:rgba(0,212,255,0.08);color:var(--cyan);border:1px solid rgba(0,212,255,0.18);}
+.berry .review-flavor-badge{background:rgba(255,45,158,0.08);color:var(--pink);border:1px solid rgba(255,45,158,0.18);}
+
+.review-title{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;letter-spacing:1px;margin-bottom:10px;color:var(--text);}
+.review-text{font-size:15px;color:var(--text-dim);line-height:1.7;font-style:italic;margin-bottom:20px;}
+.review-author{display:flex;align-items:center;gap:12px;}
+.review-avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-size:12px;font-weight:700;flex-shrink:0;}
+.lemon .review-avatar{background:rgba(255,220,0,0.12);color:#ffd700;}
+.grape .review-avatar{background:rgba(168,85,247,0.12);color:#c084fc;}
+.c4 .review-avatar{background:rgba(0,212,255,0.1);color:var(--cyan);}
+.berry .review-avatar{background:rgba(255,45,158,0.1);color:var(--pink);}
+.review-name{font-weight:700;font-size:14px;}
+.review-meta{font-size:12px;color:var(--text-dim);}
+.review-verified{display:inline-flex;align-items:center;gap:4px;font-size:11px;color:var(--cyan);margin-top:4px;}
+
+/* EMPTY STATE */
+.empty-state{grid-column:1/-1;text-align:center;padding:60px 24px;color:var(--text-dim);}
+.empty-state h3{font-family:'Orbitron',monospace;font-size:16px;color:var(--text);margin-bottom:8px;}
+
+/* CTA */
+.reviews-cta{background:var(--dark2);padding:80px 24px;text-align:center;}
+
+footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:40px 0 24px;text-align:center;}
+.ftr-inner{max-width:1200px;margin:0 auto;padding:0 24px;}
+.footer-logo img{height:44px;margin:0 auto 16px;opacity:0.8;width:auto;}
+.footer-links{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:20px;}
+.footer-links a{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;color:var(--text-dim);transition:color 0.3s;}
+.footer-links a:hover{color:var(--cyan);}
+.footer-copy{font-size:12px;color:rgba(232,244,255,0.3);}
+</style>
+</head>
+<body>
+<div id="scroll-bar"></div>
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav"/></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="flavors.html">Flavors</a></li>
+      <li><a href="howitworks.html">How It Works</a></li>
+      <li><a href="tiktok.html">TikTok</a></li>
+      <li><a href="reviews.html" class="active">Reviews</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+      <li><a href="index.html#faq">FAQ</a></li>
+      <li><a href="shop.html" class="btn btn-primary nav-cta">Shop Now</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" class="mobile-link">Home</a>
+  <a href="about.html" class="mobile-link">About</a>
+  <a href="flavors.html" class="mobile-link">Flavors</a>
+  <a href="howitworks.html" class="mobile-link">How It Works</a>
+  <a href="tiktok.html" class="mobile-link">TikTok</a>
+  <a href="reviews.html" class="mobile-link active">Reviews</a>
+  <a href="index.html#contact" class="mobile-link">Contact</a>
+  <a href="index.html#faq" class="mobile-link">FAQ</a>
+  <a href="shop.html" class="btn btn-primary" style="margin-top:8px;">Shop Now</a>
+</div>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <span class="section-label">Customer Reviews</span>
+    <h1 class="section-title" style="font-size:clamp(28px,5vw,54px);">What People Are <span>Saying</span></h1>
+    <p style="color:var(--text-dim);font-size:17px;max-width:500px;margin:0 auto;">Real reviews from real FlavorWav riders.</p>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-bar-inner">
+    <div class="stat-item">
+      <div class="stat-num">5.0</div>
+      <div class="stat-label">★★★★★ Average Rating</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Verified Reviews</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">4</div>
+      <div class="stat-label">Flavors Reviewed</div>
+    </div>
+  </div>
+</div>
+
+<!-- FILTER TABS -->
+<div class="filter-bar">
+  <div class="filter-tabs">
+    <button class="filter-tab active" onclick="filterReviews('all',this)">All Flavors</button>
+    <button class="filter-tab" onclick="filterReviews('lemon',this)">🍋 Energy Lemon</button>
+    <button class="filter-tab" onclick="filterReviews('grape',this)">⚡ Zenergy Grape</button>
+    <button class="filter-tab" onclick="filterReviews('c4',this)">💙 Blue Raspberry C4</button>
+    <button class="filter-tab" onclick="filterReviews('berry',this)">🫐 Mixed Berry Probiotic</button>
+  </div>
+</div>
+
+<!-- REVIEWS GRID -->
+<section class="reviews-section">
+  <div class="reviews-inner">
+    <div class="reviews-grid" id="reviewsGrid">
+
+      <!-- REVIEW 1 — ADD MORE BELOW THIS LINE IN THE SAME FORMAT -->
+      <div class="review-card lemon" data-flavor="lemon">
+        <div class="review-top">
+          <div class="review-stars">★★★★★</div>
+          <span class="review-flavor-badge">Energy Lemon</span>
+        </div>
+        <div class="review-title">"Best thing I've added to my routine"</div>
+        <p class="review-text">"I put this in my Stanley every morning. The Alpha Lemon flavor is insane — I actually look forward to drinking water now. And I can feel the focus kick in within 20 minutes."</p>
+        <div class="review-author">
+          <div class="review-avatar">JR</div>
+          <div>
+            <div class="review-name">Jake R.</div>
+            <div class="review-meta">Verified Buyer · Los Angeles, CA</div>
+            <div class="review-verified">✓ Verified Purchase</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REVIEW 2 -->
+      <div class="review-card berry" data-flavor="berry">
+        <div class="review-top">
+          <div class="review-stars">★★★★★</div>
+          <span class="review-flavor-badge">Mixed Berry</span>
+        </div>
+        <div class="review-title">"Replaced my probiotic supplements"</div>
+        <p class="review-text">"Obsessed. Fits my 40oz Yeti perfectly and the Mixed Berry probiotic is my daily routine now. No more buying separate probiotic supplements. Tastes amazing too."</p>
+        <div class="review-author">
+          <div class="review-avatar">AM</div>
+          <div>
+            <div class="review-name">Alyssa M.</div>
+            <div class="review-meta">Verified Buyer · Austin, TX</div>
+            <div class="review-verified">✓ Verified Purchase</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REVIEW 3 -->
+      <div class="review-card c4" data-flavor="c4">
+        <div class="review-top">
+          <div class="review-stars">★★★★★</div>
+          <span class="review-flavor-badge">Blue Raspberry C4</span>
+        </div>
+        <div class="review-title">"Pre-workout without the hassle"</div>
+        <p class="review-text">"Used the C4 Blue Raspberry before my gym session. No chalky powder, no mess — just insert and go. Felt the pre-workout hit right on time. Game changer for anyone who trains."</p>
+        <div class="review-author">
+          <div class="review-avatar">DT</div>
+          <div>
+            <div class="review-name">Devon T.</div>
+            <div class="review-meta">Verified Buyer · Miami, FL</div>
+            <div class="review-verified">✓ Verified Purchase</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- =============================================
+           ADD NEW REVIEWS BELOW HERE — COPY THIS TEMPLATE:
+
+      <div class="review-card [lemon/grape/c4/berry]" data-flavor="[lemon/grape/c4/berry]">
+        <div class="review-top">
+          <div class="review-stars">★★★★★</div>
+          <span class="review-flavor-badge">[Flavor Name]</span>
+        </div>
+        <div class="review-title">"[Short headline]"</div>
+        <p class="review-text">"[Full review text]"</p>
+        <div class="review-author">
+          <div class="review-avatar">[Initials]</div>
+          <div>
+            <div class="review-name">[Name]</div>
+            <div class="review-meta">Verified Buyer · [City, State]</div>
+            <div class="review-verified">✓ Verified Purchase</div>
+          </div>
+        </div>
+      </div>
+
+      ============================================= -->
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="reviews-cta">
+  <span class="section-label">Ready to Ride the Wav?</span>
+  <h2 class="section-title" style="font-size:clamp(22px,3.5vw,40px);margin-bottom:16px;">Try <span>FlavorWav</span> Today</h2>
+  <p style="color:var(--text-dim);font-size:16px;margin-bottom:32px;">Join the wave. 12" infused straws — fits 30oz &amp; 40oz tumblers.</p>
+  <a href="shop.html" class="btn btn-primary" style="font-size:12px;padding:14px 36px;">Shop All Flavors →</a>
+</section>
+
+<footer>
+  <div class="ftr-inner">
+    <div class="footer-logo"><img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav"/></div>
+    <nav class="footer-links">
+      <a href="index.html">Home</a><a href="about.html">About</a><a href="flavors.html">Flavors</a>
+      <a href="howitworks.html">How It Works</a><a href="tiktok.html">TikTok</a>
+      <a href="reviews.html">Reviews</a><a href="index.html#contact">Contact</a><a href="index.html#faq">FAQ</a>
+    </nav>
+    <p class="footer-copy">&copy; 2025 FlavorWav. All rights reserved. California, USA.</p>
+  </div>
+</footer>
+
+<script>
+// SCROLL BAR
+(function(){
+  var bar=document.getElementById('scroll-bar');
+  if(!bar)return;
+  window.addEventListener('scroll',function(){
+    var s=document.documentElement.scrollTop||document.body.scrollTop;
+    var h=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+    bar.style.width=(h>0?(s/h*100):0)+'%';
+  },{passive:true});
+})();
+// CURSOR
+(function(){var dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');if(!dot||!ring)return;var mx=window.innerWidth/2,my=window.innerHeight/2,rx=mx,ry=my;document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});(function t(){rx+=(mx-rx)*0.13;ry+=(my-ry)*0.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(t);})();document.querySelectorAll('a,button').forEach(function(el){el.addEventListener('mouseenter',function(){document.body.classList.add('ch');});el.addEventListener('mouseleave',function(){document.body.classList.remove('ch');});});})();
+// HAMBURGER
+(function(){var h=document.getElementById('hamburger'),m=document.getElementById('mobileMenu');if(!h||!m)return;h.addEventListener('click',function(){var o=m.classList.toggle('open');h.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';});document.querySelectorAll('.mobile-link,.mobile-menu .btn').forEach(function(l){l.addEventListener('click',function(){m.classList.remove('open');h.classList.remove('open');document.body.style.overflow='';});});})();
+// FILTER
+function filterReviews(flavor, btn){
+  document.querySelectorAll('.filter-tab').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  document.querySelectorAll('.review-card').forEach(function(card){
+    if(flavor==='all' || card.getAttribute('data-flavor')===flavor){
+      card.style.display='block';
+    } else {
+      card.style.display='none';
+    }
+  });
+}
+</script>
+</body>
+</html>

@@ -15,8 +15,7 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{font-family:'Rajdhani',sans-serif;background:#000;color:var(--text);overflow-x:hidden;}
-img{display:block;}
-a{text-decoration:none;color:inherit;}
+img{display:block;}a{text-decoration:none;color:inherit;}
 #cursor-dot{position:fixed;width:8px;height:8px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);box-shadow:0 0 10px var(--cyan),0 0 20px rgba(0,212,255,0.4);}
 #cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid rgba(0,212,255,0.45);border-radius:50%;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);}
 body.ch #cursor-dot{background:var(--pink);box-shadow:0 0 16px var(--pink);}
@@ -40,8 +39,94 @@ nav#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-hei
 .mobile-menu.open{transform:translateX(0);}
 .mobile-menu a{font-family:'Orbitron',monospace;font-size:18px;letter-spacing:3px;text-transform:uppercase;color:var(--text-dim);}
 .mobile-menu a:hover{color:var(--cyan);}
-.images-wrap{padding-top:var(--nav-height);line-height:0;font-size:0;}
-.images-wrap img{width:100%;display:block;margin:0;padding:0;}
+.section-label{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);display:block;margin-bottom:12px;}
+.section-title{font-family:'Orbitron',monospace;font-weight:900;line-height:1.1;margin-bottom:16px;}
+.section-title span{background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+/* HERO */
+.page-hero{padding:calc(var(--nav-height) + 60px) 24px 60px;text-align:center;background:url('flav%20hero%20background.png') center/cover no-repeat;position:relative;}
+.page-hero::before{content:'';position:absolute;inset:0;background:rgba(5,10,20,0.82);}
+.page-hero-inner{position:relative;z-index:1;}
+
+/* FLAVOR CARDS */
+.flavors-section{background:var(--dark);padding:80px 24px;}
+.flavors-inner{max-width:1200px;margin:0 auto;}
+.flavors-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:24px;margin-top:48px;}
+.flavor-card{background:var(--dark2);border-radius:20px;overflow:hidden;border:1px solid var(--glass-border);transition:transform var(--t),box-shadow var(--t);}
+.flavor-card:hover{transform:translateY(-6px);}
+.flavor-card.lemon{border-color:rgba(255,220,0,0.3);}.flavor-card.lemon:hover{box-shadow:0 20px 60px rgba(255,220,0,0.18);}
+.flavor-card.grape{border-color:rgba(168,85,247,0.4);}.flavor-card.grape:hover{box-shadow:0 20px 60px rgba(168,85,247,0.22);}
+.flavor-card.c4{border-color:rgba(0,212,255,0.35);}.flavor-card.c4:hover{box-shadow:0 20px 60px rgba(0,212,255,0.18);}
+.flavor-card.berry{border-color:rgba(255,45,158,0.35);}.flavor-card.berry:hover{box-shadow:0 20px 60px rgba(255,45,158,0.18);}
+.card-top{padding:28px 24px 4px;text-align:center;}
+.card-icon{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 16px;}
+.lemon .card-icon{background:rgba(255,220,0,0.12);box-shadow:0 0 24px rgba(255,220,0,0.25);}
+.grape .card-icon{background:rgba(168,85,247,0.12);box-shadow:0 0 24px rgba(168,85,247,0.25);}
+.c4 .card-icon{background:rgba(0,212,255,0.1);box-shadow:0 0 24px rgba(0,212,255,0.2);}
+.berry .card-icon{background:rgba(255,45,158,0.1);box-shadow:0 0 24px rgba(255,45,158,0.2);}
+.card-name{font-family:'Orbitron',monospace;font-size:14px;font-weight:700;margin-bottom:4px;}
+.card-tag{font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:16px;display:block;}
+.lemon .card-tag{color:#ffd700;}.grape .card-tag{color:#c084fc;}.c4 .card-tag{color:var(--cyan);}.berry .card-tag{color:var(--pink);}
+.card-perks{padding:8px 24px 16px;list-style:none;display:flex;flex-direction:column;gap:8px;}
+.card-perks li{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text-dim);}
+.card-perks li::before{content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+.lemon .card-perks li::before{background:#ffd700;}.grape .card-perks li::before{background:#c084fc;}.c4 .card-perks li::before{background:var(--cyan);}.berry .card-perks li::before{background:var(--pink);}
+.card-badge{margin:4px 24px 20px;padding:8px 0;border-radius:8px;text-align:center;font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;font-weight:700;}
+.lemon .card-badge{background:rgba(255,220,0,0.08);color:#ffd700;border:1px solid rgba(255,220,0,0.2);}
+.grape .card-badge{background:rgba(168,85,247,0.08);color:#c084fc;border:1px solid rgba(168,85,247,0.2);}
+.c4 .card-badge{background:rgba(0,212,255,0.07);color:var(--cyan);border:1px solid rgba(0,212,255,0.18);}
+.berry .card-badge{background:rgba(255,45,158,0.07);color:var(--pink);border:1px solid rgba(255,45,158,0.18);}
+.card-divider{height:1px;background:var(--glass-border);}
+.card-shop{display:block;text-align:center;padding:16px;font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim);transition:color var(--t);}
+.flavor-card:hover .card-shop{color:var(--cyan);}
+
+/* CLEAN LABEL */
+.clean-section{background:var(--dark2);padding:80px 24px;position:relative;overflow:hidden;}
+.clean-section::before{content:'';position:absolute;inset:0;background:url('flav%20hero%20background.png') center/cover no-repeat;opacity:0.06;}
+.clean-inner{max-width:900px;margin:0 auto;position:relative;z-index:1;}
+.clean-header{text-align:center;margin-bottom:48px;}
+.clean-box{background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.18);border-radius:20px;padding:40px 48px;}
+@media(max-width:600px){.clean-box{padding:28px 20px;}}
+.clean-title-row{display:flex;align-items:center;gap:12px;margin-bottom:32px;}
+.clean-check{width:36px;height:36px;background:linear-gradient(135deg,var(--cyan),var(--purple));border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:16px;flex-shrink:0;}
+.clean-title-row span{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);}
+.clean-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px 40px;}
+@media(max-width:580px){.clean-grid{grid-template-columns:1fr;}}
+.clean-item{display:flex;align-items:center;gap:10px;font-size:15px;color:var(--text-dim);padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.05);}
+.clean-item::before{content:'✓';color:var(--cyan);font-weight:700;flex-shrink:0;}
+.clean-note{margin-top:24px;text-align:center;font-size:13px;color:rgba(232,244,255,0.3);font-style:italic;}
+
+/* NUTRITION */
+.nutrition-section{background:var(--dark);padding:80px 24px;}
+.nutrition-inner{max-width:1100px;margin:0 auto;}
+.nutrition-header{text-align:center;margin-bottom:48px;}
+.table-wrap{overflow-x:auto;border-radius:16px;border:1px solid var(--glass-border);}
+table.nutri{width:100%;border-collapse:collapse;font-size:13px;min-width:680px;}
+table.nutri thead tr:first-child th{padding:18px 14px;font-family:'Orbitron',monospace;font-size:9px;letter-spacing:1.2px;text-transform:uppercase;text-align:center;line-height:1.5;}
+table.nutri thead tr:first-child th:first-child{background:rgba(5,10,20,0.9);color:var(--text-dim);text-align:left;padding-left:20px;}
+table.nutri thead tr:first-child th.col-lemon{background:rgba(255,220,0,0.1);color:#ffd700;}
+table.nutri thead tr:first-child th.col-grape{background:rgba(168,85,247,0.12);color:#c084fc;}
+table.nutri thead tr:first-child th.col-c4{background:rgba(0,212,255,0.08);color:var(--cyan);}
+table.nutri thead tr:first-child th.col-berry{background:rgba(255,45,158,0.08);color:var(--pink);}
+table.nutri thead tr.sub-head th{font-size:11px;padding:6px 14px;text-align:center;color:var(--text-dim);font-weight:400;border-top:1px solid rgba(255,255,255,0.06);}
+table.nutri thead tr.sub-head th:first-child{text-align:left;padding-left:20px;}
+table.nutri tbody tr{border-top:1px solid rgba(255,255,255,0.04);}
+table.nutri tbody tr:hover{background:rgba(255,255,255,0.025);}
+table.nutri tbody tr.section-hdr td{background:rgba(255,255,255,0.04);font-family:'Orbitron',monospace;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:var(--text-dim);padding:10px 20px;font-weight:700;}
+table.nutri tbody tr.bold-row td{font-weight:700;color:var(--text);}
+table.nutri tbody tr.indent td:first-child{padding-left:36px;font-size:12px;}
+table.nutri td{padding:10px 14px;text-align:center;color:var(--text-dim);}
+table.nutri td:first-child{text-align:left;padding-left:20px;color:var(--text);}
+table.nutri td.col-lemon{color:#ffd700;}
+table.nutri td.col-grape{color:#c084fc;}
+table.nutri td.col-c4{color:var(--cyan);}
+table.nutri td.col-berry{color:#f472b6;}
+table.nutri td.dash{color:rgba(255,255,255,0.15);}
+.allergen-bar{background:rgba(255,220,50,0.05);border-top:1px solid rgba(255,220,0,0.12);padding:14px 20px;text-align:center;font-size:12px;color:rgba(232,244,255,0.4);font-style:italic;}
+
+/* CTA */
+.cta-section{padding:80px 24px;text-align:center;background:var(--dark2);}
+
 footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:40px 0 24px;text-align:center;}
 .ftr-inner{max-width:1200px;margin:0 auto;padding:0 24px;}
 .footer-logo img{height:44px;margin:0 auto 16px;opacity:0.8;width:auto;}
@@ -52,38 +137,261 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
 </style>
 </head>
 <body>
-<div id="cursor-dot"></div>
-<div id="cursor-ring"></div>
+<div id="cursor-dot"></div><div id="cursor-ring"></div>
+
 <nav id="navbar">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo"><img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav"/></a>
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About</a></li>
+      <li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li>
       <li><a href="flavors.html" class="active">Flavors</a></li>
-      <li><a href="howitworks.html">How It Works</a></li>
-      <li><a href="tiktok.html">TikTok</a></li>
-      <li><a href="index.html#contact">Contact</a></li>
-      <li><a href="index.html#faq">FAQ</a></li>
+      <li><a href="howitworks.html">How It Works</a></li><li><a href="tiktok.html">TikTok</a></li>
+      <li><a href="index.html#contact">Contact</a></li><li><a href="index.html#faq">FAQ</a></li>
       <li><a href="shop.html" class="btn btn-primary nav-cta">Shop Now</a></li>
     </ul>
     <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
   </div>
 </nav>
 <div class="mobile-menu" id="mobileMenu">
-  <a href="index.html" class="mobile-link">Home</a>
-  <a href="about.html" class="mobile-link">About</a>
-  <a href="flavors.html" class="mobile-link">Flavors</a>
-  <a href="howitworks.html" class="mobile-link">How It Works</a>
-  <a href="tiktok.html" class="mobile-link">TikTok</a>
-  <a href="index.html#contact" class="mobile-link">Contact</a>
+  <a href="index.html" class="mobile-link">Home</a><a href="about.html" class="mobile-link">About</a>
+  <a href="flavors.html" class="mobile-link">Flavors</a><a href="howitworks.html" class="mobile-link">How It Works</a>
+  <a href="tiktok.html" class="mobile-link">TikTok</a><a href="index.html#contact" class="mobile-link">Contact</a>
   <a href="index.html#faq" class="mobile-link">FAQ</a>
   <a href="shop.html" class="btn btn-primary" style="margin-top:8px;">Shop Now</a>
 </div>
-<div class="images-wrap">
-  <img src="FlavorWav%20Flavor%20Menu.png" alt="Flavor Menu" onerror="if(!this._tried){this._tried=true;this.src='FlavorWav_Flavor_Menu.png';}" />
-  <img src="Release%20Profiles%20Page.png" alt="Release Profiles" onerror="if(!this._tried){this._tried=true;this.src='Release_Profiles_Page.png';}" />
-</div>
+
+<!-- HERO -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <span class="section-label">Our Lineup</span>
+    <h1 class="section-title" style="font-size:clamp(28px,5vw,54px);">Four <span>Functional</span> Formulas</h1>
+    <p style="color:var(--text-dim);font-size:17px;max-width:500px;margin:0 auto;">Designed to energize, hydrate, and support wellness with every sip.</p>
+  </div>
+</section>
+
+<!-- FLAVOR CARDS -->
+<section class="flavors-section">
+  <div class="flavors-inner">
+    <div style="text-align:center;">
+      <span class="section-label">Choose Your Wave</span>
+      <h2 class="section-title" style="font-size:clamp(22px,3.5vw,40px);">Pick Your <span>Flavor</span></h2>
+    </div>
+    <div class="flavors-grid">
+      <div class="flavor-card lemon">
+        <div class="card-top">
+          <div class="card-icon">🍋</div>
+          <div class="card-name">Energy Lemon</div>
+          <span class="card-tag">Focus &amp; Energy</span>
+        </div>
+        <ul class="card-perks">
+          <li>125 mg Alpha GPC</li>
+          <li>80 mg L-Theanine</li>
+          <li>60 mg Vitamin C</li>
+          <li>Vitamin B6 + B12 Complex</li>
+          <li>Zero Added Sugar</li>
+        </ul>
+        <div class="card-badge">⚡ Fast Release</div>
+        <div class="card-divider"></div>
+        <a href="shop.html" class="card-shop">Shop Now →</a>
+      </div>
+      <div class="flavor-card grape">
+        <div class="card-top">
+          <div class="card-icon">⚡</div>
+          <div class="card-name">Zenergy Grape</div>
+          <span class="card-tag">Power Boost</span>
+        </div>
+        <ul class="card-perks">
+          <li>125 mg Caffeine (from Tea)</li>
+          <li>80 mg L-Theanine</li>
+          <li>Bold Grape Flavor</li>
+          <li>Instant Alertness</li>
+          <li>Vitamin B6 + B12 Complex</li>
+        </ul>
+        <div class="card-badge">⚡ Fast Release</div>
+        <div class="card-divider"></div>
+        <a href="shop.html" class="card-shop">Shop Now →</a>
+      </div>
+      <div class="flavor-card c4">
+        <div class="card-top">
+          <div class="card-icon">💙</div>
+          <div class="card-name">Blue Raspberry C4</div>
+          <span class="card-tag">Performance</span>
+        </div>
+        <ul class="card-perks">
+          <li>C4 Pre-Workout Formula</li>
+          <li>1600 mg Beta-Alanine</li>
+          <li>500 mg Arginine AKG</li>
+          <li>Rapid Delivery System</li>
+          <li>No Gritty Powder Mess</li>
+        </ul>
+        <div class="card-badge">⚡ Fast Release</div>
+        <div class="card-divider"></div>
+        <a href="shop.html" class="card-shop">Shop Now →</a>
+      </div>
+      <div class="flavor-card berry">
+        <div class="card-top">
+          <div class="card-icon">🫐</div>
+          <div class="card-name">Mixed Berry Probiotic</div>
+          <span class="card-tag">Gut Health</span>
+        </div>
+        <ul class="card-perks">
+          <li>50B CFU (at manufacture)</li>
+          <li>10 Spore-Forming Strains</li>
+          <li>3g Dietary Fiber</li>
+          <li>Shelf-Stable — No Fridge</li>
+          <li>Digestive &amp; Immune Support</li>
+        </ul>
+        <div class="card-badge">🌿 Slow Release</div>
+        <div class="card-divider"></div>
+        <a href="shop.html" class="card-shop">Shop Now →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLEAN LABEL -->
+<section class="clean-section">
+  <div class="clean-inner">
+    <div class="clean-header">
+      <span class="section-label">Transparency First</span>
+      <h2 class="section-title" style="font-size:clamp(24px,4vw,44px);">Clean Label <span>Promise</span></h2>
+      <p style="color:var(--text-dim);font-family:'Orbitron',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-top:8px;">Transparency in every sip</p>
+    </div>
+    <div class="clean-box">
+      <div class="clean-title-row">
+        <div class="clean-check">✓</div>
+        <span>Nature-Derived Ingredients</span>
+      </div>
+      <div class="clean-grid">
+        <div class="clean-item">Resistant Dextrin</div>
+        <div class="clean-item">Citrus Fiber &amp; Extract</div>
+        <div class="clean-item">Probiotic Cultures</div>
+        <div class="clean-item">Glycine</div>
+        <div class="clean-item">Citric, Malic &amp; Tartaric Acids</div>
+        <div class="clean-item">Lemon Juice Powder</div>
+        <div class="clean-item">Natural Berry Flavors</div>
+        <div class="clean-item">Lemon Oil</div>
+        <div class="clean-item">Pullulan (Binder)</div>
+        <div class="clean-item">Sunflower Lecithin</div>
+        <div class="clean-item">Stevia Reb M</div>
+        <div class="clean-item">Monk Fruit</div>
+      </div>
+      <p class="clean-note">No artificial dyes · No adhesive seam · PFAS tested · 100% biodegradable paper construction</p>
+    </div>
+  </div>
+</section>
+
+<!-- NUTRITIONAL CHART -->
+<section class="nutrition-section">
+  <div class="nutrition-inner">
+    <div class="nutrition-header">
+      <span class="section-label">Supplement Facts</span>
+      <h2 class="section-title" style="font-size:clamp(22px,3.5vw,40px);">Nutritional &amp; <span>Ingredient</span> Chart</h2>
+      <p style="color:var(--text-dim);font-size:15px;margin-top:8px;">Per serving — 1 straw · 10 servings per bag</p>
+    </div>
+    <div class="table-wrap">
+      <table class="nutri">
+        <thead>
+          <tr>
+            <th style="text-align:left;padding-left:20px;background:rgba(5,10,20,0.9);color:var(--text-dim);">Supplement Facts</th>
+            <th class="col-lemon">🍋 Energy Lemon<br/><small style="font-weight:400;opacity:0.7;">Alpha GPC</small></th>
+            <th class="col-grape">⚡ Zenergy Grape<br/><small style="font-weight:400;opacity:0.7;">Power Boost</small></th>
+            <th class="col-c4">💙 Blue Raspberry<br/><small style="font-weight:400;opacity:0.7;">C4 Pre-Workout</small></th>
+            <th class="col-berry">🫐 Mixed Berry<br/><small style="font-weight:400;opacity:0.7;">50B CFU Probiotic</small></th>
+          </tr>
+          <tr class="sub-head">
+            <th>Serving Size</th><th>1 Straw</th><th>1 Straw</th><th>1 Straw</th><th>1 Straw</th>
+          </tr>
+          <tr class="sub-head">
+            <th>Servings Per Container</th><th>10</th><th>10</th><th>10</th><th>10</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bold-row">
+            <td>Calories</td>
+            <td class="col-lemon">15</td><td class="col-grape">15</td><td class="col-c4">20</td><td class="col-berry">20</td>
+          </tr>
+          <tr class="bold-row">
+            <td>Total Carbohydrate</td>
+            <td class="col-lemon">4g</td><td class="col-grape">4g</td><td class="col-c4">4g</td><td class="col-berry">5g</td>
+          </tr>
+          <tr class="indent">
+            <td>Dietary Fiber (Resistant Dextrin)</td>
+            <td class="col-lemon">3g</td><td class="col-grape">2g</td><td class="col-c4">1.5g</td><td class="col-berry">3g</td>
+          </tr>
+          <tr class="indent">
+            <td>Total Sugars</td>
+            <td class="col-lemon">1.6g</td><td class="col-grape">1.7g</td><td class="col-c4">1.6g</td><td class="col-berry">0g</td>
+          </tr>
+          <tr class="indent">
+            <td>Added Sugars</td>
+            <td class="col-lemon">0g</td><td class="col-grape">0g</td><td class="col-c4">0g</td><td class="col-berry">0g</td>
+          </tr>
+          <tr class="bold-row">
+            <td>Protein</td>
+            <td class="col-lemon">0g</td><td class="col-grape">0g</td><td class="col-c4">0g</td><td class="col-berry">0g</td>
+          </tr>
+          <tr class="section-hdr"><td colspan="5">Vitamins &amp; Minerals</td></tr>
+          <tr>
+            <td>Vitamin C (Ascorbic Acid)</td>
+            <td class="col-lemon">60mg</td><td class="col-grape">60mg</td><td class="col-c4 dash">—</td><td class="col-berry dash">—</td>
+          </tr>
+          <tr>
+            <td>Vitamin B6 (Pyridoxine HCl)</td>
+            <td class="col-lemon">2mg</td><td class="col-grape">2mg</td><td class="col-c4">2mg</td><td class="col-berry dash">—</td>
+          </tr>
+          <tr>
+            <td>Vitamin B12</td>
+            <td class="col-lemon">100mcg</td><td class="col-grape">100mcg</td><td class="col-c4">100mcg</td><td class="col-berry dash">—</td>
+          </tr>
+          <tr class="section-hdr"><td colspan="5">Active Ingredients</td></tr>
+          <tr>
+            <td>L-Theanine</td>
+            <td class="col-lemon">80mg</td><td class="col-grape">80mg</td><td class="col-c4 dash">—</td><td class="col-berry dash">—</td>
+          </tr>
+          <tr>
+            <td>Alpha GPC</td>
+            <td class="col-lemon">125mg</td><td class="col-grape dash">—</td><td class="col-c4 dash">—</td><td class="col-berry dash">—</td>
+          </tr>
+          <tr>
+            <td>Caffeine (from Tea)</td>
+            <td class="col-lemon dash">—</td><td class="col-grape">125mg</td><td class="col-c4">125mg</td><td class="col-berry">100mg</td>
+          </tr>
+          <tr>
+            <td>Beta-Alanine</td>
+            <td class="col-lemon dash">—</td><td class="col-grape dash">—</td><td class="col-c4">1600mg</td><td class="col-berry dash">—</td>
+          </tr>
+          <tr>
+            <td>Arginine AKG</td>
+            <td class="col-lemon dash">—</td><td class="col-grape dash">—</td><td class="col-c4">500mg</td><td class="col-berry dash">—</td>
+          </tr>
+          <tr>
+            <td>Niacin</td>
+            <td class="col-lemon dash">—</td><td class="col-grape dash">—</td><td class="col-c4">30mg</td><td class="col-berry dash">—</td>
+          </tr>
+          <tr>
+            <td>Licorice Root Extract</td>
+            <td class="col-lemon dash">—</td><td class="col-grape dash">—</td><td class="col-c4 dash">—</td><td class="col-berry">50mg</td>
+          </tr>
+          <tr>
+            <td>10-Strain Probiotic Blend</td>
+            <td class="col-lemon dash">—</td><td class="col-grape dash">—</td><td class="col-c4 dash">—</td><td class="col-berry">50B CFUs</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="allergen-bar">⚠ Allergen Statement: Manufactured in a facility that processes no major allergens.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOP CTA -->
+<section class="cta-section">
+  <span class="section-label">Ready to Sip?</span>
+  <h2 class="section-title" style="font-size:clamp(22px,3.5vw,40px);margin-bottom:16px;">Get Your <span>FlavorWav</span> Today</h2>
+  <p style="color:var(--text-dim);font-size:16px;margin-bottom:32px;">12" infused straws — fits 30oz &amp; 40oz tumblers · 10 straws per bag</p>
+  <a href="shop.html" class="btn btn-primary" style="font-size:12px;padding:14px 36px;">Shop All Flavors →</a>
+</section>
+
 <footer>
   <div class="ftr-inner">
     <div class="footer-logo"><img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav"/></div>

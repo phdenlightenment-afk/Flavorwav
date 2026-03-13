@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>FlavorWav — Infused Straws</title>
+<title>FlavorWav™ — Infused Straws</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
@@ -170,6 +170,10 @@ nav#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-hei
 
 /* AMBIENT GLOW BEHIND LOGO */
 .hero-logo-wrap{position:relative;z-index:10;margin-bottom:0;}
+.hero-logo-wrap::after{content:'™';position:absolute;top:8%;right:-8px;font-family:'Orbitron',monospace;
+  font-size:clamp(14px,2vw,22px);font-weight:700;color:var(--cyan);
+  text-shadow:0 0 12px var(--cyan),0 0 24px rgba(0,212,255,0.5);
+  line-height:1;pointer-events:none;}
 .hero-logo-wrap::before{content:'';position:absolute;inset:-60px;border-radius:50%;
   background:radial-gradient(circle,rgba(0,200,255,0.25) 0%,rgba(0,120,255,0.15) 35%,transparent 70%);
   animation:glowPulse 3s ease-in-out infinite;z-index:-1;}
@@ -481,7 +485,7 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
 </section>
 
 <section id="benefits">
-  <img src="FlavorWav%20Benefits%20Page.png" alt="FlavorWav Benefits" onerror="if(!this._tried){this._tried=true;this.src='FlavorWav_Benefits_Page.png';}" />
+  <img src="FlavorWav%20Benefits%20Page.png" alt="FlavorWav™ Benefits" onerror="if(!this._tried){this._tried=true;this.src='FlavorWav_Benefits_Page.png';}" />
 </section>
 
 <section id="nav-cards">
@@ -515,7 +519,7 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
   <div class="shop-bg"></div>
   <div class="container">
     <div class="shop-content">
-      <img src="FLAVPACK_14.png" alt="FlavorWav Pack" class="shop-product-img" />
+      <img src="FLAVPACK_14.png" alt="FlavorWav™ Pack" class="shop-product-img" />
       <h2 class="shop-title">Ready to Ride<br/>the Wav?</h2>
       <p class="shop-desc">Premium infused straws packed with flavor, vitamins, caffeine, and fiber. Free shipping on qualifying orders.</p>
       <div class="shop-actions">
@@ -558,7 +562,7 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
     <div class="faq-header">
       <span class="section-label">Help Center</span>
       <h2 class="section-title">Frequently Asked Questions</h2>
-      <p style="color:var(--text-dim);font-size:16px;max-width:480px;margin:0 auto 16px;">Everything you need to know about FlavorWav.</p>
+      <p style="color:var(--text-dim);font-size:16px;max-width:480px;margin:0 auto 16px;">Everything you need to know about FlavorWav™.</p>
     </div>
     <div class="faq-cats">
       <button class="faq-cat active" data-cat="ordering">Ordering</button>
@@ -695,7 +699,7 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
       <a href="howitworks.html">How It Works</a><a href="tiktok.html">TikTok</a>
       <a href="#contact">Contact</a><a href="#faq">FAQ</a>
     </nav>
-    <p class="footer-copy">&copy; 2025 FlavorWav. All rights reserved. California, USA.</p>
+    <p class="footer-copy">&copy; 2025 FlavorWav™. All rights reserved. California, USA.</p>
   </div>
 </footer>
 

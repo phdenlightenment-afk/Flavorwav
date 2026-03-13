@@ -45,12 +45,13 @@ nav#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-hei
 
 /* HERO */
 .page-hero{padding:calc(var(--nav-height) + 60px) 24px 60px;text-align:center;background:url('flav%20hero%20background.png') center/cover no-repeat;position:relative;}
-.page-hero::before{content:'';position:absolute;inset:0;background:rgba(5,10,20,0.82);}
+.page-hero::before{content:'';position:absolute;inset:0;background:rgba(5,10,20,0.65);}
 .page-hero-inner{position:relative;z-index:1;}
 
 /* FLAVOR CARDS */
-.flavors-section{background:var(--dark);padding:80px 24px;}
-.flavors-inner{max-width:1200px;margin:0 auto;}
+.flavors-section{background:url('flav%20hero%20background.png') center/cover no-repeat;padding:80px 24px;position:relative;}
+.flavors-section::before{content:'';position:absolute;inset:0;background:rgba(5,10,20,0.88);}
+.flavors-inner{max-width:1200px;margin:0 auto;position:relative;z-index:1;}
 .flavors-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:24px;margin-top:48px;}
 .flavor-card{background:var(--dark2);border-radius:20px;overflow:hidden;border:1px solid var(--glass-border);transition:transform var(--t),box-shadow var(--t);}
 .flavor-card:hover{transform:translateY(-6px);}
@@ -389,7 +390,7 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
   <span class="section-label">Ready to Sip?</span>
   <h2 class="section-title" style="font-size:clamp(22px,3.5vw,40px);margin-bottom:16px;">Get Your <span>FlavorWav</span> Today</h2>
   <p style="color:var(--text-dim);font-size:16px;margin-bottom:32px;">12" infused straws — fits 30oz &amp; 40oz tumblers · 10 straws per bag</p>
-  <a href="shop.html" class="btn btn-primary" style="font-size:12px;padding:14px 36px;">Shop All Flavors →</a>
+  <a href="shop.html" class="btn btn-primary" onclick="window.location.href='shop.html';return false;" style="font-size:12px;padding:14px 36px;">Shop All Flavors →</a>
 </section>
 
 <footer>

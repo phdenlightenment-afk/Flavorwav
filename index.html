@@ -520,36 +520,35 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
       <span class="section-label">Help Center</span>
       <h2 class="section-title">Frequently Asked Questions</h2>
       <p style="color:var(--text-dim);font-size:16px;max-width:480px;margin:0 auto 16px;">Everything you need to know about FlavorWav.</p>
-      <a href="files/flavorwav-full-faq.pdf" download class="faq-dl">&#11015; Download Full FAQ</a>
     </div>
     <div class="faq-cats">
-      <button class="faq-cat active" data-cat="ordering">Ordering</button>
-      <button class="faq-cat" data-cat="shipping">Shipping</button>
-      <button class="faq-cat" data-cat="products">Products</button>
-      <button class="faq-cat" data-cat="returns">Returns</button>
+      <button class="faq-cat active" onclick="switchCat('ordering',this)">Ordering</button>
+      <button class="faq-cat" onclick="switchCat('shipping',this)">Shipping</button>
+      <button class="faq-cat" onclick="switchCat('products',this)">Products</button>
+      <button class="faq-cat" onclick="switchCat('returns',this)">Returns</button>
     </div>
     <div class="faq-group active" id="faq-ordering">
-      <div class="faq-item"><button class="faq-q">How do I place an order? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Visit our Shop page, choose your flavors, add to cart, and check out. We accept all major credit cards and PayPal.</div></div></div>
-      <div class="faq-item"><button class="faq-q">Can I order multiple flavors? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Yes! We offer variety packs so you can mix and match your favorite flavors.</div></div></div>
-      <div class="faq-item"><button class="faq-q">Is there a minimum order? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">No minimum required. Order a single pack or stock up with larger bundles.</div></div></div>
-      <div class="faq-item"><button class="faq-q">Do you offer subscriptions? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Subscriptions coming soon! Sign up for our newsletter to be first to know.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How do I place an order? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Visit our Shop page, choose your flavors, add to cart, and check out.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Can I order multiple flavors? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Yes! We offer variety packs so you can mix and match your favorite flavors.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is there a minimum order? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">No minimum required. Order a single pack or stock up with larger bundles.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Do you offer subscriptions? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Subscriptions coming soon! Sign up for our newsletter to be first to know.</div></div></div>
     </div>
     <div class="faq-group" id="faq-shipping">
-      <div class="faq-item"><button class="faq-q">How long does shipping take? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Standard: 5-7 business days. Expedited options available at checkout.</div></div></div>
-      <div class="faq-item"><button class="faq-q">Do you offer free shipping? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Yes! Free standard shipping on qualifying orders.</div></div></div>
-      <div class="faq-item"><button class="faq-q">Do you ship internationally? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Currently US only. International coming soon.</div></div></div>
-      <div class="faq-item"><button class="faq-q">How do I track my order? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">You'll receive a tracking number via email once your order ships.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How long does shipping take? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Standard: 5-7 business days. Expedited options available at checkout.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Do you offer free shipping? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Yes! Free standard shipping on qualifying orders.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Do you ship internationally? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Currently US only. International coming soon.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How do I track my order? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">You'll receive a tracking number via email once your order ships.</div></div></div>
     </div>
     <div class="faq-group" id="faq-products">
-      <div class="faq-item"><button class="faq-q">What tumblers do they fit? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Our 12" straws fit 30oz and 40oz tumblers — Yeti, Stanley, RTIC, Hydro Flask, and similar.</div></div></div>
-      <div class="faq-item"><button class="faq-q">Are they safe and tested? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Yes. Tested for PFAS and key chemical screens. Glueless construction, no adhesive seam.</div></div></div>
-      <div class="faq-item"><button class="faq-q">How does the flavor dissolve? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">The inner lining dissolves as liquid flows through during normal sipping. Just insert and drink.</div></div></div>
-      <div class="faq-item"><button class="faq-q">Are they biodegradable? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Yes — paper-based with a verified biodegradability report.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What tumblers do they fit? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Our 12" straws fit 30oz and 40oz tumblers — Yeti, Stanley, RTIC, Hydro Flask, and similar.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Are they safe and tested? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Yes. Tested for PFAS and key chemical screens. Glueless construction, no adhesive seam.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How does the flavor dissolve? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">The inner lining dissolves as liquid flows through during normal sipping. Just insert and drink.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Are they biodegradable? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Yes — paper-based with a verified biodegradability report.</div></div></div>
     </div>
     <div class="faq-group" id="faq-returns">
-      <div class="faq-item"><button class="faq-q">What is your return policy? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Returns within 30 days for unopened products. Email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7c14191010133c1a101d0a130e0b1d0a521f1311">[email&#160;protected]</a> with your order number.</div></div></div>
-      <div class="faq-item"><button class="faq-q">My order arrived damaged? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c5ada0a9a9aa85a3a9a4b3aab7b2a4b3eba6aaa8">[email&#160;protected]</a> with a photo and order number. We'll make it right fast.</div></div></div>
-      <div class="faq-item"><button class="faq-q">How do I reach support? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Use the contact form above or email <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4b232e2727240b2d272a3d24393c2a3d65282426">[email&#160;protected]</a>. We respond within 1-2 business days.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What is your return policy? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Returns within 30 days for unopened products. Email support@flavorwav.com with your order number.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">My order arrived damaged? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Email support@flavorwav.com with a photo and order number. We'll make it right fast.</div></div></div>
+      <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How do I reach support? <i class="faq-icon">+</i></button><div class="faq-a"><div class="faq-a-inner">Use the contact form above or email support@flavorwav.com. We respond within 1-2 business days.</div></div></div>
     </div>
   </div>
 </section>
@@ -609,23 +608,27 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
   document.querySelectorAll('.mobile-link,.mobile-menu .btn').forEach(function(l){l.addEventListener('click',function(){m.classList.remove('open');h.classList.remove('open');document.body.style.overflow='';});});
 })();
 // FAQ
-document.addEventListener('DOMContentLoaded', function(){
-document.querySelectorAll('.faq-q').forEach(function(btn){
-  btn.addEventListener('click',function(){
-    var item=btn.closest('.faq-item'),ans=item.querySelector('.faq-a'),open=item.classList.contains('open');
-    item.closest('.faq-group').querySelectorAll('.faq-item').forEach(function(i){i.classList.remove('open');i.querySelector('.faq-a').style.maxHeight='0';});
-    if(!open){item.classList.add('open');ans.style.maxHeight=ans.scrollHeight+'px';}
+// FAQ
+function toggleFaq(btn){
+  var item=btn.closest('.faq-item');
+  var ans=item.querySelector('.faq-a');
+  var isOpen=item.classList.contains('open');
+  item.closest('.faq-group').querySelectorAll('.faq-item').forEach(function(i){
+    i.classList.remove('open');
+    i.querySelector('.faq-a').style.maxHeight='0';
   });
-});
-document.querySelectorAll('.faq-cat').forEach(function(btn){
-  btn.addEventListener('click',function(){
-    document.querySelectorAll('.faq-cat').forEach(function(b){b.classList.remove('active');});
-    document.querySelectorAll('.faq-group').forEach(function(g){g.classList.remove('active');});
-    btn.classList.add('active');
-    var t=document.getElementById('faq-'+btn.dataset.cat);if(t)t.classList.add('active');
-  });
-});
-});
+  if(!isOpen){
+    item.classList.add('open');
+    ans.style.maxHeight=ans.scrollHeight+'px';
+  }
+}
+function switchCat(cat,btn){
+  document.querySelectorAll('.faq-cat').forEach(function(b){b.classList.remove('active');});
+  document.querySelectorAll('.faq-group').forEach(function(g){g.classList.remove('active');});
+  btn.classList.add('active');
+  var t=document.getElementById('faq-'+cat);
+  if(t) t.classList.add('active');
+}
 // CONTACT
 function sendMsg(){
   var n=document.getElementById('cname').value.trim(),e=document.getElemen

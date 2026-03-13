@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>TikTok &mdash; FlavorWav</title>
+<title>TikTok &mdash; FlavorWav™</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
@@ -11,17 +11,21 @@
 :root{--cyan:#00d4ff;--purple:#7b2fff;--pink:#ff2d9e;--dark:#050a14;--dark2:#070e1c;
   --glass:rgba(255,255,255,0.06);--glass-border:rgba(0,212,255,0.18);
   --text:#e8f4ff;--text-dim:rgba(232,244,255,0.6);--nav-height:70px;--radius:16px;
-  --t:0.35s cubic-bezier(0.25,0.8,0.25,1);}
+  --t:0.35s cubic-bezier(0.25,0.8,0.25,1);--tiktok:#ff0050;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{font-family:'Rajdhani',sans-serif;background:#000;color:var(--text);overflow-x:hidden;}
-img{display:block;}
-a{text-decoration:none;color:inherit;}
+img{display:block;}a{text-decoration:none;color:inherit;}
+
+#scroll-bar{position:fixed;top:0;left:0;height:3px;width:0%;z-index:9999;
+  background:linear-gradient(90deg,var(--tiktok),var(--cyan),var(--purple));
+  box-shadow:0 0 10px var(--tiktok);}
 #cursor-dot{position:fixed;width:8px;height:8px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);box-shadow:0 0 10px var(--cyan),0 0 20px rgba(0,212,255,0.4);}
 #cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid rgba(0,212,255,0.45);border-radius:50%;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);}
 body.ch #cursor-dot{background:var(--pink);box-shadow:0 0 16px var(--pink);}
 body.ch #cursor-ring{width:54px;height:54px;border-color:rgba(255,45,158,0.5);}
 @media(hover:none),(pointer:coarse){#cursor-dot,#cursor-ring{display:none;}}
+
 nav#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-height);display:flex;align-items:center;padding:0 24px;background:rgba(5,10,20,0.96);backdrop-filter:blur(20px);box-shadow:0 1px 0 var(--glass-border);}
 .nav-inner{width:100%;display:flex;align-items:center;justify-content:space-between;}
 .nav-logo img{height:42px;width:auto;}
@@ -30,6 +34,8 @@ nav#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-hei
 .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:50px;font-family:'Orbitron',monospace;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;border:none;transition:var(--t);}
 .btn-primary{background:linear-gradient(135deg,var(--cyan),var(--purple));color:#fff;box-shadow:0 0 24px rgba(0,212,255,0.4);}
 .btn-primary:hover{transform:translateY(-3px);}
+.btn-tiktok{background:linear-gradient(135deg,#ff0050,#00f2ea);color:#fff;box-shadow:0 0 24px rgba(255,0,80,0.4);}
+.btn-tiktok:hover{transform:translateY(-3px);box-shadow:0 0 36px rgba(255,0,80,0.5);}
 .nav-cta{padding:8px 16px!important;font-size:8px!important;}
 .hamburger{display:flex;flex-direction:column;gap:5px;cursor:pointer;padding:8px;border:none;background:transparent;z-index:1100;}
 .hamburger span{display:block;width:24px;height:2px;background:var(--cyan);transition:var(--t);transform-origin:center;}
@@ -39,9 +45,111 @@ nav#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-hei
 .mobile-menu{position:fixed;inset:0;background:rgba(5,10,20,0.97);backdrop-filter:blur(24px);z-index:1050;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;transform:translateX(100%);transition:transform 0.45s cubic-bezier(0.25,0.8,0.25,1);}
 .mobile-menu.open{transform:translateX(0);}
 .mobile-menu a{font-family:'Orbitron',monospace;font-size:18px;letter-spacing:3px;text-transform:uppercase;color:var(--text-dim);}
-.mobile-menu a:hover{color:var(--cyan);}
-.images-wrap{padding-top:var(--nav-height);line-height:0;font-size:0;}
-.images-wrap img{width:100%;display:block;margin:0;padding:0;}
+.mobile-menu a:hover,.mobile-menu a.active{color:var(--cyan);}
+.section-label{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);display:block;margin-bottom:12px;}
+.section-title{font-family:'Orbitron',monospace;font-weight:900;line-height:1.1;margin-bottom:16px;}
+.grad{background:linear-gradient(135deg,#ff0050,#00f2ea);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+/* HERO */
+.tt-hero{padding:calc(var(--nav-height) + 60px) 24px 70px;text-align:center;
+  background:url('flav%20hero%20background.png') center/cover no-repeat;position:relative;}
+.tt-hero::before{content:'';position:absolute;inset:0;background:rgba(5,10,20,0.78);}
+.tt-hero-inner{position:relative;z-index:1;max-width:700px;margin:0 auto;}
+.tt-logo-wrap{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:20px;}
+.tt-icon{width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,#ff0050,#00f2ea);
+  display:flex;align-items:center;justify-content:center;box-shadow:0 0 32px rgba(255,0,80,0.5);}
+.tt-handle{font-family:'Orbitron',monospace;font-size:clamp(20px,4vw,36px);font-weight:900;color:var(--text);}
+.tt-hero h1{font-family:'Orbitron',monospace;font-size:clamp(28px,5vw,56px);font-weight:900;margin-bottom:16px;line-height:1.1;}
+.tt-hero p{color:var(--text-dim);font-size:17px;max-width:500px;margin:0 auto 36px;line-height:1.6;}
+.tt-hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+
+/* STATS */
+.tt-stats{background:var(--dark2);border-bottom:1px solid var(--glass-border);padding:28px 24px;}
+.tt-stats-inner{max-width:700px;margin:0 auto;display:flex;justify-content:center;gap:60px;flex-wrap:wrap;}
+.tt-stat-num{font-family:'Orbitron',monospace;font-size:28px;font-weight:900;
+  background:linear-gradient(135deg,#ff0050,#00f2ea);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.tt-stat-label{font-size:12px;color:var(--text-dim);margin-top:4px;letter-spacing:1px;text-align:center;}
+
+/* FEATURED VIDEO */
+.featured-section{background:var(--dark);padding:80px 24px;}
+.featured-inner{max-width:900px;margin:0 auto;}
+.featured-header{text-align:center;margin-bottom:48px;}
+.featured-embed{position:relative;border-radius:20px;overflow:hidden;
+  background:var(--dark2);border:1px solid var(--glass-border);
+  display:flex;align-items:center;justify-content:center;min-height:300px;}
+.embed-placeholder{text-align:center;padding:60px 40px;}
+.embed-placeholder .tt-icon-lg{width:80px;height:80px;border-radius:20px;
+  background:linear-gradient(135deg,#ff0050,#00f2ea);display:flex;align-items:center;
+  justify-content:center;margin:0 auto 20px;box-shadow:0 0 40px rgba(255,0,80,0.4);}
+.embed-placeholder h3{font-family:'Orbitron',monospace;font-size:16px;margin-bottom:10px;}
+.embed-placeholder p{color:var(--text-dim);font-size:15px;max-width:400px;margin:0 auto 24px;}
+/* TO ADD A REAL VIDEO: Replace the embed-placeholder div with:
+   <blockquote class="tiktok-embed" cite="YOUR_VIDEO_URL" data-video-id="YOUR_VIDEO_ID">
+   </blockquote>
+   <script async src="https://www.tiktok.com/embed.js"></script>
+*/
+
+/* VIDEO GRID */
+.videos-section{background:var(--dark2);padding:80px 24px;}
+.videos-inner{max-width:1200px;margin:0 auto;}
+.videos-header{text-align:center;margin-bottom:48px;}
+.videos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;}
+
+.video-slot{background:var(--dark);border:1px solid var(--glass-border);border-radius:20px;
+  overflow:hidden;transition:transform var(--t),border-color var(--t);position:relative;}
+.video-slot:hover{transform:translateY(-4px);border-color:rgba(255,0,80,0.35);}
+.video-slot.live{border-color:rgba(255,0,80,0.3);}
+
+/* 9:16 aspect ratio for TikTok */
+.video-thumb{position:relative;padding-bottom:177.77%;background:var(--dark2);overflow:hidden;}
+.video-thumb iframe{position:absolute;inset:0;width:100%;height:100%;border:none;}
+.video-thumb-placeholder{position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:12px;background:var(--dark2);}
+.placeholder-num{font-family:'Orbitron',monospace;font-size:48px;font-weight:900;
+  color:rgba(255,255,255,0.04);}
+.placeholder-label{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;
+  text-transform:uppercase;color:rgba(255,255,255,0.15);}
+.coming-badge{position:absolute;top:12px;left:12px;background:rgba(255,0,80,0.15);
+  border:1px solid rgba(255,0,80,0.3);border-radius:20px;padding:4px 12px;
+  font-family:'Orbitron',monospace;font-size:8px;letter-spacing:1.5px;
+  text-transform:uppercase;color:#ff0050;}
+.live-badge{background:rgba(255,0,80,0.2);border-color:rgba(255,0,80,0.5);color:#ff0050;
+  animation:pulse-badge 2s infinite;}
+@keyframes pulse-badge{0%,100%{opacity:1;}50%{opacity:0.5;}}
+
+.video-info{padding:16px 18px 20px;}
+.video-title{font-family:'Orbitron',monospace;font-size:11px;font-weight:700;letter-spacing:1px;
+  color:var(--text);margin-bottom:6px;}
+.video-desc{font-size:13px;color:var(--text-dim);line-height:1.5;margin-bottom:12px;}
+.video-meta{display:flex;justify-content:space-between;align-items:center;}
+.video-flavor{font-size:11px;padding:3px 10px;border-radius:20px;
+  font-family:'Orbitron',monospace;letter-spacing:1px;}
+.video-date{font-size:11px;color:var(--text-dim);}
+
+/* HOW TO ADD VIDEOS GUIDE */
+.guide-section{background:var(--dark);padding:80px 24px;}
+.guide-inner{max-width:800px;margin:0 auto;}
+.guide-header{text-align:center;margin-bottom:48px;}
+.guide-box{background:rgba(0,242,234,0.04);border:1px solid rgba(0,242,234,0.18);
+  border-radius:20px;padding:40px;}
+@media(max-width:600px){.guide-box{padding:24px 20px;}}
+.guide-steps{display:flex;flex-direction:column;gap:20px;}
+.guide-step{display:flex;gap:20px;align-items:flex-start;}
+.step-num{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#ff0050,#00f2ea);
+  display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;
+  font-size:13px;font-weight:700;flex-shrink:0;color:#fff;}
+.step-content h4{font-family:'Orbitron',monospace;font-size:11px;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--text);margin-bottom:6px;}
+.step-content p{font-size:14px;color:var(--text-dim);line-height:1.6;}
+.step-content code{background:rgba(0,242,234,0.1);border:1px solid rgba(0,242,234,0.2);
+  border-radius:6px;padding:2px 8px;font-size:12px;color:#00f2ea;font-family:monospace;}
+
+/* FOLLOW CTA */
+.follow-section{background:url('flav%20hero%20background.png') center/cover no-repeat;
+  position:relative;padding:80px 24px;text-align:center;}
+.follow-section::before{content:'';position:absolute;inset:0;background:rgba(5,10,20,0.82);}
+.follow-inner{position:relative;z-index:1;max-width:600px;margin:0 auto;}
+
 footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:40px 0 24px;text-align:center;}
 .ftr-inner{max-width:1200px;margin:0 auto;padding:0 24px;}
 .footer-logo img{height:44px;margin:0 auto 16px;opacity:0.8;width:auto;}
@@ -49,25 +157,23 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
 .footer-links a{font-family:'Orbitron',monospace;font-size:9px;letter-spacing:2px;color:var(--text-dim);transition:color 0.3s;}
 .footer-links a:hover{color:var(--cyan);}
 .footer-copy{font-size:12px;color:rgba(232,244,255,0.3);}
-.tiktok-wrap{position:relative;padding-top:var(--nav-height);line-height:0;font-size:0;}
-.tiktok-wrap img{width:100%;display:block;}
-.tiktok-cta{position:absolute;bottom:7%;left:50%;transform:translateX(-50%);z-index:2;white-space:nowrap;}
-.tiktok-btn{background:linear-gradient(135deg,#69c9d0,#010101 80%);color:#fff;border:1.5px solid rgba(105,201,208,0.35);font-family:'Orbitron',monospace;font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:14px 36px;border-radius:50px;display:inline-flex;align-items:center;gap:10px;box-shadow:0 0 30px rgba(105,201,208,0.3);transition:.35s;text-decoration:none;}
-.tiktok-btn:hover{transform:translateY(-4px);}
 </style>
 </head>
 <body>
+<div id="scroll-bar"></div>
 <div id="cursor-dot"></div>
 <div id="cursor-ring"></div>
+
 <nav id="navbar">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo"><img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav"/></a>
+    <a href="index.html" class="nav-logo"><img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav™"/></a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
       <li><a href="flavors.html">Flavors</a></li>
       <li><a href="howitworks.html">How It Works</a></li>
       <li><a href="tiktok.html" class="active">TikTok</a></li>
+      <li><a href="reviews.html">Reviews</a></li>
       <li><a href="index.html#contact">Contact</a></li>
       <li><a href="index.html#faq">FAQ</a></li>
       <li><a href="shop.html" class="btn btn-primary nav-cta">Shop Now</a></li>
@@ -80,32 +186,248 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
   <a href="about.html" class="mobile-link">About</a>
   <a href="flavors.html" class="mobile-link">Flavors</a>
   <a href="howitworks.html" class="mobile-link">How It Works</a>
-  <a href="tiktok.html" class="mobile-link">TikTok</a>
+  <a href="tiktok.html" class="mobile-link active">TikTok</a>
+  <a href="reviews.html" class="mobile-link">Reviews</a>
   <a href="index.html#contact" class="mobile-link">Contact</a>
   <a href="index.html#faq" class="mobile-link">FAQ</a>
   <a href="shop.html" class="btn btn-primary" style="margin-top:8px;">Shop Now</a>
 </div>
-<div class="tiktok-wrap">
-  <img src="Flavorwav%20TIKTOK%20Action%20Page.png" alt="FlavorWav TikTok" onerror="if(!this._tried){this._tried=true;this.src='Flavorwav_TIKTOK_Action_Page.png';}" />
-  <div class="tiktok-cta">
-    <a href="https://www.tiktok.com/@flavorwav" target="_blank" rel="noopener" class="tiktok-btn">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.73a4.85 4.85 0 0 1-1.01-.04z"/></svg>
-      Follow Us on TikTok
-    </a>
+
+<!-- HERO -->
+<section class="tt-hero">
+  <div class="tt-hero-inner">
+    <div class="tt-logo-wrap">
+      <div class="tt-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.73a4.85 4.85 0 0 1-1.01-.04z"/></svg>
+      </div>
+      <div class="tt-handle">@flavorwav</div>
+    </div>
+    <h1>Watch <span class="grad">FlavorWav™</span> In Action</h1>
+    <p>See the straw that's changing the way people hydrate. Follow us for new drops, flavor reveals, and more.</p>
+    <div class="tt-hero-btns">
+      <a href="https://www.tiktok.com/@flavorwav" target="_blank" rel="noopener" class="btn btn-tiktok">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.73a4.85 4.85 0 0 1-1.01-.04z"/></svg>
+        Follow @flavorwav
+      </a>
+      <a href="shop.html" class="btn btn-primary">Shop Now →</a>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="tt-stats">
+  <div class="tt-stats-inner">
+    <div style="text-align:center;">
+      <div class="tt-stat-num" id="followerCount">—</div>
+      <div class="tt-stat-label">Followers</div>
+    </div>
+    <div style="text-align:center;">
+      <div class="tt-stat-num">0</div>
+      <div class="tt-stat-label">Videos Posted</div>
+    </div>
+    <div style="text-align:center;">
+      <div class="tt-stat-num">—</div>
+      <div class="tt-stat-label">Total Likes</div>
+    </div>
+    <div style="text-align:center;">
+      <div class="tt-stat-num">4</div>
+      <div class="tt-stat-label">Flavors Featured</div>
+    </div>
   </div>
 </div>
+
+<!-- FEATURED VIDEO -->
+<section class="featured-section">
+  <div class="featured-inner">
+    <div class="featured-header">
+      <span class="section-label">Latest Drop</span>
+      <h2 class="section-title" style="font-size:clamp(22px,3.5vw,40px);">Featured <span class="grad">Video</span></h2>
+    </div>
+    <div class="featured-embed">
+      <!-- REPLACE THIS BLOCK WITH A TIKTOK EMBED ONCE YOU HAVE VIDEOS LIVE:
+           1. Go to your TikTok video → Share → Embed
+           2. Copy the blockquote embed code
+           3. Paste it here replacing this placeholder div
+      -->
+      <div class="embed-placeholder">
+        <div class="tt-icon-lg">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="#fff"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.73a4.85 4.85 0 0 1-1.01-.04z"/></svg>
+        </div>
+        <h3>First Video Coming Soon</h3>
+        <p>We're launching on TikTok soon. Follow @flavorwav to be the first to see it.</p>
+        <a href="https://www.tiktok.com/@flavorwav" target="_blank" class="btn btn-tiktok" style="font-size:10px;padding:12px 28px;">Follow Us Now</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO GRID -->
+<section class="videos-section">
+  <div class="videos-inner">
+    <div class="videos-header">
+      <span class="section-label">All Videos</span>
+      <h2 class="section-title" style="font-size:clamp(22px,3.5vw,40px);">The <span class="grad">Content</span></h2>
+      <p style="color:var(--text-dim);font-size:15px;margin-top:8px;">Videos will appear here as they're posted.</p>
+    </div>
+    <div class="videos-grid" id="videosGrid">
+
+      <!-- =============================================
+           TO ADD A VIDEO — copy this block and fill in:
+
+      <div class="video-slot live">
+        <div class="video-thumb">
+          <blockquote class="tiktok-embed" cite="VIDEO_URL" data-video-id="VIDEO_ID" style="max-width:100%;min-width:unset;">
+            <section></section>
+          </blockquote>
+        </div>
+        <div class="video-info">
+          <div class="video-title">Your Video Title</div>
+          <div class="video-desc">Short description of the video</div>
+          <div class="video-meta">
+            <span class="video-flavor" style="background:rgba(0,212,255,0.08);color:var(--cyan);border:1px solid rgba(0,212,255,0.2);">💙 Blue Raspberry</span>
+            <span class="video-date">Mar 2025</span>
+          </div>
+        </div>
+      </div>
+
+      ============================================= -->
+
+      <!-- PLACEHOLDER SLOTS — will fill as videos go live -->
+      <div class="video-slot">
+        <div class="video-thumb">
+          <div class="video-thumb-placeholder">
+            <div class="placeholder-num">1</div>
+            <div class="placeholder-label">Coming Soon</div>
+          </div>
+          <span class="coming-badge">Coming Soon</span>
+        </div>
+        <div class="video-info">
+          <div class="video-title">First Drop</div>
+          <div class="video-desc">Our launch video — stay tuned.</div>
+          <div class="video-meta">
+            <span class="video-flavor" style="background:rgba(0,212,255,0.08);color:var(--cyan);border:1px solid rgba(0,212,255,0.18);">🌊 FlavorWav™</span>
+            <span class="video-date">Coming Soon</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="video-slot">
+        <div class="video-thumb">
+          <div class="video-thumb-placeholder">
+            <div class="placeholder-num">2</div>
+            <div class="placeholder-label">Coming Soon</div>
+          </div>
+          <span class="coming-badge">Coming Soon</span>
+        </div>
+        <div class="video-info">
+          <div class="video-title">Flavor Reveal</div>
+          <div class="video-desc">Meet all four formulas.</div>
+          <div class="video-meta">
+            <span class="video-flavor" style="background:rgba(255,220,0,0.08);color:#ffd700;border:1px solid rgba(255,220,0,0.18);">🍋 Energy Lemon</span>
+            <span class="video-date">Coming Soon</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="video-slot">
+        <div class="video-thumb">
+          <div class="video-thumb-placeholder">
+            <div class="placeholder-num">3</div>
+            <div class="placeholder-label">Coming Soon</div>
+          </div>
+          <span class="coming-badge">Coming Soon</span>
+        </div>
+        <div class="video-info">
+          <div class="video-title">How It Works</div>
+          <div class="video-desc">Insert. Sip. Dissolve.</div>
+          <div class="video-meta">
+            <span class="video-flavor" style="background:rgba(168,85,247,0.08);color:#c084fc;border:1px solid rgba(168,85,247,0.18);">⚡ Zenergy Grape</span>
+            <span class="video-date">Coming Soon</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO ADD VIDEOS GUIDE -->
+<section class="guide-section">
+  <div class="guide-inner">
+    <div class="guide-header">
+      <span class="section-label">For Site Admin</span>
+      <h2 class="section-title" style="font-size:clamp(20px,3vw,36px);">How to Add <span class="grad">New Videos</span></h2>
+      <p style="color:var(--text-dim);font-size:15px;margin-top:8px;">Follow these steps each time you post a new TikTok.</p>
+    </div>
+    <div class="guide-box">
+      <div class="guide-steps">
+        <div class="guide-step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <h4>Post on TikTok</h4>
+            <p>Upload your video to TikTok at <code>@flavorwav</code>. Wait for it to go live.</p>
+          </div>
+        </div>
+        <div class="guide-step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <h4>Get the Embed Code</h4>
+            <p>On your TikTok video → tap <strong>Share</strong> → <strong>Embed</strong>. Copy the <code>&lt;blockquote&gt;</code> code snippet.</p>
+          </div>
+        </div>
+        <div class="guide-step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <h4>Add to This Page</h4>
+            <p>Open <code>tiktok.html</code> → find the <code>videosGrid</code> section → copy the video block template from the comment and paste your embed code inside <code>.video-thumb</code>.</p>
+          </div>
+        </div>
+        <div class="guide-step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <h4>Update the Featured Video</h4>
+            <p>Replace the <code>embed-placeholder</code> div in the Featured section with your latest embed code to spotlight your newest video.</p>
+          </div>
+        </div>
+        <div class="guide-step">
+          <div class="step-num">5</div>
+          <div class="step-content">
+            <h4>Update the Stats</h4>
+            <p>Update follower count, video count, and likes in the stats bar above to keep your social proof current.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOLLOW CTA -->
+<section class="follow-section">
+  <div class="follow-inner">
+    <span class="section-label">Join the Community</span>
+    <h2 class="section-title" style="font-size:clamp(24px,4vw,44px);margin-bottom:16px;">Follow <span class="grad">@flavorwav</span></h2>
+    <p style="color:var(--text-dim);font-size:16px;margin-bottom:32px;">New content dropping soon. Be the first to see it.</p>
+    <a href="https://www.tiktok.com/@flavorwav" target="_blank" rel="noopener" class="btn btn-tiktok" style="font-size:12px;padding:14px 40px;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.73a4.85 4.85 0 0 1-1.01-.04z"/></svg>
+      Follow on TikTok
+    </a>
+  </div>
+</section>
+
 <footer>
   <div class="ftr-inner">
-    <div class="footer-logo"><img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav"/></div>
+    <div class="footer-logo"><img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav™"/></div>
     <nav class="footer-links">
       <a href="index.html">Home</a><a href="about.html">About</a><a href="flavors.html">Flavors</a>
       <a href="howitworks.html">How It Works</a><a href="tiktok.html">TikTok</a>
-      <a href="index.html#contact">Contact</a><a href="index.html#faq">FAQ</a>
+      <a href="reviews.html">Reviews</a><a href="index.html#contact">Contact</a><a href="index.html#faq">FAQ</a>
     </nav>
-    <p class="footer-copy">&copy; 2025 FlavorWav. All rights reserved. California, USA.</p>
+    <p class="footer-copy">&copy; 2025 FlavorWav™. All rights reserved. California, USA.</p>
   </div>
 </footer>
+
 <script>
+(function(){var bar=document.getElementById('scroll-bar');if(!bar)return;window.addEventListener('scroll',function(){var s=document.documentElement.scrollTop||document.body.scrollTop;var h=document.documentElement.scrollHeight-document.documentElement.clientHeight;bar.style.width=(h>0?(s/h*100):0)+'%';},{passive:true});})();
 (function(){var dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');if(!dot||!ring)return;var mx=window.innerWidth/2,my=window.innerHeight/2,rx=mx,ry=my;document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});(function t(){rx+=(mx-rx)*0.13;ry+=(my-ry)*0.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(t);})();document.querySelectorAll('a,button').forEach(function(el){el.addEventListener('mouseenter',function(){document.body.classList.add('ch');});el.addEventListener('mouseleave',function(){document.body.classList.remove('ch');});});})();
 (function(){var h=document.getElementById('hamburger'),m=document.getElementById('mobileMenu');if(!h||!m)return;h.addEventListener('click',function(){var o=m.classList.toggle('open');h.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';});document.querySelectorAll('.mobile-link,.mobile-menu .btn').forEach(function(l){l.addEventListener('click',function(){m.classList.remove('open');h.classList.remove('open');document.body.style.overflow='';});});})();
 </script>

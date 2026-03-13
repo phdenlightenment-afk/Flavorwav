@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>About Us &mdash; FlavorWav</title>
+<title>About Us &mdash; FlavorWav™</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
@@ -15,13 +15,17 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{font-family:'Rajdhani',sans-serif;background:#000;color:var(--text);overflow-x:hidden;}
-img{display:block;}
-a{text-decoration:none;color:inherit;}
+img{display:block;}a{text-decoration:none;color:inherit;}
+
+#scroll-bar{position:fixed;top:0;left:0;height:3px;width:0%;z-index:9999;
+  background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink));
+  box-shadow:0 0 10px var(--cyan);}
 #cursor-dot{position:fixed;width:8px;height:8px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);box-shadow:0 0 10px var(--cyan),0 0 20px rgba(0,212,255,0.4);}
 #cursor-ring{position:fixed;width:36px;height:36px;border:1.5px solid rgba(0,212,255,0.45);border-radius:50%;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);}
 body.ch #cursor-dot{background:var(--pink);box-shadow:0 0 16px var(--pink);}
 body.ch #cursor-ring{width:54px;height:54px;border-color:rgba(255,45,158,0.5);}
 @media(hover:none),(pointer:coarse){#cursor-dot,#cursor-ring{display:none;}}
+
 nav#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-height);display:flex;align-items:center;padding:0 24px;background:rgba(5,10,20,0.96);backdrop-filter:blur(20px);box-shadow:0 1px 0 var(--glass-border);}
 .nav-inner{width:100%;display:flex;align-items:center;justify-content:space-between;}
 .nav-logo img{height:42px;width:auto;}
@@ -39,9 +43,70 @@ nav#navbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-hei
 .mobile-menu{position:fixed;inset:0;background:rgba(5,10,20,0.97);backdrop-filter:blur(24px);z-index:1050;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;transform:translateX(100%);transition:transform 0.45s cubic-bezier(0.25,0.8,0.25,1);}
 .mobile-menu.open{transform:translateX(0);}
 .mobile-menu a{font-family:'Orbitron',monospace;font-size:18px;letter-spacing:3px;text-transform:uppercase;color:var(--text-dim);}
-.mobile-menu a:hover{color:var(--cyan);}
-.images-wrap{padding-top:var(--nav-height);line-height:0;font-size:0;}
-.images-wrap img{width:100%;display:block;margin:0;padding:0;}
+.mobile-menu a:hover,.mobile-menu a.active{color:var(--cyan);}
+.section-label{font-family:'Orbitron',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);display:block;margin-bottom:12px;}
+.section-title{font-family:'Orbitron',monospace;font-weight:900;line-height:1.1;margin-bottom:16px;}
+.grad{background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+
+/* HERO */
+.about-hero{min-height:80vh;display:flex;align-items:center;justify-content:center;text-align:center;
+  padding:calc(var(--nav-height) + 60px) 24px 80px;
+  background:url('flav%20hero%20background.png') center/cover no-repeat;position:relative;}
+.about-hero::before{content:'';position:absolute;inset:0;background:rgba(5,10,20,0.72);}
+.about-hero-inner{position:relative;z-index:1;max-width:800px;margin:0 auto;}
+.about-hero h1{font-family:'Orbitron',monospace;font-size:clamp(36px,7vw,80px);font-weight:900;line-height:1.05;margin-bottom:24px;}
+.about-hero p{font-size:clamp(17px,2.5vw,22px);color:var(--text-dim);max-width:600px;margin:0 auto 40px;line-height:1.7;}
+.hero-tagline{font-family:'Orbitron',monospace;font-size:clamp(12px,1.5vw,15px);letter-spacing:4px;
+  text-transform:uppercase;color:var(--cyan);margin-bottom:20px;}
+
+/* ORIGIN STORY */
+.origin-section{background:var(--dark);padding:100px 24px;}
+.origin-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+@media(max-width:860px){.origin-inner{grid-template-columns:1fr;gap:48px;}}
+.origin-visual{position:relative;}
+.origin-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:24px;padding:40px;text-align:center;}
+.origin-icon{font-size:72px;margin-bottom:20px;display:block;}
+.origin-card h3{font-family:'Orbitron',monospace;font-size:18px;font-weight:700;margin-bottom:12px;}
+.origin-card p{color:var(--text-dim);font-size:15px;line-height:1.7;}
+.origin-glow{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(0,212,255,0.12),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
+.origin-text h2{font-size:clamp(26px,4vw,44px);margin-bottom:24px;}
+.origin-text p{color:var(--text-dim);font-size:16px;line-height:1.85;margin-bottom:20px;}
+
+/* MISSION PILLARS */
+.pillars-section{background:var(--dark2);padding:100px 24px;position:relative;overflow:hidden;}
+.pillars-section::before{content:'';position:absolute;inset:0;background:url('flav%20hero%20background.png') center/cover no-repeat;opacity:0.05;}
+.pillars-inner{max-width:1100px;margin:0 auto;position:relative;z-index:1;}
+.pillars-header{text-align:center;margin-bottom:64px;}
+.pillars-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;}
+.pillar-card{background:rgba(255,255,255,0.04);border:1px solid var(--glass-border);border-radius:20px;padding:36px 28px;text-align:center;transition:transform var(--t),border-color var(--t);}
+.pillar-card:hover{transform:translateY(-6px);border-color:rgba(0,212,255,0.35);}
+.pillar-icon{font-size:40px;margin-bottom:20px;display:block;}
+.pillar-title{font-family:'Orbitron',monospace;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:12px;}
+.pillar-text{color:var(--text-dim);font-size:15px;line-height:1.7;}
+
+/* WHAT MAKES US DIFFERENT */
+.diff-section{background:var(--dark);padding:100px 24px;}
+.diff-inner{max-width:1100px;margin:0 auto;}
+.diff-header{text-align:center;margin-bottom:64px;}
+.diff-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+@media(max-width:700px){.diff-grid{grid-template-columns:1fr;}}
+.diff-item{background:var(--glass);border:1px solid var(--glass-border);border-radius:16px;padding:28px;display:flex;gap:20px;align-items:flex-start;transition:border-color var(--t);}
+.diff-item:hover{border-color:rgba(0,212,255,0.3);}
+.diff-num{font-family:'Orbitron',monospace;font-size:28px;font-weight:900;color:rgba(0,212,255,0.25);flex-shrink:0;line-height:1;}
+.diff-content h4{font-family:'Orbitron',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text);margin-bottom:8px;}
+.diff-content p{color:var(--text-dim);font-size:14px;line-height:1.7;}
+
+/* STATS */
+.stats-section{background:linear-gradient(135deg,rgba(0,212,255,0.06),rgba(123,47,255,0.08));
+  border-top:1px solid var(--glass-border);border-bottom:1px solid var(--glass-border);padding:70px 24px;}
+.stats-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:40px;text-align:center;}
+.stat-num{font-family:'Orbitron',monospace;font-size:clamp(36px,5vw,56px);font-weight:900;
+  background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;}
+.stat-label{font-size:14px;color:var(--text-dim);margin-top:6px;letter-spacing:1px;}
+
+/* CTA */
+.about-cta{background:var(--dark2);padding:100px 24px;text-align:center;}
+
 footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:40px 0 24px;text-align:center;}
 .ftr-inner{max-width:1200px;margin:0 auto;padding:0 24px;}
 .footer-logo img{height:44px;margin:0 auto 16px;opacity:0.8;width:auto;}
@@ -52,17 +117,20 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
 </style>
 </head>
 <body>
+<div id="scroll-bar"></div>
 <div id="cursor-dot"></div>
 <div id="cursor-ring"></div>
+
 <nav id="navbar">
   <div class="nav-inner">
-    <a href="index.html" class="nav-logo"><img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav"/></a>
+    <a href="index.html" class="nav-logo"><img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav™"/></a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="about.html" class="active">About</a></li>
       <li><a href="flavors.html">Flavors</a></li>
       <li><a href="howitworks.html">How It Works</a></li>
       <li><a href="tiktok.html">TikTok</a></li>
+      <li><a href="reviews.html">Reviews</a></li>
       <li><a href="index.html#contact">Contact</a></li>
       <li><a href="index.html#faq">FAQ</a></li>
       <li><a href="shop.html" class="btn btn-primary nav-cta">Shop Now</a></li>
@@ -72,29 +140,185 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
 </nav>
 <div class="mobile-menu" id="mobileMenu">
   <a href="index.html" class="mobile-link">Home</a>
-  <a href="about.html" class="mobile-link">About</a>
+  <a href="about.html" class="mobile-link active">About</a>
   <a href="flavors.html" class="mobile-link">Flavors</a>
   <a href="howitworks.html" class="mobile-link">How It Works</a>
   <a href="tiktok.html" class="mobile-link">TikTok</a>
+  <a href="reviews.html" class="mobile-link">Reviews</a>
   <a href="index.html#contact" class="mobile-link">Contact</a>
   <a href="index.html#faq" class="mobile-link">FAQ</a>
   <a href="shop.html" class="btn btn-primary" style="margin-top:8px;">Shop Now</a>
 </div>
-<div class="images-wrap">
-  <img src="about%20us%20no%20glow%20city.png" alt="About FlavorWav" onerror="if(!this._tried){this._tried=true;this.src='about_us_no_glow_city.png';}" />
-</div>
+
+<!-- HERO -->
+<section class="about-hero">
+  <div class="about-hero-inner">
+    <p class="hero-tagline">Our Story</p>
+    <h1>We Are <span class="grad">FlavorWav™</span></h1>
+    <p>Born from a simple question — why should staying hydrated be boring? We set out to turn every sip into something worth looking forward to.</p>
+    <a href="shop.html" class="btn btn-primary" style="font-size:12px;padding:14px 36px;">Shop FlavorWav™</a>
+  </div>
+</section>
+
+<!-- ORIGIN STORY -->
+<section class="origin-section">
+  <div class="origin-inner">
+    <div class="origin-visual">
+      <div class="origin-glow"></div>
+      <div class="origin-card">
+        <span class="origin-icon">🌊</span>
+        <h3>The Idea</h3>
+        <p>What if your straw could do more than just carry liquid from cup to mouth? What if it could carry vitamins, energy, probiotics — and taste incredible doing it?</p>
+      </div>
+    </div>
+    <div class="origin-text">
+      <span class="section-label">How It Started</span>
+      <h2 class="section-title" style="font-size:clamp(24px,4vw,42px);">Turning Water Into <span class="grad">Something More</span></h2>
+      <p>FlavorWav™ started with a 40oz tumbler, a problem, and an obsession. Staying hydrated was a chore. Supplements were messy. Pre-workout was chalky. There had to be a better way.</p>
+      <p>We spent months developing a paper-based infused straw that dissolves functional ingredients — vitamins, caffeine, probiotics, and natural flavors — directly into your drink as you sip. No powders, no pills, no prep.</p>
+      <p>The result is FlavorWav™ — a line of 12" infused straws designed to fit your Stanley, Yeti, RTIC, or any 30oz and 40oz tumbler. Just insert, sip, and ride the wav.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION PILLARS -->
+<section class="pillars-section">
+  <div class="pillars-inner">
+    <div class="pillars-header">
+      <span class="section-label">What We Stand For</span>
+      <h2 class="section-title" style="font-size:clamp(24px,4vw,44px);">Our <span class="grad">Mission</span></h2>
+      <p style="color:var(--text-dim);font-size:16px;max-width:520px;margin:0 auto;">Every decision we make comes back to three things.</p>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar-card">
+        <span class="pillar-icon">🧬</span>
+        <div class="pillar-title">Function First</div>
+        <p class="pillar-text">Every straw delivers real, effective doses of functional ingredients — not trace amounts. Alpha GPC, 50B CFU probiotics, C4 pre-workout. We don't cut corners.</p>
+      </div>
+      <div class="pillar-card">
+        <span class="pillar-icon">🌱</span>
+        <div class="pillar-title">Clean & Honest</div>
+        <p class="pillar-text">Nature-derived ingredients only. No artificial dyes, no adhesive seams, PFAS-tested, and 100% biodegradable paper construction. Clean label — always.</p>
+      </div>
+      <div class="pillar-card">
+        <span class="pillar-icon">⚡</span>
+        <div class="pillar-title">Built for Your Life</div>
+        <p class="pillar-text">Fits your 30oz and 40oz tumblers. No prep, no mess, no extra gear. Drop it in and go — whether you're at the gym, the office, or on the road.</p>
+      </div>
+      <div class="pillar-card">
+        <span class="pillar-icon">🌊</span>
+        <div class="pillar-title">Taste the Wav</div>
+        <p class="pillar-text">Function means nothing if it tastes bad. We obsessed over every flavor — Lemon, Grape, Blue Raspberry, and Mixed Berry — until every sip was something to look forward to.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT MAKES US DIFFERENT -->
+<section class="diff-section">
+  <div class="diff-inner">
+    <div class="diff-header">
+      <span class="section-label">The Difference</span>
+      <h2 class="section-title" style="font-size:clamp(24px,4vw,44px);">Why <span class="grad">FlavorWav™</span></h2>
+    </div>
+    <div class="diff-grid">
+      <div class="diff-item">
+        <div class="diff-num">01</div>
+        <div class="diff-content">
+          <h4>No Powder. No Mess.</h4>
+          <p>Pre-workout and supplements in powder form are messy, clumpy, and a hassle to travel with. FlavorWav™ fits in your pocket.</p>
+        </div>
+      </div>
+      <div class="diff-item">
+        <div class="diff-num">02</div>
+        <div class="diff-content">
+          <h4>Rapid Delivery</h4>
+          <p>The infused inner lining dissolves as liquid flows through the straw — delivering ingredients with every sip, not all at once.</p>
+        </div>
+      </div>
+      <div class="diff-item">
+        <div class="diff-num">03</div>
+        <div class="diff-content">
+          <h4>100% Biodegradable</h4>
+          <p>Paper-based with a verified biodegradability report. We built a better product without building a bigger problem for the planet.</p>
+        </div>
+      </div>
+      <div class="diff-item">
+        <div class="diff-num">04</div>
+        <div class="diff-content">
+          <h4>PFAS Tested & Safe</h4>
+          <p>Tested for PFAS and key chemical screens. Glueless construction with no adhesive seam. You can trust what goes in your body.</p>
+        </div>
+      </div>
+      <div class="diff-item">
+        <div class="diff-num">05</div>
+        <div class="diff-content">
+          <h4>Four Functional Formulas</h4>
+          <p>Focus & Energy, Power Boost, Pre-Workout Performance, and Gut Health Probiotic. One lineup, every goal covered.</p>
+        </div>
+      </div>
+      <div class="diff-item">
+        <div class="diff-num">06</div>
+        <div class="diff-content">
+          <h4>Fits Your Favorite Tumbler</h4>
+          <p>12" straws engineered for 30oz and 40oz tumblers — Yeti, Stanley, RTIC, Hydro Flask, and more. No adapter needed.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-section">
+  <div class="stats-inner">
+    <div>
+      <span class="stat-num">4</span>
+      <div class="stat-label">Functional Flavors</div>
+    </div>
+    <div>
+      <span class="stat-num">50B</span>
+      <div class="stat-label">CFU Probiotics</div>
+    </div>
+    <div>
+      <span class="stat-num">12"</span>
+      <div class="stat-label">Fits 30oz & 40oz</div>
+    </div>
+    <div>
+      <span class="stat-num">0</span>
+      <div class="stat-label">Added Sugars</div>
+    </div>
+    <div>
+      <span class="stat-num">100%</span>
+      <div class="stat-label">Biodegradable</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="about-cta">
+  <span class="section-label">Join the Wav</span>
+  <h2 class="section-title" style="font-size:clamp(24px,4vw,44px);margin-bottom:16px;">Ready to Ride the <span class="grad">Wav?</span></h2>
+  <p style="color:var(--text-dim);font-size:16px;margin-bottom:36px;max-width:480px;margin-left:auto;margin-right:auto;">Premium infused straws packed with flavor, vitamins, caffeine, and fiber. Free shipping on qualifying orders.</p>
+  <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+    <a href="shop.html" class="btn btn-primary" style="font-size:12px;padding:14px 36px;" onclick="window.location.href='shop.html';return false;">Shop All Flavors →</a>
+    <a href="flavors.html" class="btn" style="font-size:12px;padding:14px 36px;background:transparent;border:1.5px solid var(--cyan);color:var(--cyan);">View Flavors</a>
+  </div>
+</section>
+
 <footer>
   <div class="ftr-inner">
-    <div class="footer-logo"><img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav"/></div>
+    <div class="footer-logo"><img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav™"/></div>
     <nav class="footer-links">
       <a href="index.html">Home</a><a href="about.html">About</a><a href="flavors.html">Flavors</a>
       <a href="howitworks.html">How It Works</a><a href="tiktok.html">TikTok</a>
-      <a href="index.html#contact">Contact</a><a href="index.html#faq">FAQ</a>
+      <a href="reviews.html">Reviews</a><a href="index.html#contact">Contact</a><a href="index.html#faq">FAQ</a>
     </nav>
-    <p class="footer-copy">&copy; 2025 FlavorWav. All rights reserved. California, USA.</p>
+    <p class="footer-copy">&copy; 2025 FlavorWav™. All rights reserved. California, USA.</p>
   </div>
 </footer>
+
 <script>
+(function(){var bar=document.getElementById('scroll-bar');if(!bar)return;window.addEventListener('scroll',function(){var s=document.documentElement.scrollTop||document.body.scrollTop;var h=document.documentElement.scrollHeight-document.documentElement.clientHeight;bar.style.width=(h>0?(s/h*100):0)+'%';},{passive:true});})();
 (function(){var dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');if(!dot||!ring)return;var mx=window.innerWidth/2,my=window.innerHeight/2,rx=mx,ry=my;document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});(function t(){rx+=(mx-rx)*0.13;ry+=(my-ry)*0.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(t);})();document.querySelectorAll('a,button').forEach(function(el){el.addEventListener('mouseenter',function(){document.body.classList.add('ch');});el.addEventListener('mouseleave',function(){document.body.classList.remove('ch');});});})();
 (function(){var h=document.getElementById('hamburger'),m=document.getElementById('mobileMenu');if(!h||!m)return;h.addEventListener('click',function(){var o=m.classList.toggle('open');h.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';});document.querySelectorAll('.mobile-link,.mobile-menu .btn').forEach(function(l){l.addEventListener('click',function(){m.classList.remove('open');h.classList.remove('open');document.body.style.overflow='';});});})();
 </script>

@@ -351,12 +351,49 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
 .footer-links a:hover{color:var(--cyan);}
 .footer-copy{font-size:12px;color:rgba(232,244,255,0.3);}
 
+/* SCROLL PROGRESS BAR */
+#scroll-bar{position:fixed;top:0;left:0;height:3px;width:0%;z-index:9999;
+  background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink));
+  box-shadow:0 0 10px var(--cyan);transition:width 0.05s linear;}
+
+/* TESTIMONIALS */
+.testimonials-section{background:var(--dark2);padding:80px 24px;}
+.testimonials-inner{max-width:1100px;margin:0 auto;}
+.testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin-top:48px;}
+.testi-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:20px;padding:28px;
+  transition:border-color var(--t),transform var(--t);}
+.testi-card:hover{border-color:rgba(0,212,255,0.35);transform:translateY(-4px);}
+.testi-stars{color:#ffd700;font-size:16px;letter-spacing:2px;margin-bottom:14px;}
+.testi-text{font-size:16px;color:var(--text-dim);line-height:1.7;margin-bottom:20px;font-style:italic;}
+.testi-author{display:flex;align-items:center;gap:12px;}
+.testi-avatar{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-family:'Orbitron',monospace;font-size:13px;font-weight:700;flex-shrink:0;}
+.testi-name{font-weight:600;font-size:15px;}
+.testi-handle{font-size:12px;color:var(--text-dim);}
+.testi-flavor{display:inline-block;margin-top:16px;padding:4px 12px;border-radius:20px;
+  font-size:11px;letter-spacing:1px;font-family:'Orbitron',monospace;}
+
+/* EMAIL SIGNUP */
+.email-section{background:url('flav%20hero%20background.png') center/cover no-repeat;position:relative;padding:80px 24px;}
+.email-section::before{content:'';position:absolute;inset:0;background:rgba(5,10,20,0.82);}
+.email-inner{max-width:600px;margin:0 auto;text-align:center;position:relative;z-index:1;}
+.email-form{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap;justify-content:center;}
+.email-input{flex:1;min-width:240px;padding:14px 20px;border-radius:50px;border:1.5px solid var(--glass-border);
+  background:rgba(255,255,255,0.06);color:var(--text);font-family:'Rajdhani',sans-serif;font-size:15px;outline:none;
+  transition:border-color var(--t);}
+.email-input::placeholder{color:var(--text-dim);}
+.email-input:focus{border-color:var(--cyan);}
+.email-note{margin-top:14px;font-size:12px;color:rgba(232,244,255,0.35);}
+.email-success{display:none;margin-top:20px;padding:14px 24px;border-radius:12px;
+  background:rgba(0,212,255,0.1);border:1px solid rgba(0,212,255,0.3);color:var(--cyan);font-size:15px;}
+
 @media(max-width:900px){.contact-grid{grid-template-columns:1fr;gap:32px;}}
 @media(max-width:600px){.hero-actions{flex-direction:column;align-items:center;}.cards-grid{grid-template-columns:1fr 1fr;}}
 </style>
 </head>
 <body>
 
+<div id="scroll-bar"></div>
 <div id="cursor-dot"></div>
 <div id="cursor-ring"></div>
 <div id="float-shop"><a href="shop.html" class="float-btn"><div class="float-pulse"></div>Shop Now</a></div>
@@ -585,6 +622,69 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
 })();
 </script>
 
+<!-- TESTIMONIALS -->
+<section class="testimonials-section">
+  <div class="testimonials-inner">
+    <div style="text-align:center;">
+      <span class="section-label">Real Reviews</span>
+      <h2 class="section-title" style="font-size:clamp(24px,4vw,44px);">What People Are <span style="background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Saying</span></h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"I put this in my Stanley every morning. The Alpha Lemon flavor is insane — I actually look forward to drinking water now. And I can feel the focus kick in."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:rgba(255,220,0,0.15);color:#ffd700;">JR</div>
+          <div>
+            <div class="testi-name">Jake R.</div>
+            <div class="testi-handle">Verified Buyer</div>
+          </div>
+        </div>
+        <span class="testi-flavor" style="background:rgba(255,220,0,0.1);color:#ffd700;border:1px solid rgba(255,220,0,0.2);">🍋 Energy Lemon</span>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Obsessed. Fits my 40oz Yeti perfectly and the Mixed Berry probiotic is my daily routine now. No more buying separate probiotic supplements."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:rgba(255,45,158,0.15);color:var(--pink);">AM</div>
+          <div>
+            <div class="testi-name">Alyssa M.</div>
+            <div class="testi-handle">Verified Buyer</div>
+          </div>
+        </div>
+        <span class="testi-flavor" style="background:rgba(255,45,158,0.1);color:var(--pink);border:1px solid rgba(255,45,158,0.2);">🫐 Mixed Berry Probiotic</span>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Used the C4 Blue Raspberry before my gym session. No chalky powder, no mess — just insert and go. Felt the pre-workout hit right on time. Game changer."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:rgba(0,212,255,0.12);color:var(--cyan);">DT</div>
+          <div>
+            <div class="testi-name">Devon T.</div>
+            <div class="testi-handle">Verified Buyer</div>
+          </div>
+        </div>
+        <span class="testi-flavor" style="background:rgba(0,212,255,0.08);color:var(--cyan);border:1px solid rgba(0,212,255,0.2);">💙 Blue Raspberry C4</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EMAIL SIGNUP -->
+<section class="email-section">
+  <div class="email-inner">
+    <span class="section-label">Stay in the Wav</span>
+    <h2 class="section-title" style="font-size:clamp(24px,4vw,42px);">Get Early Access & <span style="background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Deals</span></h2>
+    <p style="color:var(--text-dim);font-size:16px;margin-top:8px;">Be first to know about new flavors, restocks, and exclusive discounts.</p>
+    <div class="email-form">
+      <input class="email-input" type="email" id="emailInput" placeholder="Enter your email address"/>
+      <button class="btn btn-primary" onclick="submitEmail()" style="padding:14px 28px;font-size:11px;">Subscribe</button>
+    </div>
+    <p class="email-note">No spam. Unsubscribe anytime. We respect your privacy.</p>
+    <div class="email-success" id="emailSuccess">🌊 You're on the list! Welcome to the Wav.</div>
+  </div>
+</section>
+
 <footer>
   <div class="ftr-inner">
     <div class="footer-logo"><img src="FLAVORWAVLOGOOFFICIAL.png" alt="FlavorWav"/></div>
@@ -663,4 +763,32 @@ function switchCat(cat,btn){
 }
 // CONTACT
 function sendMsg(){
-  var n=document.getElementById('cname').value.trim(),e=document.getElemen
+  var n=document.getElementById('cname').value.trim(),e=document.getElementById('cemail').value.trim(),m=document.getElementById('cmsg').value.trim();
+  if(!n||!e||!m){alert('Please fill in all fields.');return;}
+  alert('Message sent! We\'ll get back to you within 1-2 business days.');
+  document.getElementById('cname').value='';
+  document.getElementById('cemail').value='';
+  document.getElementById('cmsg').value='';
+}
+// SCROLL PROGRESS BAR
+(function(){
+  var bar=document.getElementById('scroll-bar');
+  if(!bar)return;
+  window.addEventListener('scroll',function(){
+    var s=document.documentElement.scrollTop||document.body.scrollTop;
+    var h=document.documentElement.scrollHeight-document.documentElement.clientHeight;
+    bar.style.width=(h>0?(s/h*100):0)+'%';
+  },{passive:true});
+})();
+// EMAIL SIGNUP
+function submitEmail(){
+  var input=document.getElementById('emailInput');
+  var success=document.getElementById('emailSuccess');
+  if(!input||!input.value||!input.value.includes('@')){alert('Please enter a valid email.');return;}
+  input.style.display='none';
+  input.nextElementSibling.style.display='none';
+  success.style.display='block';
+}
+</script>
+</body>
+</html>

@@ -80,9 +80,7 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
   <a href="index.html#faq" class="mobile-link">FAQ</a>
   <a href="shop.html" class="btn btn-primary" style="margin-top:8px;">Shop Now</a>
 </div>
-<div class="images-wrap">
-  <img src="how%20it%20works%20no%20city%20glow.png" alt="How FlavorWav Works" onerror="if(!this._tried){this._tried=true;this.src='how_it_works_no_city_glow.png';}" />
-</div>
+
 
 <style>
 .video-section{background:var(--dark);padding:80px 24px 100px;}
@@ -119,8 +117,8 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
       <!-- STEP 1 — LIVE -->
       <div class="video-card">
         <div class="video-wrap">
-          <video autoplay muted loop playsinline>
-            <source src="vid1strawinsert.webm" type="video/webm">
+          <video id="vid1" autoplay muted loop playsinline preload="auto">
+            <source src="vid1strawinsert.mp4" type="video/mp4">
           </video>
         </div>
         <div class="video-card-info">
@@ -181,6 +179,15 @@ footer{background:var(--dark2);border-top:1px solid var(--glass-border);padding:
 <script>
 (function(){var dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');if(!dot||!ring)return;var mx=window.innerWidth/2,my=window.innerHeight/2,rx=mx,ry=my;document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});(function t(){rx+=(mx-rx)*0.13;ry+=(my-ry)*0.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(t);})();document.querySelectorAll('a,button').forEach(function(el){el.addEventListener('mouseenter',function(){document.body.classList.add('ch');});el.addEventListener('mouseleave',function(){document.body.classList.remove('ch');});});})();
 (function(){var h=document.getElementById('hamburger'),m=document.getElementById('mobileMenu');if(!h||!m)return;h.addEventListener('click',function(){var o=m.classList.toggle('open');h.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';});document.querySelectorAll('.mobile-link,.mobile-menu .btn').forEach(function(l){l.addEventListener('click',function(){m.classList.remove('open');h.classList.remove('open');document.body.style.overflow='';});});})();
+// Force video play
+(function(){
+  var v = document.getElementById('vid1');
+  if(!v) return;
+  v.muted = true;
+  var p = v.play();
+  if(p !== undefined){ p.catch(function(){ v.muted=true; v.play(); }); }
+  document.addEventListener('click', function(){ v.muted=true; v.play(); }, {once:true});
+})();
 </script>
 </body>
 </html>
